@@ -7,6 +7,7 @@
 
 <script>
 import NavHeader from './components/home/NavHeader'
+
 export default {
   name: 'App',
   components:{
