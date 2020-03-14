@@ -1,6 +1,6 @@
-# navigation
+# ishow前端
 
-> 简单的导航栏
+> 前端界面
 
 ## Build Setup
 
