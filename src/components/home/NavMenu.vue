@@ -1,10 +1,11 @@
 <template>
-  <nav>
+  <div>
     <el-menu :default-active="$route.path"
              mode="horizontal"
              background-color="#545c64"
              text-color="#fff"
-             active-text-color="#ffd04b" :router="true">
+             active-text-color="#ffd04b"
+             :router="true">
       <el-menu-item index="/">
         主页
       </el-menu-item>
@@ -18,16 +19,15 @@
         关于
       </el-menu-item>
     </el-menu>
-  </nav>
+  </div>
 </template>
 
 <script>
   export default {
-    name: 'navMenu',
+    name: 'navMenu'
   }
 </script>
 
 <style scoped>
-  nav {
-  }
+
 </style>

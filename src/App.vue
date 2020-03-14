@@ -6,14 +6,14 @@
 </template>
 
 <script>
-import NavMenu from './components/home/NavMenu'
+  import NavMenu from './components/home/NavMenu'
 
-export default {
-  name: 'App',
-  components:{
-    "navMenu":NavMenu
+  export default {
+    name: 'App',
+    components: {
+      "navMenu": NavMenu
+    }
   }
-}
 </script>
 
 <style>
