@@ -1,17 +1,17 @@
 <template>
   <div id="app">
-    <navHeader></navHeader>
+    <nav-menu></nav-menu>
     <router-view></router-view>
   </div>
 </template>
 
 <script>
-import NavHeader from './components/home/NavHeader'
+import NavMenu from './components/home/NavMenu'
 
 export default {
   name: 'App',
   components:{
-    "navHeader":NavHeader
+    "navMenu":NavMenu
   }
 }
 </script>

@@ -1,17 +1,17 @@
 <template>
-  <div id="main">
+  <div id="home">
   	<h1>主页</h1>
   </div>
 </template>
 
 <script>
   export default {
-    name: 'main',
+    name: 'home',
   }
 </script>
 
 <style scoped>
-#main{
+#home{
 	margin: 0;
 	padding: 0;
 	background: gainsboro;
