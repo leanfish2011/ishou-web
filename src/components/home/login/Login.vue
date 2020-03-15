@@ -1,29 +1,28 @@
 <template>
   <div class="login-container">
-    <el-form :model="loginModel" :rules="loginRule"
+    <el-link>
+      <router-link to="/" target="_blank">回到首页</router-link>
+    </el-link>
+    <el-form :model="loginModel" :rules="validRule"
              status-icon
              ref="loginForm"
              label-position="left"
              class="login-page">
       <h3 class="title">系统登录</h3>
-      <el-form-item prop="username">
-        <el-input type="text"
-                  v-model="loginModel.username"
-                  auto-complete="off"
-                  placeholder="用户名"
-        ></el-input>
+      <el-form-item prop="usercode">
+        <el-input v-model="loginModel.usercode"
+                  placeholder="请输入用户名">
+        </el-input>
       </el-form-item>
       <el-form-item prop="password">
         <el-input type="password"
                   v-model="loginModel.password"
-                  auto-complete="off"
-                  placeholder="密码"
-        ></el-input>
+                  placeholder="请输入密码">
+        </el-input>
       </el-form-item>
       <el-checkbox
         v-model="checked"
-        class="rememberme"
-      >记住密码
+        class="rememberme">记住密码
       </el-checkbox>
       <el-form-item style="width:100%;">
         <el-button type="primary" style="width:100%;" @click="handleSubmit" :loading="logining">登录
@@ -39,11 +38,11 @@
       return {
         logining: false,
         loginModel: {
-          username: '',
+          usercode: '',
           password: '',
         },
-        loginRule: {
-          username: [{required: true, message: '请输入用户名', trigger: 'blur'}],
+        validRule: {
+          usercode: [{required: true, message: '请输入用户名', trigger: 'blur'}],
           password: [{required: true, message: '请输入密码', trigger: 'blur'}]
         },
         checked: false
@@ -62,7 +61,7 @@
                 let responseData = res.data;
                 if (responseData.code === 0) {
                   this.logining = false;
-                  sessionStorage.setItem('username', this.loginModel.username);
+                  sessionStorage.setItem('usercode', this.loginModel.usercode);
                   this.$router.push({path: '/'});
                 } else {
                   this.logining = false;
@@ -89,7 +88,7 @@
   .login-page {
     -webkit-border-radius: 5px;
     border-radius: 5px;
-    margin: 180px auto;
+    margin: 10% auto;
     width: 350px;
     padding: 35px 35px 15px;
     background: #fff;
