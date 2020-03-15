@@ -1,6 +1,6 @@
 <template>
   <div id="message">
-  	<h1>留言板</h1>
+  	<p>留言板</p>
   </div>
 </template>
 
@@ -12,8 +12,6 @@
 
 <style scoped>
 #message{
-	margin: 0;
-	padding: 0;
 	background: azure;
 	height: 600px;
 	width: 100%;

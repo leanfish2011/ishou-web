@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <nav-menu></nav-menu>
-    <router-view></router-view>
+    <router-view :class="'routerview'"></router-view>
   </div>
 </template>
 
@@ -17,5 +17,7 @@
 </script>
 
 <style>
-
+  .routerview {
+    margin: 10px 0 0 0;
+  }
 </style>

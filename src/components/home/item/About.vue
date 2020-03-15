@@ -1,6 +1,6 @@
 <template>
   <div id="about">
-  	<h1>关于</h1>
+  	<p>关于</p>
   </div>
 </template>
 
@@ -12,8 +12,6 @@
 
 <style scoped>
 #about{
-	margin: 0;
-	padding: 0;
 	background: lightyellow;
 	height: 600px;
 	width: 100%;

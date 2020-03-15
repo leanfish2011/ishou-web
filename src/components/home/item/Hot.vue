@@ -1,6 +1,6 @@
 <template>
   <div id="hot">
-  	<h1>热点收藏</h1>
+  	<p>热点收藏</p>
   </div>
 </template>
 
@@ -12,8 +12,6 @@
 
 <style scoped>
 #hot{
-	margin: 0;
-	padding: 0;
 	background: bisque;
 	height: 600px;
 	width: 100%;
