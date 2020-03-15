@@ -1,5 +1,6 @@
 <template>
   <div id="home">
+    <nav-menu></nav-menu>
     <ul :class="'ulstyle'">
       <li v-for="item in myDataList" :key="item.id" :class="'listyle'">
         <a :href=item.url target="_blank">{{item.name}}</a>
@@ -9,8 +10,13 @@
 </template>
 
 <script>
+  import NavMenu from '../NavMenu'
+
   export default {
     name: 'home',
+    components: {
+      "navMenu": NavMenu
+    },
     data() {
       return {
         myDataList: null

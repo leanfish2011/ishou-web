@@ -1,12 +1,18 @@
 <template>
   <div id="hot">
-  	<p>热点收藏</p>
+    <nav-menu></nav-menu>
+    <p>热点收藏</p>
   </div>
 </template>
 
 <script>
+  import NavMenu from '../NavMenu'
+
   export default {
     name: 'hot',
+    components: {
+      "navMenu": NavMenu
+    }
   }
 </script>
 

@@ -1,0 +1,104 @@
+<template>
+  <div class="login-container">
+    <el-form :model="loginModel" :rules="loginRule"
+             status-icon
+             ref="loginForm"
+             label-position="left"
+             class="login-page">
+      <h3 class="title">系统登录</h3>
+      <el-form-item prop="username">
+        <el-input type="text"
+                  v-model="loginModel.username"
+                  auto-complete="off"
+                  placeholder="用户名"
+        ></el-input>
+      </el-form-item>
+      <el-form-item prop="password">
+        <el-input type="password"
+                  v-model="loginModel.password"
+                  auto-complete="off"
+                  placeholder="密码"
+        ></el-input>
+      </el-form-item>
+      <el-checkbox
+        v-model="checked"
+        class="rememberme"
+      >记住密码
+      </el-checkbox>
+      <el-form-item style="width:100%;">
+        <el-button type="primary" style="width:100%;" @click="handleSubmit" :loading="logining">登录
+        </el-button>
+      </el-form-item>
+    </el-form>
+  </div>
+</template>
+
+<script>
+  export default {
+    data() {
+      return {
+        logining: false,
+        loginModel: {
+          username: '',
+          password: '',
+        },
+        loginRule: {
+          username: [{required: true, message: '请输入用户名', trigger: 'blur'}],
+          password: [{required: true, message: '请输入密码', trigger: 'blur'}]
+        },
+        checked: false
+      }
+    },
+    methods: {
+      handleSubmit(event) {
+        event.preventDefault();
+        this.$refs.loginForm.validate((valid) => {
+          if (valid) {
+            this.logining = true;
+            let loginData = JSON.stringify(this.loginModel);
+            console.log(loginData);
+            this.$axios.post('http://127.0.0.1:9092/api/v1/auth/login', loginData).then((res) => {
+              if (res.status === 200) {
+                let responseData = res.data;
+                if (responseData.code === 0) {
+                  this.logining = false;
+                  sessionStorage.setItem('username', this.loginModel.username);
+                  this.$router.push({path: '/'});
+                } else {
+                  this.logining = false;
+                  this.$message.error(responseData.msg);
+                }
+              } else {
+                this.logining = false;
+                this.$message.error("系统内部错误");
+              }
+            })
+          }
+        })
+      }
+    }
+  };
+</script>
+
+<style scoped>
+  .login-container {
+    width: 100%;
+    height: 100%;
+  }
+
+  .login-page {
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    margin: 180px auto;
+    width: 350px;
+    padding: 35px 35px 15px;
+    background: #fff;
+    border: 1px solid #eaeaea;
+    box-shadow: 0 0 25px #cac6c6;
+  }
+
+  label.el-checkbox.rememberme {
+    margin: 0px 0px 15px;
+    text-align: left;
+  }
+</style>

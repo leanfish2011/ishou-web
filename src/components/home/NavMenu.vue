@@ -18,6 +18,14 @@
       <el-menu-item index="/about">
         关于
       </el-menu-item>
+      <span class="loginSpan">
+        <el-link>
+          <router-link to="/login" target="_blank">登 录</router-link>
+        </el-link>
+        <el-link>
+          <router-link to="/register" target="_blank">注 册</router-link>
+        </el-link>
+      </span>
     </el-menu>
   </div>
 </template>
@@ -28,6 +36,16 @@
   }
 </script>
 
-<style scoped>
+<style>
+  .loginSpan {
+    float: right;
+    position: relative;
+    top: 50%;
+    margin-top: 15px;
+    margin-right: 10px;
+  }
 
+  .loginSpan a {
+    color: white;
+  }
 </style>

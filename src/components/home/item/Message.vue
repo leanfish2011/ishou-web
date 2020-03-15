@@ -1,19 +1,25 @@
 <template>
   <div id="message">
-  	<p>留言板</p>
+    <nav-menu></nav-menu>
+    <p>留言板</p>
   </div>
 </template>
 
 <script>
+  import NavMenu from '../NavMenu'
+
   export default {
     name: 'message',
+    components: {
+      "navMenu": NavMenu
+    }
   }
 </script>
 
 <style scoped>
-#message{
-	background: azure;
-	height: 600px;
-	width: 100%;
-}
+  #message {
+    background: azure;
+    height: 600px;
+    width: 100%;
+  }
 </style>
