@@ -1,0 +1,99 @@
+<template>
+  <div class="app">
+    <el-container>
+      <el-aside class="app-side app-side-left"
+                :class="isCollapse ? 'app-side-collapsed' : 'app-side-expanded'">
+        <div class="app-side-logo">
+          <img src="@/assets/logo.png"
+               :width="isCollapse ? '60' : '60'"
+               height="60"/>
+        </div>
+        <div>
+          <el-menu default-active="/site"
+                   class="el-menu-vertical-demo"
+                   :collapse="isCollapse" :router="true">
+            <el-submenu index="1">
+              <template slot="title">
+                <i class="el-icon-location"></i>
+                <span slot="title">网站管理</span>
+              </template>
+              <el-menu-item index="/site">网站管理</el-menu-item>
+              <el-menu-item index="/type">类别管理</el-menu-item>
+            </el-submenu>
+            <el-submenu index="2">
+              <template slot="title">
+                <i class="el-icon-document"></i>
+                <span slot="title">用户管理</span>
+              </template>
+              <el-menu-item index="/user">用户管理</el-menu-item>
+              <el-menu-item index="role">角色管理</el-menu-item>
+            </el-submenu>
+
+          </el-menu>
+        </div>
+      </el-aside>
+
+      <el-container>
+        <el-header style="text-align: right; font-size: 12px">
+          <div class="app-header-userinfo">
+            <el-dropdown trigger="hover"
+                         :hide-on-click="false">
+              <span class="el-dropdown-link">
+                {{ usercode }}
+                <i class="el-icon-arrow-down el-icon--right"></i>
+              </span>
+              <el-dropdown-menu slot="dropdown">
+                <el-dropdown-item>我的消息</el-dropdown-item>
+                <el-dropdown-item>设置</el-dropdown-item>
+                <el-dropdown-item divided
+                                  @click.native="logout">退出登录
+                </el-dropdown-item>
+              </el-dropdown-menu>
+            </el-dropdown>
+          </div>
+        </el-header>
+
+        <el-main class="app-body">
+          <template>
+            <router-view/>
+          </template>
+        </el-main>
+      </el-container>
+    </el-container>
+  </div>
+</template>
+
+<script>
+  export default {
+    name: 'Container',
+    data() {
+      return {
+        usercode: '',
+        isCollapse: false
+      }
+    },
+    methods: {
+      logout: function () {
+        this.$confirm('确认退出?', '提示', {})
+        .then(() => {
+          sessionStorage.removeItem('usercode');
+          this.$router.push('/login');
+        })
+      }
+    },
+    mounted: function () {
+      let usercode = sessionStorage.getItem('usercode');
+      if (usercode) {
+        this.usercode = usercode;
+      }
+    },
+  }
+</script>
+
+<style>
+  .el-header {
+    background-color: #B3C0D1;
+    color: #333;
+    line-height: 60px;
+  }
+</style>

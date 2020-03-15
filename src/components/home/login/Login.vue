@@ -25,7 +25,10 @@
         class="rememberme">记住密码
       </el-checkbox>
       <el-form-item style="width:100%;">
-        <el-button type="primary" style="width:100%;" @click="handleSubmit" :loading="logining">登录
+        <el-button type="primary"
+                   style="width:100%;"
+                   @click="onSubmit"
+                   :loading="logining">登录
         </el-button>
       </el-form-item>
     </el-form>
@@ -48,8 +51,16 @@
         checked: false
       }
     },
+    created() {
+      document.onkeydown = (e) => {
+        let key = window.event.keyCode;
+        if (key === 13) {
+          this.onSubmit(event)
+        }
+      }
+    },
     methods: {
-      handleSubmit(event) {
+      onSubmit(event) {
         event.preventDefault();
         this.$refs.loginForm.validate((valid) => {
           if (valid) {
@@ -62,7 +73,7 @@
                 if (responseData.code === 0) {
                   this.logining = false;
                   sessionStorage.setItem('usercode', this.loginModel.usercode);
-                  this.$router.push({path: '/'});
+                  this.$router.push({path: '/site'});
                 } else {
                   this.logining = false;
                   this.$message.error(responseData.msg);
