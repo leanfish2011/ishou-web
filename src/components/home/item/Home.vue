@@ -11,6 +11,7 @@
 
 <script>
   import NavMenu from '../NavMenu'
+  import Service from '../../../config/service'
 
   export default {
     name: 'home',
@@ -23,7 +24,7 @@
       }
     },
     created() {
-      this.$axios.get('http://127.0.0.1:9092/api/v1/site/index').then((res) => {
+      this.$axios.get(Service.url.home).then((res) => {
         this.myDataList = res.data.data;
       }).catch(function (error) {
         console.error(error);

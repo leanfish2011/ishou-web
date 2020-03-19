@@ -28,6 +28,8 @@
 </template>
 
 <script>
+  import Service from '../../../config/service'
+
   export default {
     name: "register",
     data() {
@@ -57,7 +59,7 @@
           if (valid) {
             this.registering = true;
             let registerData = JSON.stringify(this.registerModel);
-            this.$axios.post('http://127.0.0.1:9092/api/v1/auth/register', registerData).then(
+            this.$axios.post(Service.url.register, registerData).then(
               (res) => {
                 if (res.status === 200) {
                   let responseData = res.data;

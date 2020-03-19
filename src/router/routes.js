@@ -10,23 +10,24 @@ import Site from '../components/manage/site/Site.vue'
 import Type from '../components/manage/site/Type.vue'
 import User from '../components/manage/user/User.vue'
 import Role from '../components/manage/user/Role.vue'
+import RouteUrl from '../config/routeUrl'
 
-// 设置路径
+// 设置路由
 export default [
-  {path: "/", component: Home},
-  {path: "/hot", component: Hot},
-  {path: "/message", component: Message},
-  {path: "/about", component: About},
-  {path: "/login", component: Login},
-  {path: "/register", component: Register},
+  {path: RouteUrl.route.home, component: Home},
+  {path: RouteUrl.route.hot, component: Hot},
+  {path: RouteUrl.route.message, component: Message},
+  {path: RouteUrl.route.about, component: About},
+  {path: RouteUrl.route.login, component: Login},
+  {path: RouteUrl.route.register, component: Register},
   {
-    path: "/manage",
+    path: RouteUrl.route.manage,
     component: Manage,
     children: [
-      {path: "/site", component: Site},
-      {path: "/type", component: Type},
-      {path: "/user", component: User},
-      {path: "/role", component: Role}
+      {path: RouteUrl.route.site, component: Site},
+      {path: RouteUrl.route.type, component: Type},
+      {path: RouteUrl.route.user, component: User},
+      {path: RouteUrl.route.role, component: Role}
     ]
   }
 ]

@@ -36,6 +36,9 @@
 </template>
 
 <script>
+  import Service from '../../../config/service'
+  import RouteUrl from '../../../config/routeUrl'
+
   export default {
     data() {
       return {
@@ -67,13 +70,13 @@
             this.logining = true;
             let loginData = JSON.stringify(this.loginModel);
             console.log(loginData);
-            this.$axios.post('http://127.0.0.1:9092/api/v1/auth/login', loginData).then((res) => {
+            this.$axios.post(Service.url.login, loginData).then((res) => {
               if (res.status === 200) {
                 let responseData = res.data;
                 if (responseData.code === 0) {
                   this.logining = false;
                   sessionStorage.setItem('usercode', this.loginModel.usercode);
-                  this.$router.push({path: '/site'});
+                  this.$router.push({path: RouteUrl.route.site});
                 } else {
                   this.logining = false;
                   this.$message.error(responseData.msg);
