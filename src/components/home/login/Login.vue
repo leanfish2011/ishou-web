@@ -37,7 +37,6 @@
 
 <script>
   import Service from '../../../config/service'
-  import RouteUrl from '../../../config/routeUrl'
 
   export default {
     data() {
@@ -76,7 +75,7 @@
                 if (responseData.code === 0) {
                   this.logining = false;
                   sessionStorage.setItem('usercode', this.loginModel.usercode);
-                  this.$router.push({path: RouteUrl.route.site});
+                  this.$router.push({path: "/site"});
                 } else {
                   this.logining = false;
                   this.$message.error(responseData.msg);
