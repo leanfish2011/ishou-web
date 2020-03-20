@@ -18,7 +18,7 @@
           <el-input v-model="addModel.tag" placeholder="请输入标签"></el-input>
         </el-form-item>
         <el-form-item>
-          <el-button type="primary" @click="onSubmit" :loading="submiting">注册</el-button>
+          <el-button type="primary" @click="onSubmit" :loading="submiting">确定</el-button>
           <el-button @click="onCancel">取消</el-button>
         </el-form-item>
       </el-form>
