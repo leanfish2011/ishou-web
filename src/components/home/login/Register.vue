@@ -8,16 +8,16 @@
              class="register-page">
       <h3 class="title">注册</h3>
       <el-form-item label="用户名" prop="usercode">
-        <el-input v-model="registerModel.usercode" placeholder="用户名"></el-input>
+        <el-input v-model="registerModel.usercode" placeholder="请输入用户名"></el-input>
       </el-form-item>
       <el-form-item label="密码" prop="password">
-        <el-input type="password" v-model="registerModel.password" placeholder="密码"></el-input>
+        <el-input type="password" v-model="registerModel.password" placeholder="请输入密码"></el-input>
       </el-form-item>
       <el-form-item label="姓名" prop="name">
-        <el-input v-model="registerModel.name" placeholder="姓名"></el-input>
+        <el-input v-model="registerModel.name" placeholder="请输入姓名"></el-input>
       </el-form-item>
       <el-form-item label="邮箱" prop="email">
-        <el-input v-model="registerModel.email" placeholder="邮箱"></el-input>
+        <el-input v-model="registerModel.email" placeholder="请输入邮箱地址"></el-input>
       </el-form-item>
       <el-form-item>
         <el-button type="primary" @click="onSubmit" :loading="registering">注册</el-button>
