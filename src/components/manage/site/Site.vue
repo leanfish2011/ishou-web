@@ -6,18 +6,39 @@
     </el-breadcrumb>
     <el-form ref="form" :inline="true" :model="searchForm" label-width="80px" size="mini">
       <el-form-item label="标题">
-        <el-input v-model="searchForm.title" placeholder="标题"></el-input>
+        <el-input v-model="searchForm.name" placeholder="标题"></el-input>
       </el-form-item>
       <el-form-item label="创建时间">
-        <el-col :span="11">
-          <el-date-picker type="date" placeholder="选择日期" v-model="searchForm.dateStart"
-                          style="width: 100%;"></el-date-picker>
-        </el-col>
-        <el-col class="line" :span="1">-</el-col>
-        <el-col :span="11">
-          <el-date-picker type="date" placeholder="选择日期" v-model="searchForm.dateEnd"
-                          style="width: 100%;"></el-date-picker>
-        </el-col>
+        <el-date-picker
+          v-model="value2"
+          type="daterange"
+          align="right"
+          unlink-panels
+          range-separator="至"
+          start-placeholder="开始日期"
+          end-placeholder="结束日期"
+          value-format="yyyy-MM-dd HH:mm:ss"
+          :default-time="['00:00:00', '23:59:59']"
+          :picker-options="pickerOptions">
+        </el-date-picker>
+
+        <!--<el-col :span="11">-->
+        <!--<el-date-picker-->
+        <!--type="date"-->
+        <!--placeholder="选择日期"-->
+        <!--v-model="searchForm.createTimeStart"-->
+        <!--style="width: 100%;"-->
+        <!--:picker-options="pickerOptions"></el-date-picker>-->
+        <!--</el-col>-->
+        <!--<el-col class="line" :span="1">-</el-col>-->
+        <!--<el-col :span="11">-->
+        <!--<el-date-picker-->
+        <!--type="date"-->
+        <!--placeholder="选择日期"-->
+        <!--v-model="searchForm.createTimeEnd"-->
+        <!--style="width: 100%;"-->
+        <!--:picker-options="pickerOptions"></el-date-picker>-->
+        <!--</el-col>-->
       </el-form-item>
       <el-form-item>
         <el-button type="primary" @click="onSearch">查询</el-button>
@@ -87,18 +108,87 @@
     data() {
       return {
         searchForm: {
-          title: '',
-          dateStart: '',
-          dateEnd: ''
+          name: '',
+          createTimeStart: '',
+          createTimeEnd: ''
         },
+        value2: '',
         isShowAdd: false,
-        siteData: null
+        siteData: null,
+        pickerOptions: {
+          shortcuts: [{
+            text: '最近一周',
+            onClick(picker) {
+              const end = new Date();
+              const start = new Date();
+              start.setHours(0);
+              start.setMinutes(0);
+              start.setSeconds(0);
+
+              end.setHours(23);
+              end.setMinutes(59);
+              end.setSeconds(59);
+
+              start.setDate(start.getDay() - 7);
+
+              picker.$emit('pick', [start, end]);
+            }
+          }, {
+            text: '最近一个月',
+            onClick(picker) {
+              const end = new Date();
+              const start = new Date();
+
+              start.setHours(0);
+              start.setMinutes(0);
+              start.setSeconds(0);
+
+              end.setHours(23);
+              end.setMinutes(59);
+              end.setSeconds(59);
+
+              start.setDate(start.getDay() - 30);
+
+              picker.$emit('pick', [start, end]);
+            }
+          }, {
+            text: '最近三个月',
+            onClick(picker) {
+              const end = new Date();
+              const start = new Date();
+
+              start.setHours(0);
+              start.setMinutes(0);
+              start.setSeconds(0);
+
+              end.setHours(23);
+              end.setMinutes(59);
+              end.setSeconds(59);
+
+              start.setDate(start.getDay() - 90);
+
+              picker.$emit('pick', [start, end]);
+            }
+          }]
+        },
       }
     },
     methods: {
       onSearch() {
-        console.log('submit!');
-
+        if (this.value2 != null) {
+          this.searchForm.createTimeStart = this.value2[0];
+          this.searchForm.createTimeEnd = this.value2[1];
+        }else {
+          this.searchForm.createTimeStart = "";
+          this.searchForm.createTimeEnd = "";
+        }
+        this.$axios.get(Service.url.sitePersonal, {
+          params: this.searchForm
+        }).then((res) => {
+          this.siteData = res.data.data;
+        }).catch(function (error) {
+          console.error(error);
+        });
       },
       onAddShow() {
         this.isShowAdd = true;
