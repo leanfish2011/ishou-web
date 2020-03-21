@@ -75,7 +75,8 @@
                   sessionStorage.setItem('userCode', this.loginModel.userCode);
                   sessionStorage.setItem('userName', responseData.data.name);
                   sessionStorage.setItem('token', responseData.data.token);
-                  this.$router.push({path: "/site"});
+
+                  this.$router.push({path: "/"});
                 } else {
                   this.logining = false;
                   this.$message.error(responseData.msg);

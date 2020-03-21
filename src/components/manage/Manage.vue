@@ -36,6 +36,7 @@
       <el-container>
         <el-header style="text-align: right; font-size: 12px">
           <div class="app-header-userinfo">
+            <router-link to="/">主页</router-link>
             <el-dropdown trigger="hover"
                          :hide-on-click="false">
               <span class="el-dropdown-link">
@@ -89,6 +90,7 @@
               sessionStorage.removeItem('userCode');
               sessionStorage.removeItem('userName');
               sessionStorage.removeItem('token');
+              this.userName = '';
 
               this.$router.push('/login');
             } else {
@@ -102,9 +104,7 @@
     },
     mounted: function () {
       let userName = sessionStorage.getItem('userName');
-      if (userName) {
-        this.userName = userName;
-      }
+      this.userName = userName;
     },
   }
 </script>
