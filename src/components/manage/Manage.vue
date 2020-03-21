@@ -17,7 +17,7 @@
                 <i class="el-icon-location"></i>
                 <span slot="title">网站管理</span>
               </template>
-              <el-menu-item index="/site">网站管理</el-menu-item>
+              <el-menu-item index="/site">我的网站</el-menu-item>
               <el-menu-item index="/type">类别管理</el-menu-item>
             </el-submenu>
             <el-submenu index="2">
