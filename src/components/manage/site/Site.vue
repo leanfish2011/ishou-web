@@ -20,13 +20,13 @@
         </el-col>
       </el-form-item>
       <el-form-item>
-        <el-button type="primary" @click="onSubmit">查询</el-button>
+        <el-button type="primary" @click="onSearch">查询</el-button>
       </el-form-item>
       <el-form-item>
         <el-button type="primary" @click="onAddShow">创建</el-button>
       </el-form-item>
     </el-form>
-    <site-add-dialog :show.sync="isShowAdd" @refresh="load()"></site-add-dialog>
+    <site-add-dialog ref="addDialog" :show.sync="isShowAdd" @refresh="load()"></site-add-dialog>
     <el-table
       :data="siteData"
       stripe
@@ -96,17 +96,42 @@
       }
     },
     methods: {
-      onSubmit() {
+      onSearch() {
         console.log('submit!');
+
       },
       onAddShow() {
         this.isShowAdd = true;
       },
       handleEdit(index, row) {
-        console.log(index, row);
+        this.isShowAdd = true;//dialog对话窗口打开
+        this.$refs.addDialog.addModel = Object.assign({}, row);//将数据传入dialog页面
       },
       handleDelete(index, row) {
-        console.log(index, row);
+        this.$confirm('确定删除?', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => {
+          this.$axios.delete(Service.url.sitePersonal + '/' + row.id).then((res) => {
+            if (res.status === 200) {
+              let responseData = res.data;
+              if (responseData.code === 0) {
+                this.$message.success(responseData.msg);
+                this.load();
+              } else {
+                this.$message.error(responseData.msg);
+              }
+            } else {
+              this.$message.error("系统内部错误");
+            }
+          })
+        }).catch(() => {
+          this.$message({
+            type: 'info',
+            message: '已取消删除'
+          });
+        });
       },
       //时间格式化
       dateFormat: function (row, column) {
@@ -121,7 +146,7 @@
         return Y + M + D + h + m + s;
       },
       load() {
-        this.$axios.get(Service.url.sitePersonalGet).then((res) => {
+        this.$axios.get(Service.url.sitePersonal).then((res) => {
           this.siteData = res.data.data;
         }).catch(function (error) {
           console.error(error);

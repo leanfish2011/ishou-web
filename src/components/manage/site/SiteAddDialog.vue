@@ -21,6 +21,9 @@
           <el-input v-model="addModel.remark" placeholder="请输入备注"></el-input>
         </el-form-item>
         <el-form-item>
+          <el-checkbox v-model="addModel.isPost">发布到首页</el-checkbox>
+        </el-form-item>
+        <el-form-item>
           <el-button type="primary" @click="onSubmit" :loading="submiting">确定</el-button>
           <el-button @click="onCancel">取消</el-button>
         </el-form-item>
@@ -39,10 +42,12 @@
         visible: this.show,
         submiting: false,
         addModel: {
-          name: '',
-          url: '',
-          tag: '',
-          remark: ''
+          id: "",
+          name: "",
+          remark: "",
+          tag: "",
+          url: "",
+          isPost: false
         },
         validRule: {
           name: [{required: true, message: '请输入标题', trigger: 'blur'}],
@@ -64,27 +69,48 @@
     },
     methods: {
       onSubmit() {
-        this.$axios.post(Service.url.sitePersonalGet, this.addModel).then((res) => {
-          console.log(res.data.code);
-          if (res.status === 200) {
-            let responseData = res.data;
-            if (responseData.code === 0) {
-              this.$message.success(responseData.msg);
-              this.visible = false;
-              this.$emit('refresh');
+        if (this.addModel.id === "") {
+          console.log("新增");
+          this.$axios.post(Service.url.sitePersonal, this.addModel).then((res) => {
+            if (res.status === 200) {
+              let responseData = res.data;
+              if (responseData.code === 0) {
+                this.$message.success(responseData.msg);
+                this.visible = false;
+                this.$emit('refresh');
+              } else {
+                this.$message.error(responseData.msg);
+              }
             } else {
-              this.$message.error(responseData.msg);
+              this.$message.error("系统内部错误");
             }
-          } else {
-            this.$message.error("系统内部错误");
-          }
-        })
+          })
+        } else {
+          console.log(this.addModel);
+          this.$axios.put(Service.url.sitePersonal, this.addModel).then((res) => {
+            if (res.status === 200) {
+              let responseData = res.data;
+              if (responseData.code === 0) {
+                this.$message.success(responseData.msg);
+                this.visible = false;
+                this.$emit('refresh');
+              } else {
+                this.$message.error(responseData.msg);
+              }
+            } else {
+              this.$message.error("系统内部错误");
+            }
+          })
+        }
+
       },
       onCancel() {
         this.$refs.addForm.resetFields();
+        this.$emit('update:show', false);
+        this.addModel = Object.assign({}, "");//将数据传入dialog页面
       },
       onClose() {
-        this.visible = false;
+        this.onCancel();
       }
     }
   }
