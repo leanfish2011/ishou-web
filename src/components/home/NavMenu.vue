@@ -9,8 +9,8 @@
       <el-menu-item index="/">
         主页
       </el-menu-item>
-      <el-menu-item index="/hot">
-        热点
+      <el-menu-item v-if="userName!=''&&userName!=null" index="/my">
+        我的
       </el-menu-item>
       <el-menu-item index="/message">
         留言

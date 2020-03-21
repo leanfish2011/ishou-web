@@ -1,7 +1,7 @@
 <template>
-  <div id="hot">
+  <div id="my">
     <nav-menu></nav-menu>
-    <p>热点收藏</p>
+    <p>我的收藏</p>
   </div>
 </template>
 
@@ -9,7 +9,7 @@
   import NavMenu from '../NavMenu'
 
   export default {
-    name: 'hot',
+    name: 'my',
     components: {
       "navMenu": NavMenu
     }
@@ -17,7 +17,7 @@
 </script>
 
 <style scoped>
-#hot{
+#my{
 	background: bisque;
 	height: 600px;
 	width: 100%;
