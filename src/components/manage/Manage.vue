@@ -39,7 +39,7 @@
             <el-dropdown trigger="hover"
                          :hide-on-click="false">
               <span class="el-dropdown-link">
-                {{ usercode }}
+                {{ userName }}
                 <i class="el-icon-arrow-down el-icon--right"></i>
               </span>
               <el-dropdown-menu slot="dropdown">
@@ -68,7 +68,7 @@
     name: 'Container',
     data() {
       return {
-        usercode: '',
+        userName: '',
         isCollapse: false
       }
     },
@@ -76,15 +76,16 @@
       logout: function () {
         this.$confirm('确认退出?', '提示', {})
         .then(() => {
-          sessionStorage.removeItem('usercode');
+          sessionStorage.removeItem('userCode');
+          sessionStorage.removeItem('userName');
           this.$router.push('/login');
         })
       }
     },
     mounted: function () {
-      let usercode = sessionStorage.getItem('usercode');
-      if (usercode) {
-        this.usercode = usercode;
+      let userName = sessionStorage.getItem('userName');
+      if (userName) {
+        this.userName = userName;
       }
     },
   }

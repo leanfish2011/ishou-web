@@ -9,8 +9,8 @@
              label-position="left"
              class="login-page">
       <h3 class="title">系统登录</h3>
-      <el-form-item prop="usercode">
-        <el-input v-model="loginModel.usercode"
+      <el-form-item prop="userCode">
+        <el-input v-model="loginModel.userCode"
                   placeholder="请输入用户名">
         </el-input>
       </el-form-item>
@@ -43,11 +43,11 @@
       return {
         logining: false,
         loginModel: {
-          usercode: '',
+          userCode: '',
           password: '',
         },
         validRule: {
-          usercode: [{required: true, message: '请输入用户名', trigger: 'blur'}],
+          userCode: [{required: true, message: '请输入用户名', trigger: 'blur'}],
           password: [{required: true, message: '请输入密码', trigger: 'blur'}]
         },
         checked: false
@@ -67,14 +67,14 @@
         this.$refs.loginForm.validate((valid) => {
           if (valid) {
             this.logining = true;
-            let loginData = JSON.stringify(this.loginModel);
-            console.log(loginData);
-            this.$axios.post(Service.url.login, loginData).then((res) => {
+            this.$axios.post(Service.url.login, this.loginModel).then((res) => {
               if (res.status === 200) {
                 let responseData = res.data;
                 if (responseData.code === 0) {
                   this.logining = false;
-                  sessionStorage.setItem('usercode', this.loginModel.usercode);
+                  sessionStorage.setItem('userCode', this.loginModel.userCode);
+                  sessionStorage.setItem('userName', responseData.data.name);
+                  sessionStorage.setItem('token', responseData.data.token);
                   this.$router.push({path: "/site"});
                 } else {
                   this.logining = false;

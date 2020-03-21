@@ -6,8 +6,8 @@ const ROOT_PATH = `${window.location.origin.replace(/:\d+/, '')}`;
 //各个接口地址
 const url = {
   home: ROOT_PATH + ':9092/api/v1/site/index',
-  login: ROOT_PATH + ':9092/api/v1/auth/login',
-  register: ROOT_PATH + ':9092/api/v1/auth/register',
+  login: ROOT_PATH + ':9091/api/v1/auth/access/login',
+  register: ROOT_PATH + ':9091/api/v1/auth/access/register',
   sitePersonal: ROOT_PATH + ':9092/api/v1/site/personal',
 }
 
