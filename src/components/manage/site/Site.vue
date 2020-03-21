@@ -21,24 +21,6 @@
           :default-time="['00:00:00', '23:59:59']"
           :picker-options="pickerOptions">
         </el-date-picker>
-
-        <!--<el-col :span="11">-->
-        <!--<el-date-picker-->
-        <!--type="date"-->
-        <!--placeholder="选择日期"-->
-        <!--v-model="searchForm.createTimeStart"-->
-        <!--style="width: 100%;"-->
-        <!--:picker-options="pickerOptions"></el-date-picker>-->
-        <!--</el-col>-->
-        <!--<el-col class="line" :span="1">-</el-col>-->
-        <!--<el-col :span="11">-->
-        <!--<el-date-picker-->
-        <!--type="date"-->
-        <!--placeholder="选择日期"-->
-        <!--v-model="searchForm.createTimeEnd"-->
-        <!--style="width: 100%;"-->
-        <!--:picker-options="pickerOptions"></el-date-picker>-->
-        <!--</el-col>-->
       </el-form-item>
       <el-form-item>
         <el-button type="primary" @click="onSearch">查询</el-button>
@@ -178,7 +160,7 @@
         if (this.value2 != null) {
           this.searchForm.createTimeStart = this.value2[0];
           this.searchForm.createTimeEnd = this.value2[1];
-        }else {
+        } else {
           this.searchForm.createTimeStart = "";
           this.searchForm.createTimeEnd = "";
         }
