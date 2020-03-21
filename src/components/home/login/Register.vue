@@ -7,8 +7,8 @@
              status-icon
              class="register-page">
       <h3 class="title">注册</h3>
-      <el-form-item label="用户名" prop="usercode">
-        <el-input v-model="registerModel.usercode" placeholder="请输入用户名"></el-input>
+      <el-form-item label="用户名" prop="userCode">
+        <el-input v-model="registerModel.userCode" placeholder="请输入用户名"></el-input>
       </el-form-item>
       <el-form-item label="密码" prop="password">
         <el-input type="password" v-model="registerModel.password" placeholder="请输入密码"></el-input>
@@ -36,13 +36,13 @@
       return {
         registering: false,
         registerModel: {
-          usercode: '',
+          userCode: '',
           password: '123456',
           name: '',
           email: ''
         },
         validRule: {
-          usercode: [{required: true, message: '请输入用户名', trigger: 'blur'}],
+          userCode: [{required: true, message: '请输入用户名', trigger: 'blur'}],
           password: [{required: true, message: '请输入密码', trigger: 'blur'}],
           name: [{required: true, message: '请输入姓名', trigger: 'blur'}],
           email: [
@@ -58,8 +58,7 @@
         this.$refs.registerForm.validate((valid) => {
           if (valid) {
             this.registering = true;
-            let registerData = JSON.stringify(this.registerModel);
-            this.$axios.post(Service.url.register, registerData).then(
+            this.$axios.post(Service.url.register, this.registerModel).then(
               (res) => {
                 if (res.status === 200) {
                   let responseData = res.data;
@@ -69,6 +68,8 @@
                       message: responseData.msg,
                       type: 'success'
                     });
+
+                    this.$router.push('/login');
                   } else {
                     this.registering = false;
                     this.$message.error(responseData.msg);

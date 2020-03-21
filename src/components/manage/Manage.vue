@@ -64,6 +64,8 @@
 </template>
 
 <script>
+  import Service from '../../config/service'
+
   export default {
     name: 'Container',
     data() {
@@ -76,9 +78,25 @@
       logout: function () {
         this.$confirm('确认退出?', '提示', {})
         .then(() => {
-          sessionStorage.removeItem('userCode');
-          sessionStorage.removeItem('userName');
-          this.$router.push('/login');
+          //调用接口
+          this.$axios.get(Service.url.logout, {
+            headers: {
+              'Authorization': sessionStorage.getItem('token')
+            }
+          }).then((res) => {
+            let responseData = res.data;
+            if (responseData.code === 0) {
+              sessionStorage.removeItem('userCode');
+              sessionStorage.removeItem('userName');
+              sessionStorage.removeItem('token');
+
+              this.$router.push('/login');
+            } else {
+              this.$message.error(responseData.msg);
+            }
+          }).catch(function (error) {
+            console.error(error);
+          });
         })
       }
     },
