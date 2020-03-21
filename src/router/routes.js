@@ -10,6 +10,7 @@ import Site from '../components/manage/site/Site.vue'
 import Type from '../components/manage/site/Type.vue'
 import User from '../components/manage/user/User.vue'
 import Role from '../components/manage/user/Role.vue'
+import Table from '../components/test/elmentui/Table'
 
 // 设置路径
 export default [
@@ -19,6 +20,7 @@ export default [
   {path: "/about", component: About},
   {path: "/login", component: Login},
   {path: "/register", component: Register},
+  {path: "/table", component: Table},
   {
     path: "/manage",
     component: Manage,

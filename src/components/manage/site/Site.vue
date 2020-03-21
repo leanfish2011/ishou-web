@@ -27,11 +27,57 @@
       </el-form-item>
     </el-form>
     <site-add-dialog :show.sync="isShowAdd"></site-add-dialog>
+    <el-table
+      :data="siteData"
+      stripe
+      style="width: 100%">
+      <el-table-column
+        prop="name"
+        label="标题"
+        width="180">
+      </el-table-column>
+      <el-table-column
+        prop="url"
+        label="链接"
+        width="180">
+        <template slot-scope="scope">
+          <a :href="scope.row.url"
+             target="_blank"
+             class="buttonText">{{scope.row.url}}</a>
+        </template>
+      </el-table-column>
+      <el-table-column
+        prop="remark"
+        label="备注">
+      </el-table-column>
+      <el-table-column
+        prop="tag"
+        label="标签">
+      </el-table-column>
+      <el-table-column
+        prop="createTime"
+        label="创建时间" :formatter="dateFormat">
+      </el-table-column>
+      <el-table-column label="操作">
+        <template slot-scope="scope">
+          <el-button
+            size="mini"
+            @click="handleEdit(scope.$index, scope.row)">编辑
+          </el-button>
+          <el-button
+            size="mini"
+            type="danger"
+            @click="handleDelete(scope.$index, scope.row)">删除
+          </el-button>
+        </template>
+      </el-table-column>
+    </el-table>
   </div>
 </template>
 
 <script>
   import SiteAddDialog from './SiteAddDialog'
+  import Service from '../../../config/service'
 
   export default {
     name: "Site",
@@ -45,7 +91,8 @@
           dateStart: '',
           dateEnd: ''
         },
-        isShowAdd: false
+        isShowAdd: false,
+        siteData: null
       }
     },
     methods: {
@@ -55,7 +102,30 @@
       onAddShow() {
         this.isShowAdd = true;
       },
-
+      handleEdit(index, row) {
+        console.log(index, row);
+      },
+      handleDelete(index, row) {
+        console.log(index, row);
+      },
+      //时间格式化
+      dateFormat: function (row, column) {
+        let date = new Date(parseInt(row.createTime));
+        let Y = date.getFullYear() + '-';
+        let M = date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) + '-' : date.getMonth() + 1 + '-';
+        let D = date.getDate() < 10 ? '0' + date.getDate() + ' ' : date.getDate() + ' ';
+        let h = date.getHours() < 10 ? '0' + date.getHours() + ':' : date.getHours() + ':';
+        let m = date.getMinutes()  < 10 ? '0' + date.getMinutes() + ':' : date.getMinutes() + ':';
+        let s = date.getSeconds() < 10 ? '0' + date.getSeconds() : date.getSeconds();
+        return Y + M + D + h + m + s;
+      }
+    },
+    created() {
+      this.$axios.get(Service.url.sitePersonalGet).then((res) => {
+        this.siteData = res.data.data;
+      }).catch(function (error) {
+        console.error(error);
+      });
     }
   }
 </script>
