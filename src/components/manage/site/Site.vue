@@ -26,7 +26,7 @@
         <el-button type="primary" @click="onAddShow">创建</el-button>
       </el-form-item>
     </el-form>
-    <site-add-dialog :show.sync="isShowAdd"></site-add-dialog>
+    <site-add-dialog :show.sync="isShowAdd" @refresh="load()"></site-add-dialog>
     <el-table
       :data="siteData"
       stripe
@@ -112,20 +112,24 @@
       dateFormat: function (row, column) {
         let date = new Date(parseInt(row.createTime));
         let Y = date.getFullYear() + '-';
-        let M = date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) + '-' : date.getMonth() + 1 + '-';
+        let M = date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) + '-' : date.getMonth() + 1
+          + '-';
         let D = date.getDate() < 10 ? '0' + date.getDate() + ' ' : date.getDate() + ' ';
         let h = date.getHours() < 10 ? '0' + date.getHours() + ':' : date.getHours() + ':';
-        let m = date.getMinutes()  < 10 ? '0' + date.getMinutes() + ':' : date.getMinutes() + ':';
+        let m = date.getMinutes() < 10 ? '0' + date.getMinutes() + ':' : date.getMinutes() + ':';
         let s = date.getSeconds() < 10 ? '0' + date.getSeconds() : date.getSeconds();
         return Y + M + D + h + m + s;
+      },
+      load() {
+        this.$axios.get(Service.url.sitePersonalGet).then((res) => {
+          this.siteData = res.data.data;
+        }).catch(function (error) {
+          console.error(error);
+        });
       }
     },
     created() {
-      this.$axios.get(Service.url.sitePersonalGet).then((res) => {
-        this.siteData = res.data.data;
-      }).catch(function (error) {
-        console.error(error);
-      });
+      this.load();
     }
   }
 </script>

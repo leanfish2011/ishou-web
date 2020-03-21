@@ -8,7 +8,9 @@ const url = {
   home: ROOT_PATH + ':9092/api/v1/site/index',
   login: ROOT_PATH + ':9092/api/v1/auth/login',
   register: ROOT_PATH + ':9092/api/v1/auth/register',
-  sitePersonalGet: ROOT_PATH + ':9092/api/v1/site/personal'
+  sitePersonalGet: ROOT_PATH + ':9092/api/v1/site/personal',
+  sitePersonalAdd: ROOT_PATH + ':9092/api/v1/site/personal'
+
 }
 
 export default {
