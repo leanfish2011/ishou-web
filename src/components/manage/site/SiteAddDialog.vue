@@ -34,6 +34,7 @@
 
 <script>
   import Service from '../../../config/service'
+  import AuthUtil from '../../../utils/authUtil'
 
   export default {
     name: "siteAddDialog",
@@ -80,6 +81,10 @@
                 this.$emit('refresh');
               } else {
                 this.$message.error(responseData.msg);
+                if (responseData.code === -2) {
+                  AuthUtil.clearSession();
+                  this.$router.push('/login');
+                }
               }
             } else {
               this.$message.error("系统内部错误");
@@ -96,6 +101,10 @@
                 this.$emit('refresh');
               } else {
                 this.$message.error(responseData.msg);
+                if (responseData.code === -2) {
+                  AuthUtil.clearSession();
+                  this.$router.push('/login');
+                }
               }
             } else {
               this.$message.error("系统内部错误");

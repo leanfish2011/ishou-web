@@ -78,6 +78,8 @@
 <script>
   import UserAddDialog from './UserAddDialog'
   import Service from '../../../config/service'
+  import DateUtil from '../../../utils/dateUtil'
+  import AuthUtil from '../../../utils/authUtil'
 
   export default {
     name: "user",
@@ -100,55 +102,17 @@
           shortcuts: [{
             text: '最近一周',
             onClick(picker) {
-              const end = new Date();
-              const start = new Date();
-              start.setHours(0);
-              start.setMinutes(0);
-              start.setSeconds(0);
-
-              end.setHours(23);
-              end.setMinutes(59);
-              end.setSeconds(59);
-
-              start.setDate(start.getDay() - 7);
-
-              picker.$emit('pick', [start, end]);
+              picker.$emit('pick', DateUtil.beforeDate(7));
             }
           }, {
             text: '最近一个月',
             onClick(picker) {
-              const end = new Date();
-              const start = new Date();
-
-              start.setHours(0);
-              start.setMinutes(0);
-              start.setSeconds(0);
-
-              end.setHours(23);
-              end.setMinutes(59);
-              end.setSeconds(59);
-
-              start.setDate(start.getDay() - 30);
-
-              picker.$emit('pick', [start, end]);
+              picker.$emit('pick', DateUtil.beforeDate(30));
             }
           }, {
             text: '最近三个月',
             onClick(picker) {
-              const end = new Date();
-              const start = new Date();
-
-              start.setHours(0);
-              start.setMinutes(0);
-              start.setSeconds(0);
-
-              end.setHours(23);
-              end.setMinutes(59);
-              end.setSeconds(59);
-
-              start.setDate(start.getDay() - 90);
-
-              picker.$emit('pick', [start, end]);
+              picker.$emit('pick', DateUtil.beforeDate(90));
             }
           }]
         },
@@ -169,7 +133,20 @@
           },
           params: this.searchForm
         }).then((res) => {
-          this.userData = res.data.data;
+          if (res.status === 200) {
+            let responseData = res.data;
+            if (responseData.code === 0) {
+              this.userData = responseData.data;
+            } else {
+              this.$message.error(responseData.msg);
+              if (responseData.code === -2) {
+                AuthUtil.clearSession();
+                this.$router.push('/login');
+              }
+            }
+          } else {
+            this.$message.error("系统内部错误");
+          }
         }).catch(function (error) {
           console.error(error);
         });
@@ -199,6 +176,11 @@
                 this.load();
               } else {
                 this.$message.error(responseData.msg);
+                if (responseData.code === -2) {
+                  AuthUtil.clearSession();
+
+                  this.$router.push('/login');
+                }
               }
             } else {
               this.$message.error("系统内部错误");
@@ -229,7 +211,21 @@
             'Authorization': sessionStorage.getItem('token')
           }
         }).then((res) => {
-          this.userData = res.data.data;
+          if (res.status === 200) {
+            let responseData = res.data;
+            if (responseData.code === 0) {
+              this.userData = responseData.data;
+            } else {
+              this.$message.error(responseData.msg);
+              if (responseData.code === -2) {
+                AuthUtil.clearSession();
+
+                this.$router.push('/login');
+              }
+            }
+          } else {
+            this.$message.error("系统内部错误");
+          }
         }).catch(function (error) {
           console.error(error);
         });

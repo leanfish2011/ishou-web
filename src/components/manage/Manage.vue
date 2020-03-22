@@ -66,6 +66,7 @@
 
 <script>
   import Service from '../../config/service'
+  import AuthUtil from '../../utils/authUtil'
 
   export default {
     name: 'Container',
@@ -87,9 +88,7 @@
           }).then((res) => {
             let responseData = res.data;
             if (responseData.code === 0) {
-              sessionStorage.removeItem('userCode');
-              sessionStorage.removeItem('userName');
-              sessionStorage.removeItem('token');
+              AuthUtil.clearSession();
               this.userName = '';
 
               this.$router.push('/login');
