@@ -195,7 +195,7 @@
       },
       //时间格式化
       dateFormat: function (row) {
-        return DateUtil.beforeDate(row.createTime);
+        return DateUtil.dateFormat(row.createTime);
       },
       load() {
         this.$axios.get(Service.url.user, {
@@ -221,7 +221,7 @@
         }).catch(function (error) {
           console.error(error);
         });
-      }
+      },
     },
     created() {
       this.load();

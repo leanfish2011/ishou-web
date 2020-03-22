@@ -204,11 +204,25 @@
             'Authorization': sessionStorage.getItem('token')
           }
         }).then((res) => {
-          this.siteData = res.data.data;
+          if (res.status === 200) {
+            let responseData = res.data;
+            if (responseData.code === 0) {
+              this.siteData = responseData.data;
+            } else {
+              this.$message.error(responseData.msg);
+              if (responseData.code === -2) {
+                AuthUtil.clearSession();
+
+                this.$router.push('/login');
+              }
+            }
+          } else {
+            this.$message.error("系统内部错误");
+          }
         }).catch(function (error) {
           console.error(error);
         });
-      }
+      },
     },
     created() {
       this.load();

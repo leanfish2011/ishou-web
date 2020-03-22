@@ -34,7 +34,7 @@
   import AuthUtil from '../../../utils/authUtil'
 
   export default {
-    name: "userAddDialog",
+    name: "roleAddDialog",
     data() {
       return {
         visible: this.show,

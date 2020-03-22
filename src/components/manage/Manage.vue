@@ -99,6 +99,28 @@
             console.error(error);
           });
         })
+      },
+      authCheck() {
+        this.$axios.get(Service.url.authCheck, {
+          headers: {
+            'Authorization': sessionStorage.getItem('token')
+          }
+        }).then((res) => {
+          if (res.status === 200) {
+            let responseData = res.data;
+            let code = responseData.code;
+            if (code === -1 || code === -2) {
+              this.$message.error(responseData.msg);
+              AuthUtil.clearSession();
+
+              this.$router.push('/login');
+            }
+          } else {
+            this.$message.error("系统内部错误");
+          }
+        }).catch(function (error) {
+          console.error(error);
+        });
       }
     },
     mounted: function () {
@@ -106,10 +128,7 @@
       this.userName = userName;
     },
     created: function () {
-      let token = sessionStorage.getItem('token');
-      if (token == '' || token == null) {
-        this.$router.push('/login');
-      }
+      this.authCheck();
     }
   }
 </script>
