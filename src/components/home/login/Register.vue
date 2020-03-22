@@ -11,7 +11,7 @@
         <el-input v-model="registerModel.userCode" placeholder="请输入用户名"></el-input>
       </el-form-item>
       <el-form-item label="密码" prop="password">
-        <el-input type="password" v-model="registerModel.password" placeholder="请输入密码"></el-input>
+        <el-input v-model="registerModel.password" placeholder="请输入密码"></el-input>
       </el-form-item>
       <el-form-item label="姓名" prop="name">
         <el-input v-model="registerModel.name" placeholder="请输入姓名"></el-input>
