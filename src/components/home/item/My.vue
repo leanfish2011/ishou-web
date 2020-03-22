@@ -12,14 +12,20 @@
     name: 'my',
     components: {
       "navMenu": NavMenu
+    },
+    created: function () {
+      let token = sessionStorage.getItem('token');
+      if (token == '' || token == null) {
+        this.$router.push('/login');
+      }
     }
   }
 </script>
 
 <style scoped>
-#my{
-	background: bisque;
-	height: 600px;
-	width: 100%;
-}
+  #my {
+    background: bisque;
+    height: 600px;
+    width: 100%;
+  }
 </style>

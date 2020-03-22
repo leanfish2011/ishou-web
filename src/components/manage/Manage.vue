@@ -106,6 +106,12 @@
       let userName = sessionStorage.getItem('userName');
       this.userName = userName;
     },
+    created: function () {
+      let token = sessionStorage.getItem('token');
+      if (token == '' || token == null) {
+        this.$router.push('/login');
+      }
+    }
   }
 </script>
 
