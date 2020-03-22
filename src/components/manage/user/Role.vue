@@ -26,6 +26,10 @@
         <template slot-scope="scope">
           <el-button
             size="mini"
+            @click="handleMenu(scope.$index, scope.row)">分配权限
+          </el-button>
+          <el-button
+            size="mini"
             @click="handleEdit(scope.$index, scope.row)">编辑
           </el-button>
           <el-button
@@ -37,11 +41,13 @@
       </el-table-column>
     </el-table>
     <role-add-dialog ref="addDialog" :show.sync="isShowAdd" @refresh="load()"></role-add-dialog>
+    <role-menu-dialog ref="menuDialog" :show.sync="isShowMenu"></role-menu-dialog>
   </div>
 </template>
 
 <script>
   import RoleAddDialog from './RoleAddDialog'
+  import RoleMenuDialog from './RoleMenuDialog'
   import Service from '../../../config/service'
   import DateUtil from '../../../utils/dateUtil'
   import AuthUtil from '../../../utils/authUtil'
@@ -49,17 +55,24 @@
   export default {
     name: "Role",
     components: {
-      "roleAddDialog": RoleAddDialog
+      "roleAddDialog": RoleAddDialog,
+      "roleMenuDialog": RoleMenuDialog
     },
     data() {
       return {
         roleData: null,
         isShowAdd: false,
+        isShowMenu: false
       }
     },
     methods: {
       onAddShow() {
         this.isShowAdd = true;
+      },
+      handleMenu(index, row) {
+        //TODO
+        this.isShowMenu = true;
+        this.$refs.menuDialog.roleModel = Object.assign({}, row);
       },
       handleEdit(index, row) {
         this.isShowAdd = true;//dialog对话窗口打开

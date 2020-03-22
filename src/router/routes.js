@@ -12,6 +12,8 @@ import User from '../components/manage/user/User.vue'
 import Role from '../components/manage/user/Role.vue'
 import Table from '../components/test/elmentui/Table'
 import Slider from '../components/test/elmentui/Slider'
+import Tree from '../components/test/elmentui/Tree'
+import TreeData from '../components/test/elmentui/TreeData'
 
 // 设置路径
 export default [
@@ -23,6 +25,8 @@ export default [
   {path: "/register", component: Register},
   {path: "/table", component: Table},
   {path: "/slider", component: Slider},
+  {path: "/tree", component: Tree},
+  {path: "/treeData", component: TreeData},
   {
     path: "/manage",
     component: Manage,
