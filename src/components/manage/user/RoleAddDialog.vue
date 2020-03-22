@@ -1,24 +1,18 @@
 <template>
   <div>
     <el-dialog
-      title="新增用户"
+      title="新增角色"
       :visible.sync="visible"
       @close="onClose"
       :show="show">
       <el-form ref="addForm" :model="addModel" label-width="80px" :rules="validRule"
                status-icon
                class="register-page">
-        <el-form-item label="用户名" prop="userCode">
-          <el-input v-model="addModel.userCode" placeholder="请输入用户名"></el-input>
+        <el-form-item label="名称" prop="name">
+          <el-input v-model="addModel.name" placeholder="请输入名称"></el-input>
         </el-form-item>
-        <el-form-item label="密码" prop="password">
-          <el-input v-model="addModel.password" placeholder="请输入密码"></el-input>
-        </el-form-item>
-        <el-form-item label="姓名" prop="name">
-          <el-input v-model="addModel.name" placeholder="请输入姓名"></el-input>
-        </el-form-item>
-        <el-form-item label="邮箱" prop="email">
-          <el-input v-model="addModel.email" placeholder="请输入邮箱地址"></el-input>
+        <el-form-item label="备注" prop="remark">
+          <el-input v-model="addModel.remark" placeholder="请输入备注"></el-input>
         </el-form-item>
         <el-form-item>
           <el-button type="primary" @click="onSubmit" :loading="submiting">确定</el-button>
@@ -41,19 +35,11 @@
         submiting: false,
         addModel: {
           id: "",
-          userCode: "",
-          password: "",
           name: "",
-          email: "",
+          remark: ""
         },
         validRule: {
-          userCode: [{required: true, message: '请输入用户名', trigger: 'blur'}],
-          password: [{required: true, message: '请输入密码', trigger: 'blur'}],
-          name: [{required: true, message: '请输入姓名', trigger: 'blur'}],
-          email: [
-            {required: true, message: '请输入邮箱地址', trigger: 'blur'},
-            {type: 'email', message: '请输入正确的邮箱地址', trigger: ['blur', 'change']}
-          ]
+          name: [{required: true, message: '请输入名称', trigger: 'blur'}]
         }
       };
     },
@@ -71,8 +57,7 @@
     methods: {
       onSubmit() {
         if (this.addModel.id === "") {
-          console.log("新增");
-          this.$axios.post(Service.url.user, this.addModel, {
+          this.$axios.post(Service.url.role, this.addModel, {
             headers: {
               'Authorization': sessionStorage.getItem('token')
             }
@@ -96,7 +81,7 @@
           })
         } else {
           console.log(this.addModel);
-          this.$axios.put(Service.url.user, this.addModel, {
+          this.$axios.put(Service.url.role, this.addModel, {
             headers: {
               'Authorization': sessionStorage.getItem('token')
             }
