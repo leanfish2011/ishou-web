@@ -12,10 +12,10 @@
         node-key="id"
         ref="menuTree"
         default-expand-all
-        :default-expanded-keys="[2, 3]"
-        :default-checked-keys="[5]"
         :props="defaultProps">
       </el-tree>
+      <el-button type="primary" @click="onSubmit" :loading="submiting">确定</el-button>
+      <el-button @click="onCancel">取消</el-button>
     </el-dialog>
   </div>
 </template>
@@ -58,68 +58,45 @@
     watch: {
       show() {
         this.visible = this.show;
+        this.loadRoleMenu();
       }
     },
     methods: {
       onSubmit() {
-        if (this.addModel.id === "") {
-          this.$axios.post(Service.url.role, this.addModel, {
-            headers: {
-              'Authorization': sessionStorage.getItem('token')
-            }
-          }).then((res) => {
-            if (res.status === 200) {
-              let responseData = res.data;
-              if (responseData.code === 0) {
-                this.$message.success(responseData.msg);
-                this.visible = false;
-                this.$emit('refresh');
-              } else {
-                this.$message.error(responseData.msg);
-                if (responseData.code === -2) {
-                  AuthUtil.clearSession();
-                  this.$router.push('/login');
-                }
-              }
+        this.addModel.roleId = this.roleModel.id;
+        this.addModel.menuIdList = this.$refs.menuTree.getCheckedKeys();
+        console.log(this.addModel);
+        this.$axios.post(Service.url.menuRole, this.addModel, {
+          headers: {
+            'Authorization': sessionStorage.getItem('token')
+          }
+        }).then((res) => {
+          if (res.status === 200) {
+            let responseData = res.data;
+            if (responseData.code === 0) {
+              this.$message.success(responseData.msg);
+              this.visible = false;
             } else {
-              this.$message.error("系统内部错误");
-            }
-          })
-        } else {
-          console.log(this.addModel);
-          this.$axios.put(Service.url.role, this.addModel, {
-            headers: {
-              'Authorization': sessionStorage.getItem('token')
-            }
-          }).then((res) => {
-            if (res.status === 200) {
-              let responseData = res.data;
-              if (responseData.code === 0) {
-                this.$message.success(responseData.msg);
-                this.visible = false;
-                this.$emit('refresh');
-              } else {
-                this.$message.error(responseData.msg);
-                if (responseData.code === -2) {
-                  AuthUtil.clearSession();
-                  this.$router.push('/login');
-                }
+              this.$message.error(responseData.msg);
+              if (responseData.code === -2) {
+                AuthUtil.clearSession();
+                this.$router.push('/login');
               }
-            } else {
-              this.$message.error("系统内部错误");
             }
-          })
-        }
+          } else {
+            this.$message.error("系统内部错误");
+          }
+        })
       },
       onCancel() {
-        this.$refs.addForm.resetFields();
+        this.$refs.menuTree.setCheckedKeys([]);
         this.$emit('update:show', false);
-        this.addModel = Object.assign({}, "");//将数据传入dialog页面
+        this.addModel = Object.assign({}, "");//清空model
       },
       onClose() {
         this.onCancel();
       },
-      load() {
+      loadAllMenu() {
         this.$axios.get(Service.url.menuAll, {
           headers: {
             'Authorization': sessionStorage.getItem('token')
@@ -143,9 +120,34 @@
           console.error(error);
         });
       },
+      loadRoleMenu() {
+        this.$axios.get(Service.url.menuRole + "/" + this.roleModel.id, {
+          headers: {
+            'Authorization': sessionStorage.getItem('token')
+          }
+        }).then((res) => {
+          if (res.status === 200) {
+            let responseData = res.data;
+            if (responseData.code === 0) {
+              //选中菜单
+              this.$refs.menuTree.setCheckedKeys(responseData.data);
+            } else {
+              this.$message.error(responseData.msg);
+              if (responseData.code === -2) {
+                AuthUtil.clearSession();
+                this.$router.push('/login');
+              }
+            }
+          } else {
+            this.$message.error("系统内部错误");
+          }
+        }).catch(function (error) {
+          console.error(error);
+        });
+      }
     },
     created() {
-      this.load();
+      this.loadAllMenu();
     }
   }
 </script>
