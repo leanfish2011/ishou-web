@@ -129,7 +129,10 @@
           this.searchForm.createTimeEnd = "";
         }
         this.$axios.get(Service.url.sitePersonal, {
-          params: this.searchForm
+          params: this.searchForm,
+          headers: {
+            'Authorization': sessionStorage.getItem('token')
+          }
         }).then((res) => {
           if (res.status === 200) {
             let responseData = res.data;
@@ -162,7 +165,12 @@
           cancelButtonText: '取消',
           type: 'warning'
         }).then(() => {
-          this.$axios.delete(Service.url.sitePersonal + '/' + row.id).then((res) => {
+          this.$axios.delete(Service.url.sitePersonal + '/' + row.id,
+            {
+              headers: {
+                'Authorization': sessionStorage.getItem('token')
+              }
+            }).then((res) => {
             if (res.status === 200) {
               let responseData = res.data;
               if (responseData.code === 0) {
@@ -191,7 +199,11 @@
         return DateUtil.dateFormat(row.createTime);
       },
       load() {
-        this.$axios.get(Service.url.sitePersonal).then((res) => {
+        this.$axios.get(Service.url.sitePersonal, {
+          headers: {
+            'Authorization': sessionStorage.getItem('token')
+          }
+        }).then((res) => {
           this.siteData = res.data.data;
         }).catch(function (error) {
           console.error(error);

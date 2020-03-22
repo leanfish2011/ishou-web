@@ -11,7 +11,7 @@ const url = {
   sitePersonal: ROOT_PATH + ':9092/api/v1/site/personal',
   logout: ROOT_PATH + ':9091/api/v1/auth/access/logout',
   user: ROOT_PATH + ':9091/api/v1/auth/user',
-}
+};
 
 export default {
   url

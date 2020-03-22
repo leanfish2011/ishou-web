@@ -72,7 +72,11 @@
       onSubmit() {
         if (this.addModel.id === "") {
           console.log("新增");
-          this.$axios.post(Service.url.user, this.addModel).then((res) => {
+          this.$axios.post(Service.url.user, this.addModel, {
+            headers: {
+              'Authorization': sessionStorage.getItem('token')
+            }
+          }).then((res) => {
             if (res.status === 200) {
               let responseData = res.data;
               if (responseData.code === 0) {
@@ -92,7 +96,11 @@
           })
         } else {
           console.log(this.addModel);
-          this.$axios.put(Service.url.user, this.addModel).then((res) => {
+          this.$axios.put(Service.url.user, this.addModel, {
+            headers: {
+              'Authorization': sessionStorage.getItem('token')
+            }
+          }).then((res) => {
             if (res.status === 200) {
               let responseData = res.data;
               if (responseData.code === 0) {
