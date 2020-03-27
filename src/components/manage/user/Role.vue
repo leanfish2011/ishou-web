@@ -26,7 +26,7 @@
         <template slot-scope="scope">
           <el-button
             size="mini"
-            @click="handleMenu(scope.$index, scope.row)">分配权限
+            @click="handleMenu(scope.$index, scope.row)">管理
           </el-button>
           <el-button
             size="mini"
