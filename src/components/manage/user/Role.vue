@@ -78,13 +78,12 @@
         this.isShowAdd = true;
       },
       handleMenu(index, row) {
-        //TODO
         this.isShowMenu = true;
         this.$refs.menuDialog.roleModel = Object.assign({}, row);
       },
       handleUser(index, row) {
         this.isShowUser = true;
-
+        this.$refs.userDialog.roleModel = Object.assign({}, row);
       },
       handleEdit(index, row) {
         this.isShowAdd = true;//dialog对话窗口打开

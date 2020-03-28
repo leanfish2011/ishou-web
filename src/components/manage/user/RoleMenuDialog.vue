@@ -60,7 +60,9 @@
     watch: {
       show() {
         this.visible = this.show;
-        this.loadRoleMenu();
+        if (this.visible) {
+          this.loadRoleMenu();
+        }
       }
     },
     methods: {
