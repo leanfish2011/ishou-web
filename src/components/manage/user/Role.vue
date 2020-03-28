@@ -26,7 +26,11 @@
         <template slot-scope="scope">
           <el-button
             size="mini"
-            @click="handleMenu(scope.$index, scope.row)">管理
+            @click="handleMenu(scope.$index, scope.row)">分配菜单
+          </el-button>
+          <el-button
+            size="mini"
+            @click="handleUser(scope.$index, scope.row)">分配用户
           </el-button>
           <el-button
             size="mini"
@@ -42,12 +46,14 @@
     </el-table>
     <role-add-dialog ref="addDialog" :show.sync="isShowAdd" @refresh="load()"></role-add-dialog>
     <role-menu-dialog ref="menuDialog" :show.sync="isShowMenu"></role-menu-dialog>
+    <role-user-dialog ref="userDialog" :show.sync="isShowUser"></role-user-dialog>
   </div>
 </template>
 
 <script>
   import RoleAddDialog from './RoleAddDialog'
   import RoleMenuDialog from './RoleMenuDialog'
+  import RoleUserDialog from './RoleUserDialog'
   import Service from '../../../config/service'
   import DateUtil from '../../../utils/dateUtil'
   import AuthUtil from '../../../utils/authUtil'
@@ -56,13 +62,15 @@
     name: "Role",
     components: {
       "roleAddDialog": RoleAddDialog,
-      "roleMenuDialog": RoleMenuDialog
+      "roleMenuDialog": RoleMenuDialog,
+      "roleUserDialog": RoleUserDialog
     },
     data() {
       return {
         roleData: null,
         isShowAdd: false,
-        isShowMenu: false
+        isShowMenu: false,
+        isShowUser: false,
       }
     },
     methods: {
@@ -73,6 +81,10 @@
         //TODO
         this.isShowMenu = true;
         this.$refs.menuDialog.roleModel = Object.assign({}, row);
+      },
+      handleUser(index, row) {
+        this.isShowUser = true;
+
       },
       handleEdit(index, row) {
         this.isShowAdd = true;//dialog对话窗口打开

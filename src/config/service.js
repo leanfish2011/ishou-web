@@ -15,6 +15,7 @@ const url = {
   authCheck: ROOT_PATH + ':9091/api/v1/auth/access/check',
   menuAll: ROOT_PATH + ':9091/api/v1/auth/menu',
   menuRole: ROOT_PATH + ':9091/api/v1/auth/role/menu',
+  roleUser: ROOT_PATH + ':9091/api/v1/auth/role/user',
 };
 
 export default {

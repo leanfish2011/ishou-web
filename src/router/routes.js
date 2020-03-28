@@ -14,6 +14,7 @@ import Table from '../components/test/elmentui/Table'
 import Slider from '../components/test/elmentui/Slider'
 import Tree from '../components/test/elmentui/Tree'
 import TreeData from '../components/test/elmentui/TreeData'
+import Tag from '../components/test/elmentui/Tag'
 
 // 设置路径
 export default [
@@ -27,6 +28,7 @@ export default [
   {path: "/slider", component: Slider},
   {path: "/tree", component: Tree},
   {path: "/treeData", component: TreeData},
+  {path: "/tag", component: Tag},
   {
     path: "/manage",
     component: Manage,
