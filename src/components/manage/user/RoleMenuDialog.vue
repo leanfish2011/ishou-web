@@ -71,7 +71,7 @@
         this.addModel.menuIdList = this.$refs.menuTree.getCheckedKeys();
         this.$axios.post(Service.url.menuRole, this.addModel, {
           headers: {
-            'Authorization': sessionStorage.getItem('token')
+            'Authorization': localStorage.getItem('token')
           }
         }).then((res) => {
           if (res.status === 200) {
@@ -102,7 +102,7 @@
       loadAllMenu() {
         this.$axios.get(Service.url.menuAll, {
           headers: {
-            'Authorization': sessionStorage.getItem('token')
+            'Authorization': localStorage.getItem('token')
           }
         }).then((res) => {
           if (res.status === 200) {
@@ -126,7 +126,7 @@
       loadRoleMenu() {
         this.$axios.get(Service.url.menuRole + "/" + this.roleModel.id, {
           headers: {
-            'Authorization': sessionStorage.getItem('token')
+            'Authorization': localStorage.getItem('token')
           }
         }).then((res) => {
           if (res.status === 200) {

@@ -72,9 +72,11 @@
                 let responseData = res.data;
                 if (responseData.code === 0) {
                   this.logining = false;
-                  sessionStorage.setItem('userCode', this.loginModel.userCode);
-                  sessionStorage.setItem('userName', responseData.data.name);
-                  sessionStorage.setItem('token', responseData.data.token);
+                  let userData = responseData.data;
+                  localStorage.setItem('userCode', userData.userCode);
+                  localStorage.setItem('userName', userData.name);
+                  localStorage.setItem('token', userData.token);
+                  localStorage.setItem('userId', userData.userId);
 
                   this.$router.push({path: "/"});
                 } else {

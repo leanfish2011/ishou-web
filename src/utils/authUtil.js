@@ -4,9 +4,10 @@
  */
 var authUtil = {
   clearSession: function () {
-    sessionStorage.removeItem('userCode');
-    sessionStorage.removeItem('userName');
-    sessionStorage.removeItem('token');
+    localStorage.removeItem('userCode');
+    localStorage.removeItem('userName');
+    localStorage.removeItem('token');
+    localStorage.removeItem('userId');
   }
 };
 

@@ -14,7 +14,7 @@
       "navMenu": NavMenu
     },
     created: function () {
-      let token = sessionStorage.getItem('token');
+      let token = localStorage.getItem('token');
       if (token == '' || token == null) {
         this.$router.push('/login');
       }

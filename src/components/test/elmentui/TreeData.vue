@@ -34,7 +34,7 @@
       load() {
         this.$axios.get(Service.url.menuAll, {
           headers: {
-            'Authorization': sessionStorage.getItem('token')
+            'Authorization': localStorage.getItem('token')
           }
         }).then((res) => {
           if (res.status === 200) {

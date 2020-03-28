@@ -109,7 +109,7 @@
         this.addUserModel.userIdList = userSelectedId;
         this.$axios.post(Service.url.roleUser, this.addUserModel, {
           headers: {
-            'Authorization': sessionStorage.getItem('token')
+            'Authorization': localStorage.getItem('token')
           }
         }).then((res) => {
           if (res.status === 200) {
@@ -139,7 +139,7 @@
       loadAllUser() {
         this.$axios.get(Service.url.user, {
           headers: {
-            'Authorization': sessionStorage.getItem('token')
+            'Authorization': localStorage.getItem('token')
           }
         }).then((res) => {
           if (res.status === 200) {
@@ -164,7 +164,7 @@
       loadRoleUser() {
         this.$axios.get(Service.url.roleUser + "/" + this.roleModel.id, {
           headers: {
-            'Authorization': sessionStorage.getItem('token')
+            'Authorization': localStorage.getItem('token')
           }
         }).then((res) => {
           if (res.status === 200) {

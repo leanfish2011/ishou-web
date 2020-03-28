@@ -44,6 +44,7 @@
 
 <script>
   import Service from '../../config/service'
+  import AuthUtil from '../../utils/authUtil'
 
   export default {
     name: 'navMenu',
@@ -59,14 +60,12 @@
           //调用接口
           this.$axios.get(Service.url.logout, {
             headers: {
-              'Authorization': sessionStorage.getItem('token')
+              'Authorization': localStorage.getItem('token')
             }
           }).then((res) => {
             let responseData = res.data;
             if (responseData.code === 0) {
-              sessionStorage.removeItem('userCode');
-              sessionStorage.removeItem('userName');
-              sessionStorage.removeItem('token');
+              AuthUtil.clearSession();
               this.userName = '';
 
               this.$router.push('/');
@@ -80,7 +79,7 @@
       }
     },
     mounted: function () {
-      let userName = sessionStorage.getItem('userName');
+      let userName = localStorage.getItem('userName');
       this.userName = userName;
       console.log(this.userName);
     },

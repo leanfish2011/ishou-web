@@ -59,7 +59,7 @@
         if (this.addModel.id === "") {
           this.$axios.post(Service.url.role, this.addModel, {
             headers: {
-              'Authorization': sessionStorage.getItem('token')
+              'Authorization': localStorage.getItem('token')
             }
           }).then((res) => {
             if (res.status === 200) {
@@ -83,7 +83,7 @@
           console.log(this.addModel);
           this.$axios.put(Service.url.role, this.addModel, {
             headers: {
-              'Authorization': sessionStorage.getItem('token')
+              'Authorization': localStorage.getItem('token')
             }
           }).then((res) => {
             if (res.status === 200) {

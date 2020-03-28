@@ -12,21 +12,28 @@
           <el-menu default-active="/site"
                    class="el-menu-vertical-demo"
                    :collapse="isCollapse" :router="true">
+            <label v-for="(item,index) in userMenu" :key="index">
+              <el-menu-item :index=item.url>
+                <i :class=item.icon></i>
+                <span slot="title">{{item.name}}</span>
+              </el-menu-item>
+            </label>
+
             <el-submenu index="1">
               <template slot="title">
                 <i class="el-icon-location"></i>
                 <span slot="title">网站管理</span>
               </template>
               <el-menu-item index="/site">我的网站</el-menu-item>
-              <el-menu-item index="/type">类别管理</el-menu-item>
             </el-submenu>
+
             <el-submenu index="2">
               <template slot="title">
                 <i class="el-icon-document"></i>
                 <span slot="title">用户管理</span>
               </template>
               <el-menu-item index="/user">用户管理</el-menu-item>
-              <el-menu-item index="role">角色管理</el-menu-item>
+              <el-menu-item index="/role">角色管理</el-menu-item>
             </el-submenu>
 
           </el-menu>
@@ -73,7 +80,8 @@
     data() {
       return {
         userName: '',
-        isCollapse: false
+        isCollapse: false,
+        userMenu: null
       }
     },
     methods: {
@@ -83,7 +91,7 @@
           //调用接口
           this.$axios.get(Service.url.logout, {
             headers: {
-              'Authorization': sessionStorage.getItem('token')
+              'Authorization': localStorage.getItem('token')
             }
           }).then((res) => {
             let responseData = res.data;
@@ -103,7 +111,7 @@
       authCheck() {
         this.$axios.get(Service.url.authCheck, {
           headers: {
-            'Authorization': sessionStorage.getItem('token')
+            'Authorization': localStorage.getItem('token')
           }
         }).then((res) => {
           if (res.status === 200) {
@@ -121,14 +129,39 @@
         }).catch(function (error) {
           console.error(error);
         });
+      },
+      loadUserMenu() {
+        this.$axios.get(Service.url.menuUser + "/" + localStorage.getItem('userId'), {
+          headers: {
+            'Authorization': localStorage.getItem('token')
+          }
+        }).then((res) => {
+          if (res.status === 200) {
+            let responseData = res.data;
+            if (responseData.code === 0) {
+              this.userMenu = responseData.data;
+            } else {
+              this.$message.error(responseData.msg);
+              if (responseData.code === -2) {
+                AuthUtil.clearSession();
+                this.$router.push('/login');
+              }
+            }
+          } else {
+            this.$message.error("系统内部错误");
+          }
+        }).catch(function (error) {
+          console.error(error);
+        });
       }
     },
     mounted: function () {
-      let userName = sessionStorage.getItem('userName');
+      let userName = localStorage.getItem('userName');
       this.userName = userName;
     },
     created: function () {
       this.authCheck();
+      this.loadUserMenu();
     }
   }
 </script>

@@ -7,7 +7,6 @@ import Login from '../components/home/login/Login.vue'
 import Register from '../components/home/login/Register.vue'
 import Manage from '../components/manage/Manage.vue'
 import Site from '../components/manage/site/Site.vue'
-import Type from '../components/manage/site/Type.vue'
 import User from '../components/manage/user/User.vue'
 import Role from '../components/manage/user/Role.vue'
 import Table from '../components/test/elmentui/Table'
@@ -34,7 +33,6 @@ export default [
     component: Manage,
     children: [
       {path: "/site", component: Site},
-      {path: "/type", component: Type},
       {path: "/user", component: User},
       {path: "/role", component: Role}
     ]

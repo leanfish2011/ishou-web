@@ -97,7 +97,7 @@
         }).then(() => {
           this.$axios.delete(Service.url.role + '/' + row.id, {
             headers: {
-              'Authorization': sessionStorage.getItem('token')
+              'Authorization': localStorage.getItem('token')
             }
           }).then((res) => {
             if (res.status === 200) {
@@ -130,7 +130,7 @@
       load() {
         this.$axios.get(Service.url.role, {
           headers: {
-            'Authorization': sessionStorage.getItem('token')
+            'Authorization': localStorage.getItem('token')
           }
         }).then((res) => {
           if (res.status === 200) {

@@ -131,7 +131,7 @@
         this.$axios.get(Service.url.sitePersonal, {
           params: this.searchForm,
           headers: {
-            'Authorization': sessionStorage.getItem('token')
+            'Authorization': localStorage.getItem('token')
           }
         }).then((res) => {
           if (res.status === 200) {
@@ -168,7 +168,7 @@
           this.$axios.delete(Service.url.sitePersonal + '/' + row.id,
             {
               headers: {
-                'Authorization': sessionStorage.getItem('token')
+                'Authorization': localStorage.getItem('token')
               }
             }).then((res) => {
             if (res.status === 200) {
@@ -201,7 +201,7 @@
       load() {
         this.$axios.get(Service.url.sitePersonal, {
           headers: {
-            'Authorization': sessionStorage.getItem('token')
+            'Authorization': localStorage.getItem('token')
           }
         }).then((res) => {
           if (res.status === 200) {
