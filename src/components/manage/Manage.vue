@@ -13,29 +13,20 @@
                    class="el-menu-vertical-demo"
                    :collapse="isCollapse" :router="true">
             <label v-for="(item,index) in userMenu" :key="index">
-              <el-menu-item :index=item.url>
-                <i :class=item.icon></i>
-                <span slot="title">{{item.name}}</span>
-              </el-menu-item>
+              <label v-if="item.children.length>0">
+                <label v-for="firstItem in item.children">
+                  <el-submenu :index="firstItem.id">
+                    <template slot="title">
+                      <i class="el-icon-location"></i>
+                      <span slot="title">{{firstItem.name}}</span>
+                    </template>
+                    <label v-for="child in firstItem.children">
+                      <el-menu-item :index=child.url>{{child.name}}</el-menu-item>
+                    </label>
+                  </el-submenu>
+                </label>
+              </label>
             </label>
-
-            <el-submenu index="1">
-              <template slot="title">
-                <i class="el-icon-location"></i>
-                <span slot="title">网站管理</span>
-              </template>
-              <el-menu-item index="/site">我的网站</el-menu-item>
-            </el-submenu>
-
-            <el-submenu index="2">
-              <template slot="title">
-                <i class="el-icon-document"></i>
-                <span slot="title">用户管理</span>
-              </template>
-              <el-menu-item index="/user">用户管理</el-menu-item>
-              <el-menu-item index="/role">角色管理</el-menu-item>
-            </el-submenu>
-
           </el-menu>
         </div>
       </el-aside>
