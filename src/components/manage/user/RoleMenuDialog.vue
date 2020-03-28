@@ -68,7 +68,8 @@
     methods: {
       onSubmit() {
         this.addModel.roleId = this.roleModel.id;
-        this.addModel.menuIdList = this.$refs.menuTree.getCheckedKeys();
+        this.addModel.menuIdList = this.$refs.menuTree.getCheckedKeys().concat(
+          this.$refs.menuTree.getHalfCheckedKeys());
         this.$axios.post(Service.url.menuRole, this.addModel, {
           headers: {
             'Authorization': localStorage.getItem('token')
