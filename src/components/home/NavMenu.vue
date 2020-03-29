@@ -27,7 +27,7 @@
                 <i class="el-icon-arrow-down el-icon--right"></i>
               </span>
               <el-dropdown-menu slot="dropdown">
-                <el-dropdown-item>我的消息</el-dropdown-item>
+                <el-dropdown-item @click.native="addSite">增加收藏</el-dropdown-item>
                 <el-dropdown-item divided
                                   @click.native="logout">退出登录
                 </el-dropdown-item>
@@ -37,6 +37,7 @@
         <el-link>
           <router-link to="/register">注 册</router-link>
         </el-link>
+        <fast-add-site-dialog ref="fastAddSite"></fast-add-site-dialog>
       </span>
     </el-menu>
   </div>
@@ -45,9 +46,13 @@
 <script>
   import Service from '../../config/service'
   import AuthUtil from '../../utils/authUtil'
+  import FastAddSiteDialog from './FastAddSiteDialog'
 
   export default {
     name: 'navMenu',
+    components: {
+      "fastAddSiteDialog": FastAddSiteDialog
+    },
     data() {
       return {
         userName: '',
@@ -76,12 +81,14 @@
             console.error(error);
           });
         })
+      },
+      addSite: function () {
+        this.$refs.fastAddSite.dialogFormVisible = true;
       }
     },
     mounted: function () {
       let userName = localStorage.getItem('userName');
       this.userName = userName;
-      console.log(this.userName);
     },
   }
 </script>
