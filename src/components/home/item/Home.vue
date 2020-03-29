@@ -1,26 +1,32 @@
 <template>
   <div id="home">
     <nav-menu></nav-menu>
-    <ul :class="'ulstyle'">
-      <li v-for="item in myDataList" :key="item.id" :class="'listyle'">
-        <a :href=item.url target="_blank">{{item.name}}</a>
-      </li>
-    </ul>
+    <div v-bind:style="{minHeight: Height+'px'}">
+      <ul :class="'ulstyle'">
+        <li v-for="item in myDataList" :key="item.id" :class="'listyle'">
+          <a :href=item.url target="_blank">{{item.name}}</a>
+        </li>
+      </ul>
+    </div>
+    <bottom-footer></bottom-footer>
   </div>
 </template>
 
 <script>
   import NavMenu from '../NavMenu'
   import Service from '../../../config/service'
+  import Footer from '../Footer'
 
   export default {
     name: 'home',
     components: {
-      "navMenu": NavMenu
+      "navMenu": NavMenu,
+      "bottomFooter": Footer
     },
     data() {
       return {
-        myDataList: null
+        myDataList: null,
+        Height: 0
       }
     },
     created() {
@@ -29,6 +35,14 @@
       }).catch(function (error) {
         console.error(error);
       });
+    },
+    mounted() {
+      //动态设置内容高度 让footer始终居底   header+footer的高度是100
+      this.Height = document.documentElement.clientHeight - 160;
+      //监听浏览器窗口变化　
+      window.onresize = () => {
+        this.Height = document.documentElement.clientHeight - 160;
+      }
     }
   }
 </script>
@@ -36,7 +50,7 @@
 <style scoped>
   #home {
     background: gainsboro;
-    height: 600px;
+    height: 100%;
     width: 100%;
   }
 

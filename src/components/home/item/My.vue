@@ -60,7 +60,7 @@
 <style scoped>
   #my {
     background: bisque;
-    height: 600px;
+    height: 100%;
     width: 100%;
   }
 </style>

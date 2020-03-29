@@ -12,9 +12,6 @@
       <el-menu-item v-if="userName!=''&&userName!=null" index="/my">
         我的
       </el-menu-item>
-      <el-menu-item index="/message">
-        留言
-      </el-menu-item>
       <el-menu-item index="/about">
         关于
       </el-menu-item>
