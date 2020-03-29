@@ -1,14 +1,13 @@
 <template>
-  <el-dialog title="增加收藏" :visible.sync="dialogFormVisible" width="30%">
-    <el-form :model="addModel" ref="addForm" :rules="validRule">
-      <el-form-item label="标题" :label-width="formLabelWidth" prop="name">
-        <el-input v-model="addModel.name" autocomplete="off" placeholder="请输入标题"></el-input>
+  <el-dialog title="修改密码" :visible.sync="dialogFormVisible" width="20%">
+    <el-form :model="updateModel" ref="addForm" :rules="validRule">
+      <el-form-item label="旧密码" :label-width="formLabelWidth" prop="oldPassword">
+        <el-input v-model="updateModel.oldPassword" autocomplete="off"
+                  placeholder="请输入旧密码"></el-input>
       </el-form-item>
-      <el-form-item label="链接" :label-width="formLabelWidth" prop="url">
-        <el-input v-model="addModel.url" autocomplete="off" placeholder="请输入链接"></el-input>
-      </el-form-item>
-      <el-form-item>
-        <el-checkbox v-model="addModel.isPost">发布到首页</el-checkbox>
+      <el-form-item label="新密码" :label-width="formLabelWidth" prop="newPassword">
+        <el-input v-model="updateModel.newPassword" autocomplete="off"
+                  placeholder="请输入新密码"></el-input>
       </el-form-item>
     </el-form>
     <div slot="footer" class="dialog-footer">
@@ -23,19 +22,19 @@
   import AuthUtil from '../../utils/authUtil'
 
   export default {
-    name: "FastAddSiteDialog",
+    name: "ChangePwdDialog",
     data() {
       return {
         dialogFormVisible: false,
-        addModel: {
-          name: '',
-          url: '',
-          isPost: false
+        updateModel: {
+          id: '',
+          oldPassword: '',
+          newPassword: '',
         },
-        formLabelWidth: '60px',
+        formLabelWidth: '70px',
         validRule: {
-          name: [{required: true, message: '请输入标题', trigger: 'blur'}],
-          url: [{required: true, message: '请输入链接', trigger: 'blur'}]
+          oldPassword: [{required: true, message: '请输入旧密码', trigger: 'blur'}],
+          newPassword: [{required: true, message: '请输入新密码', trigger: 'blur'}]
         }
       };
     },
@@ -43,12 +42,13 @@
       onCloseDialog() {
         this.$refs.addForm.resetFields();
         this.dialogFormVisible = false;
-        this.addModel = Object.assign({}, "");
+        this.updateModel = Object.assign({}, "");
       },
       submit() {
         this.$refs.addForm.validate((valid) => {
           if (valid) {
-            this.$axios.post(Service.url.sitePersonal, this.addModel,
+            this.updateModel.id = localStorage.getItem("userId");
+            this.$axios.put(Service.url.changePwd, this.updateModel,
               {
                 headers: {
                   'Authorization': localStorage.getItem('token')

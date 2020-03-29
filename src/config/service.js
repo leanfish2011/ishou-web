@@ -17,6 +17,7 @@ const url = {
   menuRole: ROOT_PATH + ':9091/api/v1/auth/role/menu',
   roleUser: ROOT_PATH + ':9091/api/v1/auth/role/user',
   menuUser: ROOT_PATH + ':9091/api/v1/auth/menu/user',
+  changePwd: ROOT_PATH + ':9091/api/v1/auth/access/password',
 };
 
 export default {

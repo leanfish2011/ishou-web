@@ -42,8 +42,7 @@
                 <i class="el-icon-arrow-down el-icon--right"></i>
               </span>
               <el-dropdown-menu slot="dropdown">
-                <el-dropdown-item>我的消息</el-dropdown-item>
-                <el-dropdown-item>设置</el-dropdown-item>
+                <el-dropdown-item @click.native="changePwd">修改密码</el-dropdown-item>
                 <el-dropdown-item divided
                                   @click.native="logout">退出登录
                 </el-dropdown-item>
@@ -59,15 +58,20 @@
         </el-main>
       </el-container>
     </el-container>
+    <change-pwd-dialog ref="changePwd"></change-pwd-dialog>
   </div>
 </template>
 
 <script>
   import Service from '../../config/service'
   import AuthUtil from '../../utils/authUtil'
+  import ChangePwdDialog from './ChangePwdDialog'
 
   export default {
     name: 'Container',
+    components: {
+      "changePwdDialog": ChangePwdDialog
+    },
     data() {
       return {
         userName: '',
@@ -144,6 +148,9 @@
         }).catch(function (error) {
           console.error(error);
         });
+      },
+      changePwd() {
+        this.$refs.changePwd.dialogFormVisible = true;
       }
     },
     mounted: function () {
