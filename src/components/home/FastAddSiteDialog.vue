@@ -57,7 +57,6 @@
             if (responseData.code === 0) {
               this.$message.success(responseData.msg);
               this.onCloseDialog();
-              this.$emit('refresh');
             } else {
               this.$message.error(responseData.msg);
               if (responseData.code === -2) {
