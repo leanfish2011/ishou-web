@@ -1,6 +1,7 @@
 <template>
   <div id="home">
-    <nav-menu></nav-menu>
+    <!--<nav-menu></nav-menu>-->
+    <nav-header></nav-header>
     <div v-bind:style="{minHeight: Height+'px'}">
       <ul :class="'ulstyle'">
         <li v-for="item in myDataList" :key="item.id" :class="'listyle'">
@@ -16,12 +17,14 @@
   import NavMenu from '../NavMenu'
   import Service from '../../../config/service'
   import Footer from '../Footer'
+  import NavHeader from '../NavHeader'
 
   export default {
     name: 'home',
     components: {
       "navMenu": NavMenu,
-      "bottomFooter": Footer
+      "bottomFooter": Footer,
+      "navHeader": NavHeader
     },
     data() {
       return {
@@ -52,6 +55,7 @@
     background: gainsboro;
     height: 100%;
     width: 100%;
+    margin-top: 110px;
   }
 
   .ulstyle {

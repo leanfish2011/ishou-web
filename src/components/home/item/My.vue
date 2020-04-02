@@ -1,23 +1,28 @@
 <template>
   <div id="my">
-    <nav-menu></nav-menu>
-    <ul :class="'ulstyle'">
-      <li v-for="item in myDataList" :key="item.id" :class="'listyle'">
-        <a :href=item.url target="_blank">{{item.name}}</a>
-      </li>
-    </ul>
+    <nav-header></nav-header>
+    <div v-bind:style="{minHeight: Height+'px'}" class="aboutMain">
+      <ul :class="'ulstyle'">
+        <li v-for="item in myDataList" :key="item.id" :class="'listyle'">
+          <a :href=item.url target="_blank">{{item.name}}</a>
+        </li>
+      </ul>
+    </div>
+    <bottom-footer></bottom-footer>
   </div>
 </template>
 
 <script>
-  import NavMenu from '../NavMenu'
+  import NavHeader from '../NavHeader'
+  import Footer from '../Footer'
   import Service from '../../../config/service'
   import AuthUtil from '../../../utils/authUtil'
 
   export default {
     name: 'my',
     components: {
-      "navMenu": NavMenu
+      "navHeader": NavHeader,
+      "bottomFooter": Footer,
     },
     data() {
       return {
