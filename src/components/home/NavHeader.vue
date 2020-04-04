@@ -184,10 +184,7 @@
   }
 
   #midSearch span a {
-    padding-left: 10px;
-    padding-right: 10px;
-    padding-top: 8px;
-    padding-bottom: 7px;
+    padding: 8px 10px 7px;
     background: #3385FF;
     color: white;
     text-decoration: none;

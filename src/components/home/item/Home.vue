@@ -2,11 +2,16 @@
   <div id="home">
     <nav-header></nav-header>
     <div v-bind:style="{minHeight: Height+'px'}">
-      <ul :class="'ulstyle'">
-        <li v-for="item in myDataList" :key="item.id" :class="'listyle'">
-          <a :href=item.url target="_blank">{{item.name}}</a>
-        </li>
-      </ul>
+      <el-row :gutter="8">
+        <label v-for="item in myDataList" :key="item.id">
+          <el-col :span="4">
+            <el-card shadow="hover" class="siteCard">
+              <el-link :href="item.url" target="_blank">{{item.name}}</el-link>
+              <p>{{item.remark}}</p>
+            </el-card>
+          </el-col>
+        </label>
+      </el-row>
     </div>
     <bottom-footer></bottom-footer>
   </div>
@@ -49,21 +54,12 @@
 
 <style scoped>
   #home {
-    background: gainsboro;
     height: 100%;
     width: 100%;
     margin-top: 110px;
   }
 
-  .ulstyle {
-    margin: 0;
-    padding: 0;
-  }
-
-  .listyle {
-    list-style-type: none;
-    padding: 7px;
-    background-color: #ffeecc;
-    border-bottom: 1px solid white;
+  .siteCard {
+    height: 80px;
   }
 </style>
