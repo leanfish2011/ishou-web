@@ -195,7 +195,7 @@
         });
       },
       //时间格式化
-      dateFormat: function (row) {
+      dateFormat(row) {
         return DateUtil.dateFormat(row.createTime);
       },
       load() {

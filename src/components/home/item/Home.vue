@@ -6,8 +6,15 @@
         <label v-for="item in myDataList" :key="item.id">
           <el-col :span="4">
             <el-card shadow="hover" class="siteCard">
-              <el-link :href="item.url" target="_blank">{{item.name}}</el-link>
-              <p>{{item.remark}}</p>
+              <el-row>
+                <el-col :span="6">
+                  <img src="https://www.cnblogs.com/favicon.ico"/>
+                </el-col>
+                <el-col :span="18">
+                  <el-link :href="item.url" target="_blank">{{item.name}}</el-link>
+                  <div class="remark">{{item.remark}}</div>
+                </el-col>
+              </el-row>
             </el-card>
           </el-col>
         </label>
@@ -48,6 +55,11 @@
       window.onresize = () => {
         this.Height = document.documentElement.clientHeight - 160;
       }
+    },
+    methods:{
+      queryIcon(){
+
+      }
     }
   }
 </script>
@@ -61,5 +73,9 @@
 
   .siteCard {
     height: 80px;
+  }
+
+  .remark{
+    font-size: 14px;
   }
 </style>

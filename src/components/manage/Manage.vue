@@ -80,7 +80,7 @@
       }
     },
     methods: {
-      logout: function () {
+      logout() {
         this.$confirm('确认退出?', '提示', {})
         .then(() => {
           //调用接口
@@ -153,11 +153,11 @@
         this.$refs.changePwd.dialogFormVisible = true;
       }
     },
-    mounted: function () {
+    mounted() {
       let userName = localStorage.getItem('userName');
       this.userName = userName;
     },
-    created: function () {
+    created() {
       this.authCheck();
       this.loadUserMenu();
     }

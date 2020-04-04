@@ -94,7 +94,7 @@
       searchKeyword() {
         this.$message("待实现……");
       },
-      logout: function () {
+      logout() {
         this.$confirm('确认退出?', '提示', {})
         .then(() => {
           //调用接口
@@ -117,10 +117,10 @@
           });
         })
       },
-      addSite: function () {
+      addSite() {
         this.$refs.fastAddSite.dialogFormVisible = true;
       },
-      showMenu: function (needLogin) {
+      showMenu(needLogin) {
         if (needLogin == false) {
           return true;
         }
@@ -132,7 +132,7 @@
         return true;
       }
     },
-    mounted: function () {
+    mounted() {
       let userName = localStorage.getItem('userName');
       this.userName = userName;
     }
@@ -152,16 +152,16 @@
   #top {
     border: 1px solid #D8DFEA;
     margin: 5px;
-    display:flex;
+    display: flex;
     justify-content: space-between;
-    align-items:center;
+    align-items: center;
   }
 
   #top div {
     display: inline;
   }
 
-  #log{
+  #log {
     width: 4%;
   }
 
@@ -190,7 +190,7 @@
     text-decoration: none;
   }
 
-  #userInfo{
+  #userInfo {
     width: 10%;
     text-align: right;
     margin-right: 10px;

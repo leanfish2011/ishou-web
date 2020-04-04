@@ -57,7 +57,7 @@
         });
       },
     },
-    created: function () {
+    created() {
       this.load();
     }
   }
