@@ -8,7 +8,7 @@
             <el-card shadow="hover" class="siteCard">
               <el-row>
                 <el-col :span="6">
-                  <img src="https://www.cnblogs.com/favicon.ico"/>
+                  <img class="siteIcon" :src="queryIcon(item.url)"/>
                 </el-col>
                 <el-col :span="18">
                   <el-link :href="item.url" target="_blank">{{item.name}}</el-link>
@@ -56,9 +56,10 @@
         this.Height = document.documentElement.clientHeight - 160;
       }
     },
-    methods:{
-      queryIcon(){
-
+    methods: {
+      queryIcon(url) {
+        let reg = /((https?|http|ftp|file):\/\/)?[-A-Za-z0-9+&@#\/%?=~_|!:,.;]+\.[-A-Za-z+]+\/+/g;
+        return url.match(reg) + "/favicon.ico";
       }
     }
   }
@@ -75,7 +76,12 @@
     height: 80px;
   }
 
-  .remark{
+  .siteIcon {
+    width: 50%;
+    height: 50%;
+  }
+
+  .remark {
     font-size: 14px;
   }
 </style>
