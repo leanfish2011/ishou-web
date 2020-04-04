@@ -2,21 +2,36 @@
   <div id="about">
     <nav-header></nav-header>
     <div v-bind:style="{minHeight: Height+'px'}">
-      <el-timeline>
-        <el-timeline-item
-          v-for="(activity, index) in activities"
-          :timestamp="activity.timestamp"
-          :key="index"
-          :icon="activity.icon"
-          :type="activity.type"
-          :color="activity.color"
-          size="large" placement="top">
-          <el-card>
-            <h4>{{activity.title}}</h4>
-            <p>{{activity.content}}</p>
-          </el-card>
-        </el-timeline-item>
-      </el-timeline>
+
+      <el-tabs tab-position="left">
+        <el-tab-pane label="关于我">
+          <h2>关于我</h2>
+          <p>技术爱好者，喜欢折腾各种技术。从前端html5、CSS3、vue，到后端Java、Python、Go，以及数据库Mongodb、Redis等都有所研究。</p>
+          <p>文学爱好者，喜欢读各种书，尤其是中国古典文学。也喜欢写一些文章。</p>
+          <h4>联系我：</h4>
+          <p>邮箱：leanfish2011@163.com</p>
+          <p>微信公众号：</p>
+          <img src="../../../../static/img/weixinsite.jpg"/>
+        </el-tab-pane>
+        <el-tab-pane label="更新日志">
+          <h2>更新日志</h2>
+          <el-timeline>
+            <el-timeline-item
+              v-for="(activity, index) in activities"
+              :timestamp="activity.timestamp"
+              :key="index"
+              :icon="activity.icon"
+              :type="activity.type"
+              :color="activity.color"
+              size="large" placement="top">
+              <el-card>
+                <h4>{{activity.title}}</h4>
+                <p>{{activity.content}}</p>
+              </el-card>
+            </el-timeline-item>
+          </el-timeline>
+        </el-tab-pane>
+      </el-tabs>
     </div>
     <bottom-footer></bottom-footer>
   </div>
