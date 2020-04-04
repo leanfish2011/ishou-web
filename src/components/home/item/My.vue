@@ -1,7 +1,7 @@
 <template>
   <div id="my">
     <nav-header></nav-header>
-    <div v-bind:style="{minHeight: Height+'px'}" class="aboutMain">
+    <div v-bind:style="{minHeight: Height+'px'}">
       <ul :class="'ulstyle'">
         <li v-for="item in myDataList" :key="item.id" :class="'listyle'">
           <a :href=item.url target="_blank">{{item.name}}</a>
@@ -68,5 +68,17 @@
     background: bisque;
     height: 100%;
     width: 100%;
+  }
+
+  .ulstyle {
+    margin: 0;
+    padding: 0;
+  }
+
+  .listyle {
+    list-style-type: none;
+    padding: 7px;
+    background-color: #ffeecc;
+    border-bottom: 1px solid white;
   }
 </style>

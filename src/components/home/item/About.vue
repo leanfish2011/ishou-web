@@ -1,8 +1,7 @@
 <template>
   <div id="about">
-    <!--<nav-menu></nav-menu>-->
     <nav-header></nav-header>
-    <div v-bind:style="{minHeight: Height+'px'}" class="aboutMain">
+    <div v-bind:style="{minHeight: Height+'px'}">
       <el-timeline>
         <el-timeline-item
           v-for="(activity, index) in activities"
@@ -24,14 +23,12 @@
 </template>
 
 <script>
-  import NavMenu from '../NavMenu'
   import Footer from '../Footer'
   import NavHeader from '../NavHeader'
 
   export default {
     name: 'about',
     components: {
-      "navMenu": NavMenu,
       "bottomFooter": Footer,
       "navHeader": NavHeader
     },
@@ -77,14 +74,8 @@
 
 <style scoped>
   #about {
-    background: lightyellow;
     height: 100%;
     width: 100%;
     margin-top: 110px;
-  }
-
-  #aboutMain {
-    margin-top: 5px;
-    text-align: center;
   }
 </style>

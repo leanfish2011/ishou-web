@@ -1,6 +1,5 @@
 <template>
   <div id="home">
-    <!--<nav-menu></nav-menu>-->
     <nav-header></nav-header>
     <div v-bind:style="{minHeight: Height+'px'}">
       <ul :class="'ulstyle'">
@@ -14,17 +13,15 @@
 </template>
 
 <script>
-  import NavMenu from '../NavMenu'
+  import NavHeader from '../NavHeader'
   import Service from '../../../config/service'
   import Footer from '../Footer'
-  import NavHeader from '../NavHeader'
 
   export default {
     name: 'home',
     components: {
-      "navMenu": NavMenu,
+      "navHeader": NavHeader,
       "bottomFooter": Footer,
-      "navHeader": NavHeader
     },
     data() {
       return {

@@ -2,7 +2,7 @@
   <div id="message">
     <nav-header></nav-header>
     <div v-bind:style="{minHeight: Height+'px'}" class="aboutMain">
-    留言
+      留言
     </div>
     <bottom-footer></bottom-footer>
   </div>
@@ -16,8 +16,8 @@
   export default {
     name: "Message",
     components: {
+      "navHeader": NavHeader,
       "bottomFooter": Footer,
-      "navHeader": NavHeader
     },
     data() {
       return {
@@ -36,7 +36,7 @@
 </script>
 
 <style scoped>
-  #message{
+  #message {
     background: darkslategrey;
     height: 100%;
     width: 100%;

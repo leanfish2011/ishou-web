@@ -212,7 +212,7 @@
 
   #divMenu ul li a {
     text-decoration: none;
-    color: White;
+    color: #fff;
     display: block;
     padding-left: 20px;
     padding-right: 20px;

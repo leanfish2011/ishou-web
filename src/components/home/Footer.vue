@@ -1,8 +1,11 @@
 <template>
-  <div class="footer">
-    <div class="rightInfo">
-      <p>Copyright © Tim 2016-2022</p>
+  <div>
+    <div class="footer">
+      <div class="rightInfo">
+        <p>Copyright © Tim 2016-2022</p>
+      </div>
     </div>
+    <el-backtop></el-backtop>
   </div>
 </template>
 
@@ -14,8 +17,8 @@
 
 <style scoped>
   .footer {
-    height: 65px;
-    background-color: aquamarine;
+    height: 50px;
+    background-color: #1BA1E2;
     text-align: center;
   }
 
@@ -23,6 +26,7 @@
     height: 10px;
     width: 100%;
     position: relative;
-    top: 40%;
+    top: 30%;
+    color: #fff;
   }
 </style>
