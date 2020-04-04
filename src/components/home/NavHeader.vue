@@ -79,6 +79,32 @@
     methods: {
       searchKeyword() {
         this.$message("待实现……");
+      },
+      logout: function () {
+        this.$confirm('确认退出?', '提示', {})
+        .then(() => {
+          //调用接口
+          this.$axios.get(Service.url.logout, {
+            headers: {
+              'Authorization': localStorage.getItem('token')
+            }
+          }).then((res) => {
+            let responseData = res.data;
+            if (responseData.code === 0) {
+              AuthUtil.clearSession();
+              this.userName = '';
+
+              this.$router.push('/');
+            } else {
+              this.$message.error(responseData.msg);
+            }
+          }).catch(function (error) {
+            console.error(error);
+          });
+        })
+      },
+      addSite: function () {
+        this.$refs.fastAddSite.dialogFormVisible = true;
       }
     },
     mounted: function () {
