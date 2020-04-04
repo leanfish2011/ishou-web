@@ -8,7 +8,9 @@
             <el-card shadow="hover" class="siteCard">
               <el-row>
                 <el-col :span="6">
-                  <img class="siteIcon" :src="queryIcon(item.url)"/>
+                  <a :href=item.url target="_blank">
+                    <img class="siteIcon" :src="queryIcon(item.url)"/>
+                  </a>
                 </el-col>
                 <el-col :span="18">
                   <el-link :href="item.url" target="_blank">{{item.name}}</el-link>
