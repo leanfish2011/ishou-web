@@ -26,7 +26,8 @@
     },
     data() {
       return {
-        myDataList: null
+        myDataList: null,
+        Height: 0,
       }
     },
     methods: {

@@ -44,18 +44,13 @@
 
     <div id="divMenu">
       <ul>
-        <li class="adv_active">
-          <router-link to="/">主页</router-link>
-        </li>
-        <li v-if="userName!=''&&userName!=null">
-          <router-link to="/my">我的</router-link>
-        </li>
-        <li>
-          <router-link to="/message">留言</router-link>
-        </li>
-        <li>
-          <router-link to="/about">关于</router-link>
-        </li>
+        <label v-for="item in menuData">
+          <label v-if="showMenu(item.needLogin)">
+            <li>
+              <router-link :to=item.route exact>{{item.name}}</router-link>
+            </li>
+          </label>
+        </label>
       </ul>
     </div>
   </div>
@@ -74,6 +69,33 @@
     data() {
       return {
         userName: '',
+        activeId: "1",
+        menuData: [
+          {
+            "id": "1",
+            "name": "主页",
+            "route": "/",
+            "needLogin": false
+          },
+          {
+            "id": "2",
+            "name": "我的",
+            "route": "/my",
+            "needLogin": true
+          },
+          {
+            "id": "3",
+            "name": "留言",
+            "route": "/message",
+            "needLogin": false
+          },
+          {
+            "id": "4",
+            "name": "关于",
+            "route": "/about",
+            "needLogin": false
+          }
+        ]
       }
     },
     methods: {
@@ -105,12 +127,23 @@
       },
       addSite: function () {
         this.$refs.fastAddSite.dialogFormVisible = true;
+      },
+      showMenu: function (needLogin) {
+        if (needLogin == false) {
+          return true;
+        }
+
+        if (this.userName == null || this.userName == '') {
+          return false;
+        }
+
+        return true;
       }
     },
     mounted: function () {
       let userName = localStorage.getItem('userName');
       this.userName = userName;
-    },
+    }
   }
 </script>
 
@@ -175,7 +208,6 @@
   #divMenu ul li {
     display: block;
     float: left;
-    /*width: 80px;*/
   }
 
   #divMenu ul li a {
@@ -184,14 +216,14 @@
     display: block;
     padding-left: 20px;
     padding-right: 20px;
-    /*padding-left: 23px;*/
   }
 
-  #divMenu ul li a:hover {
+  #divMenu ul li:hover {
     background: #52BFF5;
   }
 
-  .adv_active {
+  /*路由激活样式，router自带属性*/
+  .router-link-active {
     background-color: #e70;
     color: #fff;
   }
