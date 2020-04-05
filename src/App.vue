@@ -11,5 +11,14 @@
 </script>
 
 <style>
-
+  /*全局样式*/
+  html {
+    /*!*全局灰色样式*!*/
+    /*-webkit-filter: grayscale(100%);*/
+    /*-moz-filter: grayscale(100%);*/
+    /*-ms-filter: grayscale(100%);*/
+    /*-o-filter: grayscale(100%);*/
+    /*filter: grayscale(100%);*/
+    /*filter: progid:DXImageTransform.Microsoft.BasicImage(grayscale=1);*/
+  }
 </style>

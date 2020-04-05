@@ -11,7 +11,7 @@
           <h4>联系我：</h4>
           <p>邮箱：leanfish2011@163.com</p>
           <p>微信公众号：</p>
-          <img src="../../../../static/img/weixinsite.jpg"/>
+          <img class="weixinImg" src="../../../../static/img/weixinsite.jpg"/>
         </el-tab-pane>
         <el-tab-pane label="更新日志">
           <h2>更新日志</h2>
@@ -92,5 +92,10 @@
     height: 100%;
     width: 100%;
     margin-top: 110px;
+  }
+
+  .weixinImg {
+    height: 200px;
+    width: 200px;
   }
 </style>
