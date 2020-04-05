@@ -2,8 +2,14 @@
   <div>
     <div class="manageHeader">
       <div class="headerLogo">
-        <img src="../../../static/img/log.jpg"/>
-        <span class="logoTitle">爱收藏</span>
+        <el-row>
+          <el-col :span="2">
+            <img width="50" height="50" src="../../../static/img/pen.png"/>
+          </el-col>
+          <el-col :span="22">
+            <span class="logoTitle">爱收藏-后台管理</span>
+          </el-col>
+        </el-row>
       </div>
       <div class="headerUser">
         <el-link href="/" type="primary" icon="el-icon-back">回到主页</el-link>
@@ -79,6 +85,7 @@
 <style scoped>
   .headerLogo {
     float: left;
+    width: 50%;
   }
 
   .logoTitle {
