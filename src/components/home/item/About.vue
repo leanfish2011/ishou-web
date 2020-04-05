@@ -1,8 +1,7 @@
 <template>
   <div id="about">
     <nav-header></nav-header>
-    <div v-bind:style="{minHeight: Height+'px'}">
-
+    <div class="aboutContent">
       <el-tabs tab-position="left">
         <el-tab-pane label="关于我">
           <h2>关于我</h2>
@@ -89,7 +88,6 @@
 
 <style scoped>
   #about {
-    height: 100%;
     width: 100%;
     margin-top: 110px;
   }

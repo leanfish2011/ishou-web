@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="mange">
     <el-container class="manageContent">
       <el-header>
         <manage-header></manage-header>
@@ -68,6 +68,14 @@
 </script>
 
 <style>
+  .mange{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+
   .el-header {
     background-color: #13d1aa;
     color: #8b8626;
@@ -76,7 +84,7 @@
   }
 
   .manageContent {
-    height: 98vh;
+    height: 100vh;
   }
 
 </style>
