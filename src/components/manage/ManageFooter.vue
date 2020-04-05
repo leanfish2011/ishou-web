@@ -13,17 +13,17 @@
 </script>
 
 <style scoped>
-  ooter {
+  footer {
     border-top: 1px solid #ddd;
     flex: 0 0 auto;
   }
 
   .footer_content {
-    width: 340px;
+    width: 100%;
     margin: 0 auto;
     text-align: center;
     line-height: 60px;
-    height: 60px;
+    height: 6px;
     color: #606266;
   }
 
