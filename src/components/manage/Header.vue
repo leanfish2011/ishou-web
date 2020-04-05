@@ -77,7 +77,6 @@
 </script>
 
 <style scoped>
-
   .headerLogo {
     float: left;
     width: 250px;

@@ -67,6 +67,7 @@
   .homeContent {
     width: 99%;
     min-height: calc(100vh - 176px);
+    margin-left: 10px;
   }
 
   .siteCard {
