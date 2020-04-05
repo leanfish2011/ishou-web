@@ -1,48 +1,49 @@
 <template>
-  <div id="topMenu">
-    <div id="top">
-      <div id="log">
-        <img src="../../../static/img/log.jpg">
-      </div>
-      <div id="logTitle">
-        爱收藏
-      </div>
-      <div id="midSearch">
-        <input type="text" id="txtKeyword"/>
-        <span><a id="btnSearch" href="#" @click="searchKeyword()">搜索一下</a></span>
-      </div>
-      <div id="userInfo">
-        <el-link>
-          <router-link v-if="userName==''||userName==null" to="/login">登录</router-link>
-          <el-dropdown v-else trigger="hover" :hide-on-click="false">
+  <div>
+    <div id="topMenu">
+      <div id="top">
+        <div id="log">
+          <img src="../../../static/img/log.jpg">
+        </div>
+        <div id="logTitle">
+          爱收藏
+        </div>
+        <div id="midSearch">
+          <input type="text" id="txtKeyword"/>
+          <span><a id="btnSearch" href="#" @click="searchKeyword()">搜索一下</a></span>
+        </div>
+        <div id="userInfo">
+          <el-link>
+            <router-link v-if="userName==''||userName==null" to="/login">登录</router-link>
+            <el-dropdown v-else trigger="hover" :hide-on-click="false">
               <span class="el-dropdown-link">
                 <router-link to="/site"> {{ userName }}</router-link>
                 <i class="el-icon-arrow-down el-icon--right"></i>
               </span>
-            <el-dropdown-menu slot="dropdown">
-              <el-dropdown-item @click.native="addSite">增加收藏</el-dropdown-item>
-              <el-dropdown-item divided
-                                @click.native="logout">退出登录
-              </el-dropdown-item>
-            </el-dropdown-menu>
-          </el-dropdown>
-        </el-link>
-        <el-link>
-          <router-link to="/register">注册</router-link>
-        </el-link>
+              <el-dropdown-menu slot="dropdown">
+                <el-dropdown-item @click.native="addSite">增加收藏</el-dropdown-item>
+                <el-dropdown-item divided
+                                  @click.native="logout">退出登录
+                </el-dropdown-item>
+              </el-dropdown-menu>
+            </el-dropdown>
+          </el-link>
+          <el-link>
+            <router-link to="/register">注册</router-link>
+          </el-link>
+        </div>
       </div>
-    </div>
-
-    <div id="divMenu">
-      <ul>
-        <label v-for="item in menuData">
-          <label v-if="showMenu(item.needLogin)">
-            <li>
-              <router-link :to=item.route exact>{{item.name}}</router-link>
-            </li>
+      <div id="divMenu">
+        <ul>
+          <label v-for="item in menuData">
+            <label v-if="showMenu(item.needLogin)">
+              <li>
+                <router-link :to=item.route exact>{{item.name}}</router-link>
+              </li>
+            </label>
           </label>
-        </label>
-      </ul>
+        </ul>
+      </div>
     </div>
     <fast-add-site-dialog ref="fastAddSite"></fast-add-site-dialog>
   </div>
