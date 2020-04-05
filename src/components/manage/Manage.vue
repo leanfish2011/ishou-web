@@ -4,9 +4,10 @@
       <el-aside class="app-side app-side-left"
                 :class="isCollapse ? 'app-side-collapsed' : 'app-side-expanded'">
         <div class="app-side-logo">
-          <img src="@/assets/logo.png"
+          <img src="../../../static/img/log.jpg"
                :width="isCollapse ? '60' : '60'"
                height="60"/>
+          <span class="logTitle">爱收藏</span>
         </div>
         <div>
           <el-menu default-active="/site"
@@ -32,9 +33,9 @@
       </el-aside>
 
       <el-container>
-        <el-header style="text-align: right; font-size: 12px">
+        <el-header>
           <div class="app-header-userinfo">
-            <router-link to="/">主页</router-link>
+            <el-link href="/" type="primary" icon="el-icon-back">回到主页</el-link>
             <el-dropdown trigger="hover"
                          :hide-on-click="false">
               <span class="el-dropdown-link">
@@ -169,5 +170,13 @@
     background-color: #13d1aa;
     color: #8b8626;
     line-height: 60px;
+    text-align: right;
+    font-size: 12px;
+  }
+
+  .logTitle {
+    font-size: 25px;
+    color: #E33E06;
+    width: 6%;
   }
 </style>

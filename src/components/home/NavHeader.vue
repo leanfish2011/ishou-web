@@ -22,8 +22,10 @@
             <el-dropdown v-else size="mini" split-button>
               <label @click="openMange()">{{ userName }}</label>
               <el-dropdown-menu slot="dropdown">
-                <el-dropdown-item @click.native="addSite()">增加收藏</el-dropdown-item>
-                <el-dropdown-item @click.native="logout()">退出登录</el-dropdown-item>
+                <el-dropdown-item icon="el-icon-circle-plus-outline" @click.native="addSite()">增加收藏
+                </el-dropdown-item>
+                <el-dropdown-item icon="el-icon-switch-button" @click.native="logout()">退出登录
+                </el-dropdown-item>
               </el-dropdown-menu>
             </el-dropdown>
             <el-button size="mini" type="primary" @click="openRegister()">注册</el-button>
