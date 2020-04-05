@@ -2,11 +2,30 @@
   <div id="my">
     <nav-header></nav-header>
     <div v-bind:style="{minHeight: Height+'px'}">
-      <ul :class="'ulstyle'">
-        <li v-for="item in myDataList" :key="item.id" :class="'listyle'">
-          <a :href=item.url target="_blank">{{item.name}}</a>
-        </li>
-      </ul>
+      <el-timeline reverse style="width: 20%">
+        <el-timeline-item
+          v-for="(item, index) in myDataList"
+          :timestamp="dateFormat(item.createTime)"
+          :key="index"
+          type="primary"
+          color="#0bbd87"
+          size="large" placement="top">
+          <el-card>
+            <el-row>
+              <el-col :span="6">
+                <a :href=item.url target="_blank">
+                  <img class="siteIcon" :src="queryIcon(item.url)"/>
+                </a>
+              </el-col>
+              <el-col :span="18">
+                <el-link :href="item.url" target="_blank">{{item.name}}</el-link>
+                <p>{{item.remark}}</p>
+                <p>{{item.tag}}</p>
+              </el-col>
+            </el-row>
+          </el-card>
+        </el-timeline-item>
+      </el-timeline>
     </div>
     <bottom-footer></bottom-footer>
   </div>
@@ -17,6 +36,7 @@
   import Footer from '../Footer'
   import Service from '../../../config/service'
   import AuthUtil from '../../../utils/authUtil'
+  import DateUtil from '../../../utils/dateUtil'
 
   export default {
     name: 'my',
@@ -56,6 +76,13 @@
           console.error(error);
         });
       },
+      dateFormat(createTimeStamp) {
+        return DateUtil.dateFormat(createTimeStamp);
+      },
+      queryIcon(url) {
+        let reg = /((https?|http|ftp|file):\/\/)?[-A-Za-z0-9+&@#\/%?=~_|!:,.;]+\.[-A-Za-z+]+\/+/g;
+        return url.match(reg) + "/favicon.ico";
+      }
     },
     created() {
       this.load();
@@ -77,17 +104,5 @@
     height: 100%;
     width: 100%;
     margin-top: 110px;
-  }
-
-  .ulstyle {
-    margin: 0;
-    padding: 0;
-  }
-
-  .listyle {
-    list-style-type: none;
-    padding: 7px;
-    background-color: #ffeecc;
-    border-bottom: 1px solid white;
   }
 </style>
