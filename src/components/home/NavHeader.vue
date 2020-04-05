@@ -9,10 +9,12 @@
           爱收藏
         </div>
         <div id="midSearch">
-          <input type="text" id="txtKeyword"/>
-          <span>
-            <el-button type="primary" size="medium" @click="searchKeyword()">搜索一下</el-button>
-          </span>
+          <form ref="baiduSearch" action="http://www.baidu.com/s" method="GET" target="_blank">
+            <input type="text" name="wd" id="txtKeyword"/>
+            <el-button type="primary" plain size="medium" @click="searchKeyword()">百度一下</el-button>
+            <input type="hidden" name="ie" value="utf-8"/>
+            <input type="hidden" name="tn" value="ace"/>
+          </form>
         </div>
         <div id="userInfo">
           <el-row>
@@ -75,12 +77,12 @@
             "route": "/my",
             "needLogin": true
           },
-          {
-            "id": "3",
-            "name": "留言",
-            "route": "/message",
-            "needLogin": false
-          },
+          // {
+          //   "id": "3",
+          //   "name": "留言",
+          //   "route": "/message",
+          //   "needLogin": false
+          // },
           {
             "id": "4",
             "name": "关于",
@@ -92,7 +94,7 @@
     },
     methods: {
       searchKeyword() {
-        this.$message("待实现……");
+        this.$refs.baiduSearch.submit();
       },
       logout() {
         this.$confirm('确认退出?', '提示', {})
