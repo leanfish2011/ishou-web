@@ -92,6 +92,10 @@
     margin-top: 110px;
   }
 
+  .aboutContent{
+    min-height: calc(100vh - 176px);
+  }
+
   .weixinImg {
     height: 200px;
     width: 200px;
