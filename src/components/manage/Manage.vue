@@ -1,9 +1,8 @@
 <template>
   <div class="app">
     <el-container>
-      <el-aside class="app-side app-side-left"
-                :class="isCollapse ? 'app-side-collapsed' : 'app-side-expanded'">
-        <div class="app-side-logo">
+      <el-aside>
+        <div>
           <img src="../../../static/img/log.jpg"
                :width="isCollapse ? '60' : '60'"
                height="60"/>
@@ -11,7 +10,6 @@
         </div>
         <div>
           <el-menu default-active="/site"
-                   class="el-menu-vertical-demo"
                    :collapse="isCollapse" :router="true">
             <label v-for="(item,index) in userMenu" :key="index">
               <label v-if="item.children.length>0">
@@ -34,7 +32,7 @@
 
       <el-container>
         <el-header>
-          <div class="app-header-userinfo">
+          <div>
             <el-link href="/" type="primary" icon="el-icon-back">回到主页</el-link>
             <el-dropdown trigger="hover"
                          :hide-on-click="false">
