@@ -52,10 +52,10 @@
     },
     mounted() {
       //动态设置内容高度 让footer始终居底   header+footer的高度是100
-      this.Height = document.documentElement.clientHeight - 160;
+      this.Height = document.documentElement.clientHeight - 185;
       //监听浏览器窗口变化　
       window.onresize = () => {
-        this.Height = document.documentElement.clientHeight - 160;
+        this.Height = document.documentElement.clientHeight - 185;
       }
     },
     methods: {
