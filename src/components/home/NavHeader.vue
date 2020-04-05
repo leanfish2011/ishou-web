@@ -10,27 +10,24 @@
         </div>
         <div id="midSearch">
           <input type="text" id="txtKeyword"/>
-          <span><a id="btnSearch" href="#" @click="searchKeyword()">搜索一下</a></span>
+          <span>
+            <el-button type="primary" size="medium" @click="searchKeyword()">搜索一下</el-button>
+          </span>
         </div>
         <div id="userInfo">
-          <el-link>
-            <router-link v-if="userName==''||userName==null" to="/login">登录</router-link>
-            <el-dropdown v-else trigger="hover" :hide-on-click="false">
-              <span class="el-dropdown-link">
-                <router-link to="/site"> {{ userName }}</router-link>
-                <i class="el-icon-arrow-down el-icon--right"></i>
-              </span>
+          <el-row>
+            <el-button v-if="userName==''||userName==null" size="mini" type="primary"
+                       @click="openLogin()">登录
+            </el-button>
+            <el-dropdown v-else size="mini" split-button>
+              <label @click="openMange()">{{ userName }}</label>
               <el-dropdown-menu slot="dropdown">
-                <el-dropdown-item @click.native="addSite">增加收藏</el-dropdown-item>
-                <el-dropdown-item divided
-                                  @click.native="logout">退出登录
-                </el-dropdown-item>
+                <el-dropdown-item @click.native="addSite()">增加收藏</el-dropdown-item>
+                <el-dropdown-item @click.native="logout()">退出登录</el-dropdown-item>
               </el-dropdown-menu>
             </el-dropdown>
-          </el-link>
-          <el-link>
-            <router-link to="/register">注册</router-link>
-          </el-link>
+            <el-button size="mini" type="primary" @click="openRegister()">注册</el-button>
+          </el-row>
         </div>
       </div>
       <div id="divMenu">
@@ -131,6 +128,15 @@
         }
 
         return true;
+      },
+      openLogin() {
+        this.$router.push('/login');
+      },
+      openRegister() {
+        this.$router.push('/register');
+      },
+      openMange() {
+        this.$router.push('/site');
       }
     },
     mounted() {
@@ -158,10 +164,6 @@
     align-items: center;
   }
 
-  #top div {
-    display: inline;
-  }
-
   #log {
     width: 4%;
   }
@@ -182,13 +184,6 @@
     height: 30px;
     font-size: 15px;
     border: 1px solid #4791FF;
-  }
-
-  #midSearch span a {
-    padding: 8px 10px 7px;
-    background: #3385FF;
-    color: white;
-    text-decoration: none;
   }
 
   #userInfo {
