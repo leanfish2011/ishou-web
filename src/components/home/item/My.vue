@@ -1,7 +1,7 @@
 <template>
   <div id="my">
     <nav-header></nav-header>
-    <div v-bind:style="{minHeight: Height+'px'}">
+    <div class="myContent">
       <el-timeline reverse style="width: 20%">
         <el-timeline-item
           v-for="(item, index) in myDataList"
@@ -46,8 +46,7 @@
     },
     data() {
       return {
-        myDataList: null,
-        Height: 0,
+        myDataList: null
       }
     },
     methods: {
@@ -86,23 +85,17 @@
     },
     created() {
       this.load();
-    },
-    mounted() {
-      //动态设置内容高度 让footer始终居底   header+footer的高度是100
-      this.Height = document.documentElement.clientHeight - 185;
-      //监听浏览器窗口变化　
-      window.onresize = () => {
-        this.Height = document.documentElement.clientHeight - 180;
-      }
     }
   }
 </script>
 
 <style scoped>
   #my {
-    background: bisque;
-    height: 100%;
     width: 100%;
     margin-top: 110px;
+  }
+
+  .myContent {
+    min-height: calc(100vh - 176px);
   }
 </style>

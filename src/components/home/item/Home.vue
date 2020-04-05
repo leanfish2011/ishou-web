@@ -1,7 +1,7 @@
 <template>
   <div id="home">
     <nav-header></nav-header>
-    <div v-bind:style="{minHeight: Height+'px'}">
+    <div class="homeContent">
       <el-row :gutter="8">
         <label v-for="item in myDataList" :key="item.id">
           <el-col :span="4">
@@ -35,12 +35,11 @@
     name: 'home',
     components: {
       "navHeader": NavHeader,
-      "bottomFooter": Footer,
+      "bottomFooter": Footer
     },
     data() {
       return {
-        myDataList: null,
-        Height: 0
+        myDataList: null
       }
     },
     created() {
@@ -49,14 +48,6 @@
       }).catch(function (error) {
         console.error(error);
       });
-    },
-    mounted() {
-      //动态设置内容高度 让footer始终居底   header+footer的高度是100
-      this.Height = document.documentElement.clientHeight - 185;
-      //监听浏览器窗口变化　
-      window.onresize = () => {
-        this.Height = document.documentElement.clientHeight - 185;
-      }
     },
     methods: {
       queryIcon(url) {
@@ -69,9 +60,13 @@
 
 <style scoped>
   #home {
-    height: 100%;
     width: 100%;
     margin-top: 110px;
+  }
+
+  .homeContent {
+    width: 99%;
+    min-height: calc(100vh - 176px);
   }
 
   .siteCard {

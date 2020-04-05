@@ -37,18 +37,17 @@
 </template>
 
 <script>
-  import Footer from '../Footer'
   import NavHeader from '../NavHeader'
+  import Footer from '../Footer'
 
   export default {
     name: 'about',
     components: {
-      "bottomFooter": Footer,
-      "navHeader": NavHeader
+      "navHeader": NavHeader,
+      "bottomFooter": Footer
     },
     data() {
       return {
-        Height: 0,
         activities: [
           {
             timestamp: '2020-03-29',
@@ -74,14 +73,6 @@
             content: '基于免费的云服务器，上线个人博客系统。',
           }]
       }
-    },
-    mounted() {
-      //动态设置内容高度 让footer始终居底   header+footer的高度是100
-      this.Height = document.documentElement.clientHeight - 185;
-      //监听浏览器窗口变化　
-      window.onresize = () => {
-        this.Height = document.documentElement.clientHeight - 185;
-      }
     }
   }
 </script>
@@ -92,7 +83,7 @@
     margin-top: 110px;
   }
 
-  .aboutContent{
+  .aboutContent {
     min-height: calc(100vh - 176px);
   }
 

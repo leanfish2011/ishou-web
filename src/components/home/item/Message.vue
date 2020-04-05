@@ -1,7 +1,7 @@
 <template>
   <div id="message">
     <nav-header></nav-header>
-    <div v-bind:style="{minHeight: Height+'px'}" class="aboutMain">
+    <div class="aboutContent">
       留言
     </div>
     <bottom-footer></bottom-footer>
@@ -18,19 +18,6 @@
     components: {
       "navHeader": NavHeader,
       "bottomFooter": Footer,
-    },
-    data() {
-      return {
-        Height: 0
-      }
-    },
-    mounted() {
-      //动态设置内容高度 让footer始终居底   header+footer的高度是100
-      this.Height = document.documentElement.clientHeight - 185;
-      //监听浏览器窗口变化　
-      window.onresize = () => {
-        this.Height = document.documentElement.clientHeight - 185;
-      }
     }
   }
 </script>
@@ -38,13 +25,13 @@
 <style scoped>
   #message {
     background: darkslategrey;
-    height: 100%;
     width: 100%;
     margin-top: 110px;
   }
 
-  #aboutMain {
+  .aboutContent {
     margin-top: 5px;
     text-align: center;
+    min-height: calc(100vh - 176px);
   }
 </style>
