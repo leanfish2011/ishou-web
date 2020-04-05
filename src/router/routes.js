@@ -15,6 +15,7 @@ import Tree from '../components/test/elmentui/Tree'
 import TreeData from '../components/test/elmentui/TreeData'
 import Tag from '../components/test/elmentui/Tag'
 import BackTop from '../components/test/elmentui/BackTop'
+import Container from '../components/test/elmentui/Container'
 
 // 设置路径
 export default [
@@ -30,6 +31,7 @@ export default [
   {path: "/treeData", component: TreeData},
   {path: "/tag", component: Tag},
   {path: "/top", component: BackTop},
+  {path: "/con", component: Container},
   {
     path: "/manage",
     component: Manage,

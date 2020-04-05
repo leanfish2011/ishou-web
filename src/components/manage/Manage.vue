@@ -1,60 +1,64 @@
 <template>
-  <div class="app">
+  <div>
     <el-container>
-      <el-aside>
-        <div>
-          <img src="../../../static/img/log.jpg"
-               :width="isCollapse ? '60' : '60'"
-               height="60"/>
+      <el-header>
+        <div class="header_log">
+          <img src="../../../static/img/log.jpg"/>
           <span class="logTitle">爱收藏</span>
         </div>
-        <div>
-          <el-menu default-active="/site"
-                   :collapse="isCollapse" :router="true">
-            <label v-for="(item,index) in userMenu" :key="index">
-              <label v-if="item.children.length>0">
-                <label v-for="firstItem in item.children">
-                  <el-submenu :index="firstItem.id">
-                    <template slot="title">
-                      <i class="el-icon-location"></i>
-                      <span slot="title">{{firstItem.name}}</span>
-                    </template>
-                    <label v-for="child in firstItem.children">
-                      <el-menu-item :index=child.url>{{child.name}}</el-menu-item>
-                    </label>
-                  </el-submenu>
-                </label>
-              </label>
-            </label>
-          </el-menu>
-        </div>
-      </el-aside>
-
-      <el-container>
-        <el-header>
-          <div>
-            <el-link href="/" type="primary" icon="el-icon-back">回到主页</el-link>
-            <el-dropdown trigger="hover"
-                         :hide-on-click="false">
+        <div class="header_user">
+          <el-link href="/" type="primary" icon="el-icon-back">回到主页</el-link>
+          <el-dropdown trigger="hover"
+                       :hide-on-click="false">
               <span class="el-dropdown-link">
                 {{ userName }}
                 <i class="el-icon-arrow-down el-icon--right"></i>
               </span>
-              <el-dropdown-menu slot="dropdown">
-                <el-dropdown-item @click.native="changePwd">修改密码</el-dropdown-item>
-                <el-dropdown-item divided
-                                  @click.native="logout">退出登录
-                </el-dropdown-item>
-              </el-dropdown-menu>
-            </el-dropdown>
-          </div>
-        </el-header>
+            <el-dropdown-menu slot="dropdown">
+              <el-dropdown-item @click.native="changePwd">修改密码</el-dropdown-item>
+              <el-dropdown-item divided
+                                @click.native="logout">退出登录
+              </el-dropdown-item>
+            </el-dropdown-menu>
+          </el-dropdown>
+        </div>
+      </el-header>
 
-        <el-main class="app-body">
-          <template>
-            <router-view/>
-          </template>
-        </el-main>
+      <el-container>
+        <el-aside>
+          <div class="asideMenu">
+            <el-menu background-color="#324157"
+                     text-color="#bfcbd9" active-text-color="#20a0ff" default-active="/site"
+                     :collapse="isCollapse" :router="true">
+              <label v-for="(item,index) in userMenu" :key="index">
+                <label v-if="item.children.length>0">
+                  <label v-for="firstItem in item.children">
+                    <el-submenu :index="firstItem.id">
+                      <template slot="title">
+                        <i class="el-icon-location"></i>
+                        <span slot="title">{{firstItem.name}}</span>
+                      </template>
+                      <label v-for="child in firstItem.children">
+                        <el-menu-item :index=child.url>{{child.name}}</el-menu-item>
+                      </label>
+                    </el-submenu>
+                  </label>
+                </label>
+              </label>
+            </el-menu>
+          </div>
+        </el-aside>
+
+        <el-container>
+          <el-main>
+            <template>
+              <router-view/>
+            </template>
+          </el-main>
+          <el-footer>
+            <manage-footer></manage-footer>
+          </el-footer>
+        </el-container>
       </el-container>
     </el-container>
     <change-pwd-dialog ref="changePwd"></change-pwd-dialog>
@@ -65,11 +69,13 @@
   import Service from '../../config/service'
   import AuthUtil from '../../utils/authUtil'
   import ChangePwdDialog from './ChangePwdDialog'
+  import ManageFooter from './ManageFooter'
 
   export default {
     name: 'Container',
     components: {
-      "changePwdDialog": ChangePwdDialog
+      "changePwdDialog": ChangePwdDialog,
+      "manageFooter": ManageFooter
     },
     data() {
       return {
@@ -168,8 +174,21 @@
     background-color: #13d1aa;
     color: #8b8626;
     line-height: 60px;
-    text-align: right;
     font-size: 12px;
+  }
+
+  .header_log {
+    float: left;
+    width: 250px;
+    line-height: 70px;
+  }
+
+  .header_user {
+    float: right;
+  }
+
+  .asideMenu {
+    height: 100%;
   }
 
   .logTitle {
