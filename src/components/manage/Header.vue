@@ -79,14 +79,11 @@
 <style scoped>
   .headerLogo {
     float: left;
-    width: 250px;
-    line-height: 70px;
   }
 
   .logoTitle {
     font-size: 25px;
     color: #E33E06;
-    width: 6%;
   }
 
   .headerUser {
