@@ -1,7 +1,7 @@
 <template>
   <div class="login-container">
     <el-link>
-      <router-link to="/" target="_blank">回到首页</router-link>
+      <router-link to="/">回到首页</router-link>
     </el-link>
     <el-form :model="loginModel" :rules="validRule"
              status-icon
