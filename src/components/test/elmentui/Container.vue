@@ -78,7 +78,6 @@
   }
 
   .content_inner {
-    //    background: #fff;
     height: 100%;
   }
 
