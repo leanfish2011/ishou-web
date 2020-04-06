@@ -4,6 +4,7 @@
       <el-breadcrumb-item>后台管理</el-breadcrumb-item>
       <el-breadcrumb-item>网页管理</el-breadcrumb-item>
     </el-breadcrumb>
+    <el-divider></el-divider>
     <el-form ref="form" :inline="true" :model="searchForm" label-width="80px" size="mini">
       <el-form-item label="标题">
         <el-input v-model="searchForm.name" placeholder="标题"></el-input>

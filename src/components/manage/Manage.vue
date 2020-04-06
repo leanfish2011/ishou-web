@@ -68,7 +68,7 @@
 </script>
 
 <style>
-  .mange{
+  .mange {
     position: absolute;
     top: 0;
     left: 0;

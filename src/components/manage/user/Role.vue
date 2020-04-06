@@ -4,6 +4,7 @@
       <el-breadcrumb-item>后台管理</el-breadcrumb-item>
       <el-breadcrumb-item>角色管理</el-breadcrumb-item>
     </el-breadcrumb>
+    <el-divider></el-divider>
     <el-button type="primary" @click="onAddShow" size="mini">创建</el-button>
     <el-table
       :data="roleData"
