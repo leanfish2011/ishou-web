@@ -10,7 +10,7 @@
           type="primary"
           color="#0bbd87"
           size="large" placement="top">
-          <el-card>
+          <el-card class="siteCard">
             <el-row>
               <el-col :span="6">
                 <a :href=item.url target="_blank">
@@ -97,5 +97,14 @@
 
   .myContent {
     min-height: calc(100vh - 176px);
+  }
+
+  .siteCard {
+    height: 80px;
+  }
+
+  .siteIcon {
+    width: 50%;
+    height: 50%;
   }
 </style>
