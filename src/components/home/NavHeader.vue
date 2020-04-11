@@ -77,12 +77,12 @@
             "route": "/my",
             "needLogin": true
           },
-          // {
-          //   "id": "3",
-          //   "name": "留言",
-          //   "route": "/message",
-          //   "needLogin": false
-          // },
+          {
+            "id": "3",
+            "name": "留言",
+            "route": "/message",
+            "needLogin": false
+          },
           {
             "id": "4",
             "name": "关于",
