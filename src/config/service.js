@@ -3,6 +3,12 @@
 //当前网页IP
 const ROOT_PATH = `${window.location.origin.replace(/:\d+/, '')}`;
 
+const githubLoginData = {
+  authorize_uri: "https://github.com/login/oauth/authorize",
+  client_id: "f2a52e951e10ea966cf9",
+  redirect_uri: ROOT_PATH + ":8080/github/auth"
+};
+
 //各个接口地址
 const url = {
   home: ROOT_PATH + ':9092/api/v1/site/index',
@@ -19,6 +25,10 @@ const url = {
   roleUser: ROOT_PATH + ':9091/api/v1/auth/role/user',
   menuUser: ROOT_PATH + ':9091/api/v1/auth/menu/user',
   changePwd: ROOT_PATH + ':9091/api/v1/auth/access/password',
+  githubAuth: githubLoginData.authorize_uri + '?client_id='
+    + githubLoginData.client_id
+    + '&redirect_uri=' + githubLoginData.redirect_uri,
+  loginByGitHub: ROOT_PATH + ':9091/api/v1/auth/access/login/github',
 };
 
 export default {

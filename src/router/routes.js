@@ -4,6 +4,7 @@ import My from '../components/home/item/My.vue'
 import Message from '../components/home/item/Message'
 import About from '../components/home/item/About.vue'
 import Login from '../components/home/login/Login.vue'
+import GitHubLogin from '../components/home/login/GithubLogin.vue'
 import Register from '../components/home/login/Register.vue'
 import Manage from '../components/manage/Manage.vue'
 import Site from '../components/manage/site/Site.vue'
@@ -25,6 +26,7 @@ export default [
   {path: "/message", component: Message},
   {path: "/about", component: About},
   {path: "/login", component: Login},
+  {path: "/github/auth", component: GitHubLogin},
   {path: "/register", component: Register},
   {path: "/table", component: Table},
   {path: "/slider", component: Slider},
