@@ -6,6 +6,9 @@
         <el-tab-pane label="关于我">
           <about-me></about-me>
         </el-tab-pane>
+        <el-tab-pane label="关于网站">
+          <about-site></about-site>
+        </el-tab-pane>
         <el-tab-pane label="更新日志">
           <about-update></about-update>
         </el-tab-pane>
@@ -20,6 +23,7 @@
   import Footer from '../Footer'
   import AboutMe from './about/Me'
   import AboutUpdate from './about/Update'
+  import AboutSite from './about/Site'
 
   export default {
     name: 'about',
@@ -27,7 +31,8 @@
       "navHeader": NavHeader,
       "bottomFooter": Footer,
       "aboutMe": AboutMe,
-      "aboutUpdate": AboutUpdate
+      "aboutUpdate": AboutUpdate,
+      "aboutSite": AboutSite
     }
   }
 </script>

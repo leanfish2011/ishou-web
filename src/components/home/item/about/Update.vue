@@ -26,11 +26,17 @@
       return {
         activities: [
           {
+            timestamp: '2020-04-12',
+            title: '集成github',
+            content: '集成github评论系统。集成github登录',
+            type: 'primary',
+            icon: 'el-icon-more'
+          },
+          {
             timestamp: '2020-03-29',
             title: '爱收藏网站上线',
             content: '之前的博客系统停用，打造用于收藏网站的系统。',
-            type: 'primary',
-            icon: 'el-icon-more'
+            color: '#bdb72f'
           },
           {
             timestamp: '2018-05-03',
