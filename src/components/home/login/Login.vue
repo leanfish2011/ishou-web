@@ -27,8 +27,10 @@
       <el-row>
         <el-col :span="24">
           <el-tooltip class="item" effect="dark" content="试试github登录" placement="top-start">
-            <img @click="githubLogin" height="30" width="30"
-                 src="https://github.com/fluidicon.png"/>
+            <a href="#">
+              <img @click="githubLogin" height="30" width="30"
+                   src="https://github.com/fluidicon.png"/>
+            </a>
           </el-tooltip>
         </el-col>
       </el-row>

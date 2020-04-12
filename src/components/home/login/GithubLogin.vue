@@ -16,7 +16,6 @@
     },
     mounted() {
       let code = this.$route.query.code;
-      console.log(code);
       this.$axios.get(Service.url.loginByGitHub + "?code=" + code).then((res) => {
         if (res.status === 200) {
           let responseData = res.data;
