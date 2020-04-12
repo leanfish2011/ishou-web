@@ -105,15 +105,9 @@
               'Authorization': localStorage.getItem('token')
             }
           }).then((res) => {
-            let responseData = res.data;
-            if (responseData.code === 0) {
-              AuthUtil.clearSession();
-              this.userName = '';
-
-              this.$router.push('/');
-            } else {
-              this.$message.error(responseData.msg);
-            }
+            AuthUtil.clearSession();
+            this.userName = '';
+            this.$router.push('/');
           }).catch(function (error) {
             console.error(error);
           });
