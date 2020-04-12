@@ -22,7 +22,7 @@
         if (res.status === 200) {
           let responseData = res.data;
           if (responseData.code === 0) {
-            this.logining = false;
+            this.loading = false;
             let userData = responseData.data;
             localStorage.setItem('userCode', userData.userCode);
             localStorage.setItem('userName', userData.name);
@@ -31,12 +31,14 @@
 
             this.$router.push({path: "/"});
           } else {
-            this.logining = false;
+            this.loading = false;
             this.$message.error(responseData.msg);
+            this.$router.push({path: "/login"});
           }
         } else {
-          this.logining = false;
+          this.loading = false;
           this.$message.error("系统内部错误");
+          this.$router.push({path: "/login"});
         }
       })
     }
