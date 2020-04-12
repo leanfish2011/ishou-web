@@ -6,7 +6,7 @@ const ROOT_PATH = `${window.location.origin.replace(/:\d+/, '')}`;
 const githubLoginData = {
   authorize_uri: "https://github.com/login/oauth/authorize",
   client_id: "f2a52e951e10ea966cf9",
-  redirect_uri: ROOT_PATH + ":8080/github/auth"
+  redirect_uri: ROOT_PATH + ":80/github/auth"
 };
 
 //各个接口地址
