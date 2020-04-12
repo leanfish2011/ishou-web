@@ -1,7 +1,8 @@
 <template>
-  <div>
-    <div>{{githubUser}}</div>
-  </div>
+  <div class="loading"
+       v-loading="loading"
+       element-loading-text=loadingText
+       element-loading-spinner="el-icon-loading"></div>
 </template>
 
 <script>
@@ -11,7 +12,8 @@
     name: "GithubLogin",
     data() {
       return {
-        githubUser: "github登录中..."
+        loadingText: "github登录中...",
+        loading: true
       };
     },
     mounted() {
@@ -42,5 +44,9 @@
 </script>
 
 <style scoped>
-
+  .loading {
+    width: 80%;
+    height: 40%;
+    margin: 0 auto 0 auto;
+  }
 </style>
