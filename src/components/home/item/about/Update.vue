@@ -48,11 +48,13 @@
             timestamp: '2018-02-09',
             title: '多人博客系统上线',
             content: '打造了可以多人注册使用的博客系统。',
+            color: '#bd6d8e'
           },
           {
             timestamp: '2014-11-04',
             title: '个人博客上线',
             content: '基于免费的云服务器，上线个人博客系统。',
+            color: '#8f85bd'
           }]
       }
     }
