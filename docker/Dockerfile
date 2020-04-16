@@ -1,6 +1,8 @@
 # 来源镜像
 FROM alpine:20200330_212034
 
+ENV TZ=Asia/Shanghai
+
 # 将vue生成后的静态文件拷贝到临时目录中
 ADD web /tmp/web
 
