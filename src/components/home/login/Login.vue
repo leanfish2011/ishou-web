@@ -1,8 +1,6 @@
 <template>
   <div class="login-container">
-    <el-link>
-      <router-link to="/">回到首页</router-link>
-    </el-link>
+    <el-link href="/" type="primary" icon="el-icon-back">回到首页</el-link>
     <el-form :model="loginModel" :rules="validRule"
              status-icon
              ref="loginForm"

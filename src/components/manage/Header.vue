@@ -12,7 +12,7 @@
         </el-row>
       </div>
       <div class="headerUser">
-        <el-link href="/" type="primary" icon="el-icon-back">回到主页</el-link>
+        <el-link href="/" type="primary" icon="el-icon-back">回到首页</el-link>
         <el-dropdown trigger="hover"
                      :hide-on-click="false">
               <span class="el-dropdown-link">

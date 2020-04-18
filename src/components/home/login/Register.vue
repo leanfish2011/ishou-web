@@ -1,8 +1,6 @@
 <template>
   <div class="register-container">
-    <el-link>
-      <router-link to="/">回到首页</router-link>
-    </el-link>
+    <el-link href="/" type="primary" icon="el-icon-back">回到首页</el-link>
     <el-form ref="registerForm" :model="registerModel" label-width="80px" :rules="validRule"
              status-icon
              class="register-page">
