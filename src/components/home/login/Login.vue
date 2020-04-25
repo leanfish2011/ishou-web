@@ -1,0 +1,130 @@
+<template>
+  <div class="login-container">
+    <el-link href="/" type="primary" icon="el-icon-back">回到首页</el-link>
+    <el-form :model="loginModel" :rules="validRule"
+             status-icon
+             ref="loginForm"
+             label-position="left"
+             class="login-page">
+      <h3 class="title">系统登录</h3>
+      <el-form-item prop="userCode">
+        <el-input v-model="loginModel.userCode"
+                  placeholder="请输入用户名">
+        </el-input>
+      </el-form-item>
+      <el-form-item prop="password">
+        <el-input type="password"
+                  v-model="loginModel.password"
+                  placeholder="请输入密码">
+        </el-input>
+      </el-form-item>
+      <el-checkbox
+        v-model="checked"
+        class="rememberme">记住密码
+      </el-checkbox>
+      <el-row>
+        <el-col :span="24">
+          <el-tooltip class="item" effect="dark" content="试试github登录" placement="top-start">
+            <a href="#">
+              <img @click="githubLogin" height="30" width="30"
+                   src="https://github.com/fluidicon.png"/>
+            </a>
+          </el-tooltip>
+        </el-col>
+      </el-row>
+      <el-form-item style="width:100%;margin-top: 10px;">
+        <el-button type="primary"
+                   style="width:100%;"
+                   @click="onSubmit"
+                   :loading="logining">登录
+        </el-button>
+      </el-form-item>
+    </el-form>
+  </div>
+</template>
+
+<script>
+  import Service from '../../../config/service'
+
+  export default {
+    data() {
+      return {
+        logining: false,
+        loginModel: {
+          userCode: '',
+          password: '',
+        },
+        validRule: {
+          userCode: [{required: true, message: '请输入用户名', trigger: 'blur'}],
+          password: [{required: true, message: '请输入密码', trigger: 'blur'}]
+        },
+        checked: false
+      }
+    },
+    created() {
+      document.onkeydown = (e) => {
+        let key = window.event.keyCode;
+        if (key === 13) {
+          this.onSubmit(event)
+        }
+      }
+    },
+    methods: {
+      onSubmit(event) {
+        event.preventDefault();
+        this.$refs.loginForm.validate((valid) => {
+          if (valid) {
+            this.logining = true;
+            this.$axios.post(Service.url.login, this.loginModel).then((res) => {
+              if (res.status === 200) {
+                let responseData = res.data;
+                if (responseData.code === 0) {
+                  this.logining = false;
+                  let userData = responseData.data;
+                  localStorage.setItem('userCode', userData.userCode);
+                  localStorage.setItem('userName', userData.name);
+                  localStorage.setItem('token', userData.token);
+                  localStorage.setItem('userId', userData.userId);
+
+                  this.$router.push({path: "/"});
+                } else {
+                  this.logining = false;
+                  this.$message.error(responseData.msg);
+                }
+              } else {
+                this.logining = false;
+                this.$message.error("系统内部错误");
+              }
+            })
+          }
+        })
+      },
+      githubLogin() {
+        window.location.href = Service.url.githubAuth;
+      }
+    }
+  };
+</script>
+
+<style scoped>
+  .login-container {
+    width: 100%;
+    height: 100%;
+  }
+
+  .login-page {
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    margin: 10% auto;
+    width: 350px;
+    padding: 35px 35px 15px;
+    background: #fff;
+    border: 1px solid #eaeaea;
+    box-shadow: 0 0 25px #cac6c6;
+  }
+
+  label.el-checkbox.rememberme {
+    margin: 0px 0px 15px;
+    text-align: left;
+  }
+</style>
