@@ -173,7 +173,7 @@
   }
 
   #midSearch {
-    width: 80%;
+    width: 60%;
     margin-left: 50px;
   }
 
@@ -185,7 +185,7 @@
   }
 
   #userInfo {
-    width: 10%;
+    width: 30%;
     text-align: right;
     margin-right: 10px;
   }
