@@ -19,7 +19,8 @@
                 </a>
               </el-col>
               <el-col :span="18">
-                <el-link :href="item.url" target="_blank">{{item.name}}</el-link>
+                <el-link :href="item.url" target="_blank" style="font-size: 16px;">{{item.name}}
+                </el-link>
                 <p>{{item.remark}}</p>
                 <p>{{item.tag}}</p>
               </el-col>
