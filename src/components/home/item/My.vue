@@ -21,8 +21,7 @@
               <el-col :span="18">
                 <el-link :href="item.url" target="_blank" style="font-size: 16px;">{{item.name}}
                 </el-link>
-                <p>{{item.remark}}</p>
-                <p>{{item.tag}}</p>
+                <div class="remark">{{item.remark}}</div>
               </el-col>
             </el-row>
           </el-card>
@@ -108,5 +107,9 @@
   .siteIcon {
     width: 50%;
     height: 50%;
+  }
+
+  .remark {
+    font-size: 14px;
   }
 </style>
