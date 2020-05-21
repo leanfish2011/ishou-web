@@ -2,7 +2,7 @@
   <div>
     <div class="footer">
       <div class="rightInfo">
-        <p>Copyright © Tim 2016-2022</p>
+        <p>Copyright © Tim 2016-2020</p>
       </div>
     </div>
     <el-backtop></el-backtop>
