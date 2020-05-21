@@ -135,11 +135,32 @@
       },
       openMange() {
         this.$router.push('/site');
+      },
+      authCheck() {
+        this.$axios.get(Service.url.authCheck, {
+          headers: {
+            'Authorization': localStorage.getItem('token')
+          }
+        }).then((res) => {
+          if (res.status === 200) {
+            let responseData = res.data;
+            let code = responseData.code;
+            if (code === -1 || code === -2) {
+              AuthUtil.clearSession();
+            } else {
+              let userName = localStorage.getItem('userName');
+              this.userName = userName;
+            }
+          } else {
+            this.$message.error("系统内部错误");
+          }
+        }).catch(function (error) {
+          console.error(error);
+        });
       }
     },
     mounted() {
-      let userName = localStorage.getItem('userName');
-      this.userName = userName;
+      this.authCheck();
     }
   }
 </script>
