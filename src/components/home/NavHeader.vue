@@ -9,12 +9,11 @@
           爱收藏
         </div>
         <div id="midSearch">
-          <form ref="baiduSearch" action="http://www.baidu.com/s" method="GET" target="_blank">
-            <input type="text" name="wd" id="txtKeyword"/>
-            <el-button type="primary" plain size="medium" @click="searchKeyword()">百度一下</el-button>
-            <input type="hidden" name="ie" value="utf-8"/>
-            <input type="hidden" name="tn" value="ace"/>
-          </form>
+          <el-form :model="searchForm">
+            <el-input v-model="searchForm.name" size="medium" class="searchInput"
+                      placeholder="请输入关键词"></el-input>
+            <el-button type="primary" plain size="medium" @click="searchKeyword()">搜索一下</el-button>
+          </el-form>
         </div>
         <div id="userInfo">
           <el-row>
@@ -89,12 +88,32 @@
             "route": "/about",
             "needLogin": false
           }
-        ]
+        ],
+        searchForm: {
+          name: ''
+        }
       }
     },
     methods: {
       searchKeyword() {
-        this.$refs.baiduSearch.submit();
+        let name = this.searchForm.name;
+        if (name == "") {
+          this.$message.warning("请输入关键词！");
+          return;
+        }
+
+        this.$axios.get(Service.url.home, {
+          params: this.searchForm
+        }).then((res) => {
+          if (res.status === 200) {
+            console.log(res.data.data);
+
+          } else {
+            this.$message.error("系统内部错误");
+          }
+        }).catch(function (error) {
+          console.error(error);
+        });
       },
       logout() {
         this.$confirm('确认退出?', '提示', {})
@@ -198,11 +217,10 @@
     margin-left: 50px;
   }
 
-  #midSearch input {
+  .searchInput {
     width: 400px;
     height: 30px;
     font-size: 15px;
-    border: 1px solid #4791FF;
   }
 
   #userInfo {
