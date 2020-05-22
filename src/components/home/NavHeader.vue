@@ -36,7 +36,7 @@
       <div id="divMenu">
         <ul>
           <label v-for="item in menuData">
-            <label v-if="showMenu(item.needLogin)">
+            <label v-if="showMenu(item.id)">
               <li>
                 <router-link :to=item.route exact>{{item.name}}</router-link>
               </li>
@@ -62,31 +62,26 @@
     data() {
       return {
         userName: '',
-        activeId: "1",
         menuData: [
           {
             "id": "1",
             "name": "主页",
-            "route": "/",
-            "needLogin": false
+            "route": "/"
           },
           {
             "id": "2",
             "name": "我的",
-            "route": "/my",
-            "needLogin": true
+            "route": "/my"
           },
           {
             "id": "3",
             "name": "留言",
-            "route": "/message",
-            "needLogin": false
+            "route": "/message"
           },
           {
             "id": "4",
             "name": "关于",
-            "route": "/about",
-            "needLogin": false
+            "route": "/about"
           }
         ],
         searchForm: {
@@ -107,7 +102,7 @@
         }).then((res) => {
           if (res.status === 200) {
             console.log(res.data.data);
-
+            //TODO 结果展示
           } else {
             this.$message.error("系统内部错误");
           }
@@ -135,12 +130,9 @@
       addSite() {
         this.$refs.fastAddSite.dialogFormVisible = true;
       },
-      showMenu(needLogin) {
-        if (needLogin == false) {
-          return true;
-        }
-
-        if (this.userName == null || this.userName == '') {
+      showMenu(id) {
+        // "我的"菜单需要登录后才显示
+        if (id == "2" && (this.userName == null || this.userName == '')) {
           return false;
         }
 
