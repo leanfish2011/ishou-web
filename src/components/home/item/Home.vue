@@ -46,7 +46,11 @@
     },
     created() {
       this.$axios.get(Service.url.home).then((res) => {
-        this.myDataList = res.data.data;
+        if (res.status === 200) {
+          this.myDataList = res.data.data;
+        } else {
+          this.$message.error("系统内部错误");
+        }
       }).catch(function (error) {
         console.error(error);
       });
