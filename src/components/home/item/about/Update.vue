@@ -26,11 +26,17 @@
       return {
         activities: [
           {
+            timestamp: '2020-05-23',
+            title: '完成站内搜索',
+            content: '替换之前的百度搜索，实现在站内搜索主页收藏的网站。',
+            type: 'primary',
+            icon: 'el-icon-more'
+          },
+          {
             timestamp: '2020-04-12',
             title: '集成github',
             content: '集成github评论系统。集成github登录',
-            type: 'primary',
-            icon: 'el-icon-more'
+            color: '#bd91a3'
           },
           {
             timestamp: '2020-03-29',
@@ -47,13 +53,13 @@
           {
             timestamp: '2018-02-09',
             title: '多人博客系统上线',
-            content: '打造了可以多人注册使用的博客系统。',
+            content: '打造了可以多人注册使用的博客系统。界面美观，操作方便。支持全文检索，支持中英文切换。',
             color: '#bd6d8e'
           },
           {
             timestamp: '2014-11-04',
             title: '个人博客上线',
-            content: '基于免费的云服务器，上线个人博客系统。',
+            content: '基于免费的云服务器，上线个人博客系统，主要功能包括：个人简介、个人文章、个人网站链接、留言等。',
             color: '#8f85bd'
           }]
       }
