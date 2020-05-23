@@ -33,17 +33,6 @@
           </el-row>
         </div>
       </div>
-      <div id="divMenu">
-        <ul>
-          <label v-for="item in menuData">
-            <label v-if="showMenu(item.id)">
-              <li>
-                <router-link :to=item.route exact>{{item.name}}</router-link>
-              </li>
-            </label>
-          </label>
-        </ul>
-      </div>
     </div>
     <fast-add-site-dialog ref="fastAddSite"></fast-add-site-dialog>
   </div>
@@ -55,35 +44,13 @@
   import FastAddSiteDialog from './FastAddSiteDialog'
 
   export default {
-    name: "NavHeader",
+    name: "SearchHeader",
     components: {
       "fastAddSiteDialog": FastAddSiteDialog
     },
     data() {
       return {
         userName: '',
-        menuData: [
-          {
-            "id": "1",
-            "name": "主页",
-            "route": "/"
-          },
-          {
-            "id": "2",
-            "name": "我的",
-            "route": "/my"
-          },
-          {
-            "id": "3",
-            "name": "留言",
-            "route": "/message"
-          },
-          {
-            "id": "4",
-            "name": "关于",
-            "route": "/about"
-          }
-        ],
         searchForm: {
           keyword: ''
         }
@@ -97,8 +64,8 @@
           return;
         }
 
-        //url中传递参数
-        this.$router.push({path: "/search", query: {keyword: keyword}});
+        //子组件调用父组件方法
+        this.$emit('search',keyword);
       },
       logout() {
         this.$confirm('确认退出?', '提示', {})
@@ -119,14 +86,6 @@
       },
       addSite() {
         this.$refs.fastAddSite.dialogFormVisible = true;
-      },
-      showMenu(id) {
-        // "我的"菜单需要登录后才显示
-        if (id == "2" && (this.userName == null || this.userName == '')) {
-          return false;
-        }
-
-        return true;
       },
       openLogin() {
         this.$router.push('/login');
@@ -209,44 +168,5 @@
     width: 30%;
     text-align: right;
     margin-right: 10px;
-  }
-
-  #divMenu {
-    line-height: 30px;
-    height: 30px;
-    top: 0px;
-    background: #1BA1E2;
-    margin-left: 5px;
-    margin-right: 5px;
-    z-index: 100;
-  }
-
-  #divMenu ul {
-    list-style: none;
-    line-height: 30px;
-    margin: 0 auto 0 auto;
-  }
-
-  #divMenu ul li {
-    display: block;
-    float: left;
-  }
-
-  #divMenu ul li a {
-    text-decoration: none;
-    color: #fff;
-    display: block;
-    padding-left: 20px;
-    padding-right: 20px;
-  }
-
-  #divMenu ul li:hover {
-    background: #52BFF5;
-  }
-
-  /*路由激活样式，router自带属性*/
-  .router-link-active {
-    background-color: #e70;
-    color: #fff;
   }
 </style>

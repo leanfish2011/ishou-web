@@ -1,6 +1,7 @@
 // 引入各个组件
 import Home from '../components/home/item/Home.vue'
 import My from '../components/home/item/My.vue'
+import Search from '../components/home/item/Search'
 import Message from '../components/home/item/Message'
 import About from '../components/home/item/About.vue'
 import Login from '../components/home/login/Login.vue'
@@ -19,10 +20,11 @@ import Tag from '../components/test/elmentui/Tag'
 import BackTop from '../components/test/elmentui/BackTop'
 import Container from '../components/test/elmentui/Container'
 
-// 设置路径
+// 设置路由路径
 export default [
   {path: "/", component: Home},
   {path: "/my", component: My},
+  {path: "/search", component: Search},
   {path: "/message", component: Message},
   {path: "/about", component: About},
   {path: "/login", component: Login},
