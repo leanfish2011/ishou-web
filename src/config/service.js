@@ -12,6 +12,7 @@ const githubLoginData = {
 //各个接口地址
 const url = {
   home: ROOT_PATH + ':9092/api/v1/site/index',
+  search: ROOT_PATH + ':9092/api/v1/site/index/search',
   login: ROOT_PATH + ':9091/api/v1/auth/access/login',
   register: ROOT_PATH + ':9091/api/v1/auth/access/register',
   sitePersonal: ROOT_PATH + ':9092/api/v1/site/personal',

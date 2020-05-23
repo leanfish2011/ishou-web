@@ -43,7 +43,7 @@
       return {
         myDataList: null,
         searchForm: {
-          name: ''
+          keyword: ''
         }
       }
     },
@@ -60,12 +60,17 @@
         return url.match(reg) + "favicon.ico";
       },
       onSearch(keyword) {
-        this.searchForm.name = keyword;
-        this.$axios.get(Service.url.home, {
+        this.searchForm.keyword = keyword;
+        this.$axios.get(Service.url.search, {
           params: this.searchForm
         }).then((res) => {
           if (res.status === 200) {
-            this.myDataList = res.data.data;
+            let responseData = res.data;
+            if (responseData.code === 0) {
+              this.myDataList = responseData.data;
+            } else {
+              this.$message.error(responseData.msg);
+            }
           } else {
             this.$message.error("系统内部错误");
           }

@@ -138,7 +138,7 @@
           if (res.status === 200) {
             let responseData = res.data;
             if (responseData.code === 0) {
-              this.siteData = res.data.data;
+              this.siteData = responseData.data;
             } else {
               this.$message.error(responseData.msg);
               if (responseData.code === -2) {
