@@ -10,9 +10,11 @@
         </div>
         <div id="midSearch">
           <el-form :model="searchForm">
+
             <el-input v-model="searchForm.keyword" size="medium" class="searchInput"
                       placeholder="请输入关键词"></el-input>
             <el-button type="primary" plain size="medium" @click="search()">搜索一下</el-button>
+            <el-link href="/" type="primary" icon="el-icon-back">回到首页</el-link>
           </el-form>
         </div>
         <div id="userInfo">
