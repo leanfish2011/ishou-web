@@ -65,7 +65,7 @@
         }
 
         //子组件调用父组件方法
-        this.$emit('search',keyword);
+        this.$emit('search', keyword);
       },
       logout() {
         this.$confirm('确认退出?', '提示', {})
@@ -121,6 +121,10 @@
     },
     mounted() {
       this.authCheck();
+
+      //搜索框显示主页传递过来的关键词
+      let keyword = this.$route.query.keyword;
+      this.searchForm.keyword = keyword;
     }
   }
 </script>
