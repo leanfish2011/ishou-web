@@ -14,9 +14,10 @@
                   </a>
                 </el-col>
                 <el-col :span="18">
-                  <el-link :href="item.url" target="_blank" style="font-size: 16px;">{{item.name}}
+                  <el-link :href="item.url" target="_blank" style="font-size: 16px;"
+                           v-html="highlight(item.name)">
                   </el-link>
-                  <div class="remark">{{item.remark}}</div>
+                  <div class="remark" v-html="highlight(item.remark)"></div>
                 </el-col>
               </el-row>
             </el-card>
@@ -50,7 +51,6 @@
     created() {
       //从url中获取参数
       let keyword = this.$route.query.keyword;
-      //给搜索赋值
 
       this.onSearch(keyword);
     },
@@ -77,6 +77,15 @@
         }).catch(function (error) {
           console.error(error);
         });
+      },
+      highlight(content) {
+        let keyword = this.searchForm.keyword;
+        // 匹配关键字正则
+        let replaceReg = new RegExp(keyword, 'g');
+        // 高亮替换v-html值
+        let replaceString = '<span style="color: red;">' + keyword + '</span>';
+        // 开始替换
+        return content.replace(replaceReg, replaceString);
       }
     }
   }
