@@ -79,6 +79,10 @@
         });
       },
       highlight(content) {
+        if (content == null || content == "") {
+          return;
+        }
+
         let keyword = this.searchForm.keyword;
         // 匹配关键字正则
         let replaceReg = new RegExp(keyword, 'g');
