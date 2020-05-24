@@ -50,7 +50,7 @@
     },
     created() {
       //从url中获取参数
-      let keyword = this.$route.query.keyword;
+      let keyword = this.$route.query.keyword.trim();
 
       this.onSearch(keyword);
     },

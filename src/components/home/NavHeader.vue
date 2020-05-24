@@ -91,7 +91,7 @@
     },
     methods: {
       search() {
-        let keyword = this.searchForm.keyword;
+        let keyword = this.searchForm.keyword.trim();
         if (keyword == "") {
           this.$message.warning("请输入关键词！");
           return;
