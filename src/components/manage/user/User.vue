@@ -36,7 +36,7 @@
         <el-button type="primary" @click="onAddShow">创建</el-button>
       </el-form-item>
     </el-form>
-    <user-add-dialog ref="addDialog" :show.sync="isShowAdd" @refresh="load()"></user-add-dialog>
+    <user-add-dialog ref="addDialog" @refresh="load()"></user-add-dialog>
     <el-table
       :data="userData"
       stripe
@@ -97,7 +97,6 @@
           email: ''
         },
         value2: '',
-        isShowAdd: false,
         userData: null,
         pickerOptions: {
           shortcuts: [{
@@ -153,10 +152,10 @@
         });
       },
       onAddShow() {
-        this.isShowAdd = true;
+        this.$refs.addDialog.dialogFormVisible = true;
       },
       handleEdit(index, row) {
-        this.isShowAdd = true;//dialog对话窗口打开
+        this.$refs.addDialog.dialogFormVisible = true;
         this.$refs.addDialog.addModel = Object.assign({}, row);//将数据传入dialog页面
       },
       handleDelete(index, row) {
