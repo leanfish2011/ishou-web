@@ -123,6 +123,7 @@
       onCancel() {
         this.dialogFormVisible = false;
         this.addUserModel = Object.assign({}, "");//清空model
+        this.$refs.multipleUserTable.clearSelection();//清空已经选择的用户
       },
       onClose() {
         this.onCancel();
