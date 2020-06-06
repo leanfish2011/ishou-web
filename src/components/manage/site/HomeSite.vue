@@ -30,7 +30,6 @@
         <el-button type="primary" @click="onAddShow">创建</el-button>
       </el-form-item>
     </el-form>
-    <home-site-add-dialog ref="addDialog" @refresh="load()"></home-site-add-dialog>
     <el-table
       :data="siteData"
       stripe
@@ -76,6 +75,7 @@
         </template>
       </el-table-column>
     </el-table>
+    <home-site-add-dialog ref="addDialog" @refresh="load()"></home-site-add-dialog>
   </div>
 </template>
 
