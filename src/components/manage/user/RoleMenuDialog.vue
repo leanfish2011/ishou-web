@@ -2,9 +2,7 @@
   <div>
     <el-dialog
       title="分配权限"
-      :visible.sync="visible"
-      @close="onClose"
-      :show="show">
+      :visible.sync="dialogFormVisible">
       <span>角色名称：{{roleModel.name}} 角色备注：{{roleModel.remark}}</span>
       <el-tree
         :data="menuData"
@@ -30,7 +28,7 @@
     name: "roleMenuDialog",
     data() {
       return {
-        visible: this.show,
+        dialogFormVisible: false,
         submiting: false,
         addModel: {
           menuIdList: null,
@@ -51,16 +49,9 @@
         },
       };
     },
-    props: {
-      show: {
-        type: Boolean,
-        default: false
-      }
-    },
     watch: {
-      show() {
-        this.visible = this.show;
-        if (this.visible) {
+      dialogFormVisible() {
+        if (this.dialogFormVisible) {
           this.loadRoleMenu();
         }
       }
@@ -79,7 +70,7 @@
             let responseData = res.data;
             if (responseData.code === 0) {
               this.$message.success(responseData.msg);
-              this.visible = false;
+              this.onCancel();
             } else {
               this.$message.error(responseData.msg);
               if (responseData.code === -2) {
@@ -94,7 +85,7 @@
       },
       onCancel() {
         this.$refs.menuTree.setCheckedKeys([]);
-        this.$emit('update:show', false);
+        this.dialogFormVisible = false;
         this.addModel = Object.assign({}, "");//清空model
       },
       onClose() {
