@@ -30,7 +30,7 @@
         <el-button type="primary" @click="onAddShow">创建</el-button>
       </el-form-item>
     </el-form>
-    <site-add-dialog ref="addDialog" :show.sync="isShowAdd" @refresh="load()"></site-add-dialog>
+    <site-add-dialog ref="addDialog" @refresh="load()"></site-add-dialog>
     <el-table
       :data="siteData"
       stripe
@@ -98,7 +98,6 @@
           createTimeEnd: ''
         },
         value2: '',
-        isShowAdd: false,
         siteData: null,
         pickerOptions: {
           shortcuts: [{
@@ -138,7 +137,7 @@
           if (res.status === 200) {
             let responseData = res.data;
             if (responseData.code === 0) {
-              this.siteData = res.data.data;
+              this.siteData = responseData.data;
             } else {
               this.$message.error(responseData.msg);
               if (responseData.code === -2) {
@@ -154,10 +153,10 @@
         });
       },
       onAddShow() {
-        this.isShowAdd = true;
+        this.$refs.addDialog.dialogFormVisible = true;
       },
       handleEdit(index, row) {
-        this.isShowAdd = true;//dialog对话窗口打开
+        this.$refs.addDialog.dialogFormVisible = true;
         this.$refs.addDialog.addModel = Object.assign({}, row);//将数据传入dialog页面
       },
       handleDelete(index, row) {

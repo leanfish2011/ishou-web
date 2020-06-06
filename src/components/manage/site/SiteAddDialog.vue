@@ -1,10 +1,7 @@
 <template>
   <div>
     <el-dialog
-      title="新增网页收藏"
-      :visible.sync="visible"
-      @close="onClose"
-      :show="show">
+      title="新增网页收藏" :visible.sync="dialogFormVisible">
       <el-form ref="addForm" :model="addModel" label-width="80px" :rules="validRule"
                status-icon
                class="register-page">
@@ -25,7 +22,7 @@
         </el-form-item>
         <el-form-item>
           <el-button type="primary" @click="onSubmit" :loading="submiting">确定</el-button>
-          <el-button @click="onCancel">取消</el-button>
+          <el-button @click="onCloseDialog">取消</el-button>
         </el-form-item>
       </el-form>
     </el-dialog>
@@ -40,7 +37,7 @@
     name: "siteAddDialog",
     data() {
       return {
-        visible: this.show,
+        dialogFormVisible: false,
         submiting: false,
         addModel: {
           id: "",
@@ -57,20 +54,9 @@
         }
       };
     },
-    props: {
-      show: {
-        type: Boolean,
-        default: false
-      }
-    },
-    watch: {
-      show() {
-        this.visible = this.show;
-      }
-    },
     methods: {
       onSubmit() {
-        if (this.addModel.id === "") {
+        if (this.addModel.id === "" || this.addModel.id === undefined) {
           console.log("新增");
           this.$axios.post(Service.url.sitePersonal, this.addModel,
             {
@@ -82,7 +68,7 @@
               let responseData = res.data;
               if (responseData.code === 0) {
                 this.$message.success(responseData.msg);
-                this.visible = false;
+                this.onCloseDialog();
                 this.$emit('refresh');
               } else {
                 this.$message.error(responseData.msg);
@@ -106,7 +92,7 @@
               let responseData = res.data;
               if (responseData.code === 0) {
                 this.$message.success(responseData.msg);
-                this.visible = false;
+                this.onCloseDialog();
                 this.$emit('refresh');
               } else {
                 this.$message.error(responseData.msg);
@@ -122,13 +108,13 @@
         }
 
       },
-      onCancel() {
+      onCloseDialog() {
         this.$refs.addForm.resetFields();
-        this.$emit('update:show', false);
+        this.dialogFormVisible = false;
         this.addModel = Object.assign({}, "");//将数据传入dialog页面
       },
       onClose() {
-        this.onCancel();
+        this.onCloseDialog();
       }
     }
   }
