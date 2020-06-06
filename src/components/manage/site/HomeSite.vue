@@ -2,7 +2,7 @@
   <div>
     <el-breadcrumb separator-class="el-icon-arrow-right">
       <el-breadcrumb-item>后台管理</el-breadcrumb-item>
-      <el-breadcrumb-item>网页管理</el-breadcrumb-item>
+      <el-breadcrumb-item>主页网址管理</el-breadcrumb-item>
     </el-breadcrumb>
     <el-divider></el-divider>
     <el-form ref="form" :inline="true" :model="searchForm" label-width="80px" size="mini">
@@ -30,7 +30,7 @@
         <el-button type="primary" @click="onAddShow">创建</el-button>
       </el-form-item>
     </el-form>
-    <home-site-add-dialog ref="addDialog" :show.sync="isShowAdd" @refresh="load()"></home-site-add-dialog>
+    <home-site-add-dialog ref="addDialog" @refresh="load()"></home-site-add-dialog>
     <el-table
       :data="siteData"
       stripe
@@ -98,7 +98,6 @@
           createTimeEnd: ''
         },
         value2: '',
-        isShowAdd: false,
         siteData: null,
         pickerOptions: {
           shortcuts: [{
@@ -154,10 +153,10 @@
         });
       },
       onAddShow() {
-        this.isShowAdd = true;
+        this.$refs.addDialog.dialogFormVisible = true;
       },
       handleEdit(index, row) {
-        this.isShowAdd = true;//dialog对话窗口打开
+        this.$refs.addDialog.dialogFormVisible = true;
         this.$refs.addDialog.addModel = Object.assign({}, row);//将数据传入dialog页面
       },
       handleDelete(index, row) {

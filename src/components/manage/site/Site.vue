@@ -2,7 +2,7 @@
   <div>
     <el-breadcrumb separator-class="el-icon-arrow-right">
       <el-breadcrumb-item>后台管理</el-breadcrumb-item>
-      <el-breadcrumb-item>网页管理</el-breadcrumb-item>
+      <el-breadcrumb-item>个人网址管理</el-breadcrumb-item>
     </el-breadcrumb>
     <el-divider></el-divider>
     <el-form ref="form" :inline="true" :model="searchForm" label-width="80px" size="mini">
