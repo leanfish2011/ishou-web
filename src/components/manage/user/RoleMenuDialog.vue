@@ -59,8 +59,10 @@
     methods: {
       onSubmit() {
         this.addModel.roleId = this.roleModel.id;
-        //菜单只保存选中的，且是叶子节点的菜单，不包含半选中的节点。加载时，有选中的，则父自动为半选中状态
-        this.addModel.menuIdList = this.$refs.menuTree.getCheckedKeys(true, false);
+        //菜单保存选中的，以及半选中的项，用于展示完整树形菜单
+        this.addModel.menuIdList = this.$refs.menuTree.getCheckedKeys().concat(
+          this.$refs.menuTree.getHalfCheckedKeys());
+        console.log(this.addModel);
         this.$axios.post(Service.url.menuRole, this.addModel, {
           headers: {
             'Authorization': localStorage.getItem('token')
