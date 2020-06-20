@@ -27,7 +27,7 @@
           <el-tooltip class="item" effect="dark" content="试试github登录" placement="top-start">
             <a href="#">
               <img @click="githubLogin" height="30" width="30"
-                   src="https://github.com/fluidicon.png"/>
+                   src="../../../../static/img/github.png"/>
             </a>
           </el-tooltip>
         </el-col>
