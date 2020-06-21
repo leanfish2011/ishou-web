@@ -9,8 +9,7 @@
               <el-row>
                 <el-col :span="6">
                   <a :href=item.url target="_blank">
-                    <img class="siteIcon" :src="queryIcon(item.url)"
-                         onerror="this.src='../../../../static/ishou.ico'"/>
+                    <img class="siteIcon" :src="queryIcon(item.iconUrl)"/>
                   </a>
                 </el-col>
                 <el-col :span="18">
@@ -57,8 +56,11 @@
     },
     methods: {
       queryIcon(url) {
-        let reg = /((https?|http|ftp|file):\/\/)?[-A-Za-z0-9+&@#\/%?=~_|!:,.;]+\.[-A-Za-z+]+\/+/g;
-        return url.match(reg) + "favicon.ico";
+        if (url == null || url == "") {
+          return "../../../../static/ishou.ico";
+        }
+
+        return url;
       }
     }
   }
