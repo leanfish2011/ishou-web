@@ -7,7 +7,7 @@
     <el-divider></el-divider>
     <el-form ref="form" :inline="true" :model="searchForm" label-width="80px" size="mini">
       <el-form-item label="标题">
-        <el-input v-model="searchForm.name" placeholder="标题"></el-input>
+        <el-input v-model="searchForm.name" placeholder="标题" clearable></el-input>
       </el-form-item>
       <el-form-item label="创建时间">
         <el-date-picker
@@ -93,9 +93,9 @@
     data() {
       return {
         searchForm: {
-          name: '',
-          createTimeStart: '',
-          createTimeEnd: ''
+          name: null,
+          createTimeStart: null,
+          createTimeEnd: null
         },
         value2: '',
         siteData: null,
@@ -125,9 +125,14 @@
           this.searchForm.createTimeStart = this.value2[0];
           this.searchForm.createTimeEnd = this.value2[1];
         } else {
-          this.searchForm.createTimeStart = "";
-          this.searchForm.createTimeEnd = "";
+          this.searchForm.createTimeStart = null;
+          this.searchForm.createTimeEnd = null;
         }
+
+        if (this.searchForm.name == '') {
+          this.searchForm.name = null;
+        }
+
         this.$axios.get(Service.url.siteHome, {
           params: this.searchForm,
           headers: {
