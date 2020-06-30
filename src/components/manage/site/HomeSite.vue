@@ -75,6 +75,17 @@
         </template>
       </el-table-column>
     </el-table>
+    <el-pagination
+      ref="sitepage"
+      @current-change="handleCurrentChange"
+      @size-change="handleSizeChange"
+      background
+      :page-sizes="[10, 20, 50]"
+      :page-size="perSize"
+      :current-page="currentPage"
+      layout="prev, pager, next, total, sizes"
+      :total="totalCount">
+    </el-pagination>
     <home-site-add-dialog ref="addDialog" @refresh="load()"></home-site-add-dialog>
   </div>
 </template>
@@ -92,10 +103,15 @@
     },
     data() {
       return {
+        perSize: 10,
+        totalCount: 1,
+        currentPage: 1,
         searchForm: {
           name: null,
           createTimeStart: null,
-          createTimeEnd: null
+          createTimeEnd: null,
+          pageNo: 1,
+          pageSize: 10
         },
         value2: '',
         siteData: null,
@@ -133,6 +149,9 @@
           this.searchForm.name = null;
         }
 
+        this.searchForm.pageNo = this.currentPage;
+        this.searchForm.pageSize = this.perSize;
+
         this.$axios.get(Service.url.siteHome, {
           params: this.searchForm,
           headers: {
@@ -142,7 +161,8 @@
           if (res.status === 200) {
             let responseData = res.data;
             if (responseData.code === 0) {
-              this.siteData = responseData.data;
+              this.totalCount = responseData.data.allTotal;
+              this.siteData = responseData.data.list;
             } else {
               this.$message.error(responseData.msg);
               if (responseData.code === -2) {
@@ -156,6 +176,14 @@
         }).catch(function (error) {
           console.error(error);
         });
+      },
+      handleCurrentChange(val) {
+        this.currentPage = val;
+        this.onSearch();
+      },
+      handleSizeChange(val) {
+        this.perSize = val;
+        this.onSearch();
       },
       onAddShow() {
         this.$refs.addDialog.dialogFormVisible = true;
@@ -205,6 +233,7 @@
       },
       load() {
         this.$axios.get(Service.url.siteHome, {
+          params: this.searchForm,
           headers: {
             'Authorization': localStorage.getItem('token')
           }
@@ -212,7 +241,8 @@
           if (res.status === 200) {
             let responseData = res.data;
             if (responseData.code === 0) {
-              this.siteData = responseData.data;
+              this.totalCount = responseData.data.allTotal;
+              this.siteData = responseData.data.list;
             } else {
               this.$message.error(responseData.msg);
               if (responseData.code === -2) {

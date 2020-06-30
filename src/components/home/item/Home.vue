@@ -46,7 +46,7 @@
     created() {
       this.$axios.get(Service.url.home).then((res) => {
         if (res.status === 200) {
-          this.myDataList = res.data.data;
+          this.myDataList = res.data.data.list;
         } else {
           this.$message.error("系统内部错误");
         }
