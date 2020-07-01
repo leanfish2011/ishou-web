@@ -31,6 +31,7 @@
       </el-form-item>
     </el-form>
     <el-table
+      size="medium"
       :data="siteData"
       stripe
       style="width: 100%">
@@ -42,7 +43,7 @@
       <el-table-column
         prop="url"
         label="链接"
-        width="180">
+        width="500">
         <template slot-scope="scope">
           <a :href="scope.row.url"
              target="_blank"
