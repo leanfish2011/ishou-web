@@ -1,7 +1,7 @@
 <template>
   <div class="mange">
     <el-container class="manageContent">
-      <el-header>
+      <el-header class="manageHeader">
         <manage-header></manage-header>
       </el-header>
 
@@ -76,7 +76,7 @@
     height: 100%;
   }
 
-  .el-header {
+  .manageHeader {
     background-color: #13d1aa;
     color: #8b8626;
     line-height: 60px;
