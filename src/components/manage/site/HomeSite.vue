@@ -267,5 +267,12 @@
 </script>
 
 <style scoped>
+  a:link, a:visited {
+    color: #2f65ca
+  }
 
+  /* 已访问的链接 */
+  a:hover {
+    color: #5c31ff
+  }
 </style>
