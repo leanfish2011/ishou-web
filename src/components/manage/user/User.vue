@@ -38,6 +38,7 @@
     </el-form>
     <user-add-dialog ref="addDialog" @refresh="load()"></user-add-dialog>
     <el-table
+      size="medium"
       :data="userData"
       stripe
       style="width: 100%">
@@ -73,6 +74,17 @@
         </template>
       </el-table-column>
     </el-table>
+    <el-pagination
+      ref="userpage"
+      @current-change="handleCurrentChange"
+      @size-change="handleSizeChange"
+      background
+      :page-sizes="[10, 20, 50]"
+      :page-size="perSize"
+      :current-page="currentPage"
+      layout="prev, pager, next, total, sizes"
+      :total="totalCount">
+    </el-pagination>
   </div>
 </template>
 
@@ -89,12 +101,17 @@
     },
     data() {
       return {
+        perSize: 10,
+        totalCount: 1,
+        currentPage: 1,
         searchForm: {
-          name: '',
-          userCode: '',
-          beginTime: '',
-          endTime: '',
-          email: ''
+          name: null,
+          userCode: null,
+          beginTime: null,
+          endTime: null,
+          email: null,
+          pageNo: 1,
+          pageSize: 10
         },
         value2: '',
         userData: null,
@@ -124,9 +141,25 @@
           this.searchForm.beginTime = this.value2[0];
           this.searchForm.endTime = this.value2[1];
         } else {
-          this.searchForm.beginTime = "";
-          this.searchForm.endTime = "";
+          this.searchForm.beginTime = null;
+          this.searchForm.endTime = null;
         }
+
+        if (this.searchForm.name == '') {
+          this.searchForm.name = null;
+        }
+
+        if (this.searchForm.userCode == '') {
+          this.searchForm.userCode = null;
+        }
+
+        if (this.searchForm.email == '') {
+          this.searchForm.email = null;
+        }
+
+        this.searchForm.pageNo = this.currentPage;
+        this.searchForm.pageSize = this.perSize;
+
         this.$axios.get(Service.url.user, {
           headers: {
             'Authorization': localStorage.getItem('token')
@@ -136,7 +169,8 @@
           if (res.status === 200) {
             let responseData = res.data;
             if (responseData.code === 0) {
-              this.userData = responseData.data;
+              this.totalCount = responseData.data.allTotal;
+              this.userData = responseData.data.list;
             } else {
               this.$message.error(responseData.msg);
               if (responseData.code === -2) {
@@ -150,6 +184,14 @@
         }).catch(function (error) {
           console.error(error);
         });
+      },
+      handleCurrentChange(val) {
+        this.currentPage = val;
+        this.onSearch();
+      },
+      handleSizeChange(val) {
+        this.perSize = val;
+        this.onSearch();
       },
       onAddShow() {
         this.$refs.addDialog.dialogFormVisible = true;
@@ -194,19 +236,21 @@
         });
       },
       //时间格式化
-      dateFormat: function (row) {
+      dateFormat(row) {
         return DateUtil.dateFormat(row.createTime);
       },
       load() {
         this.$axios.get(Service.url.user, {
           headers: {
             'Authorization': localStorage.getItem('token')
-          }
+          },
+          params: this.searchForm,
         }).then((res) => {
           if (res.status === 200) {
             let responseData = res.data;
             if (responseData.code === 0) {
-              this.userData = responseData.data;
+              this.totalCount = responseData.data.allTotal;
+              this.userData = responseData.data.list;
             } else {
               this.$message.error(responseData.msg);
               if (responseData.code === -2) {
