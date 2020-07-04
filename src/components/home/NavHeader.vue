@@ -2,10 +2,10 @@
   <div>
     <div id="topMenu">
       <div id="top">
-        <div id="log">
+        <div id="log" @click="goHome()">
           <img src="../../../static/img/log.jpg">
         </div>
-        <div id="logTitle">
+        <div id="logTitle" @click="goHome()">
           爱收藏
         </div>
         <div id="midSearch">
@@ -158,6 +158,9 @@
         }).catch(function (error) {
           console.error(error);
         });
+      },
+      goHome() {
+        this.$router.push('/');
       }
     },
     mounted() {
