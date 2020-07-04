@@ -22,6 +22,7 @@
           <div class="alluser">
             <span class="tag-group__title">选择用户：</span>
             <el-table
+              size="medium"
               ref="multipleUserTable"
               :data="tableUserData"
               tooltip-effect="dark"
@@ -46,8 +47,8 @@
         </el-main>
       </el-container>
       <span slot="footer" class="dialog-footer">
-        <el-button type="primary" @click="onSubmit" :loading="submiting">确定</el-button>
-        <el-button @click="onCancel">取消</el-button>
+        <el-button type="primary" @click="onSubmit" :loading="submiting" size="mini">确定</el-button>
+        <el-button @click="onCancel" size="mini">取消</el-button>
       </span>
     </el-dialog>
   </div>
@@ -137,7 +138,7 @@
           if (res.status === 200) {
             let responseData = res.data;
             if (responseData.code === 0) {
-              this.tableUserData = responseData.data;
+              this.tableUserData = responseData.data.list;
             } else {
               this.$message.error(responseData.msg);
               if (responseData.code === -2) {
