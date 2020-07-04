@@ -23,6 +23,7 @@
             <span class="tag-group__title">选择用户：</span>
             <el-table
               size="medium"
+              height="250"
               ref="multipleUserTable"
               :data="tableUserData"
               tooltip-effect="dark"
