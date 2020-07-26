@@ -19,6 +19,8 @@ import TreeData from '../components/test/elmentui/TreeData'
 import Tag from '../components/test/elmentui/Tag'
 import BackTop from '../components/test/elmentui/BackTop'
 import Container from '../components/test/elmentui/Container'
+import Subscribe from '../components/sub/Subscribe'
+import UnSubscribe from '../components/sub/UnSubscribe'
 
 // 设置路由路径
 export default [
@@ -37,6 +39,8 @@ export default [
   {path: "/tag", component: Tag},
   {path: "/top", component: BackTop},
   {path: "/con", component: Container},
+  {path: "/sub", component: Subscribe},
+  {path: "/unsub", component: UnSubscribe},
   {
     path: "/manage",
     component: Manage,
