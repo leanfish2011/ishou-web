@@ -30,6 +30,7 @@
               </el-dropdown-menu>
             </el-dropdown>
             <el-button size="mini" type="primary" @click="openRegister()">注册</el-button>
+            <el-button size="mini" type="primary" @click="openSub()">订阅</el-button>
           </el-row>
         </div>
       </div>
@@ -133,6 +134,9 @@
       },
       openRegister() {
         this.$router.push('/register');
+      },
+      openSub() {
+        this.$router.push('/sub');
       },
       openMange() {
         this.$router.push('/site');

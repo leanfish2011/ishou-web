@@ -1,5 +1,6 @@
 <template>
   <div class="sub-container">
+    <el-link href="/" type="primary" icon="el-icon-back">回到首页</el-link>
     <el-form ref="subForm" :model="subModel" label-width="80px" :rules="validRule"
              status-icon
              class="sub-page">
