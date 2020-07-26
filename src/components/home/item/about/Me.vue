@@ -7,7 +7,7 @@
     <p><img style="margin-right: 5px;" src="../../../../../static/img/email.jpg" height="20"
             width="20"/>邮箱：leanfish2011@163.com
     </p>
-    <p><img style="margin-right: 5px;" src="../../../../../static/img/wenxin.png" height="20"
+    <p><img style="margin-right: 5px;" src="../../../../../static/img/weixin.png" height="20"
             width="20"/>微信公众号：leanfisher
     </p>
     <p>或者扫描下面二维码关注我的公众号</p>
