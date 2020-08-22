@@ -26,11 +26,17 @@
       return {
         activities: [
           {
+            timestamp: '2020-07-26',
+            title: '增加订阅功能',
+            content: '增加订阅功能，用户可以订阅首页网站，以邮件的形式获取每周最新的网站收藏',
+            type: 'primary',
+            icon: 'el-icon-more'
+          },
+          {
             timestamp: '2020-05-23',
             title: '完成站内搜索',
             content: '替换之前的百度搜索，实现在站内搜索主页收藏的网站。',
-            type: 'primary',
-            icon: 'el-icon-more'
+            color: '#BD5444'
           },
           {
             timestamp: '2020-04-12',
