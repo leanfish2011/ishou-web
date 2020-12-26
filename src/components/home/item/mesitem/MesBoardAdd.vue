@@ -3,13 +3,13 @@
     <el-form ref="mesForm" :model="mesModel" label-width="80px" :rules="validRule"
              status-icon
              class="mes-page">
-      <el-form-item label="评论" prop="content">
+      <el-form-item label="留言" prop="content">
         <el-input type="textarea" :rows="3" v-model="mesModel.content"></el-input>
       </el-form-item>
       <el-form-item>
-        <el-button v-if="showLogin()" type="primary" size="medium" @click="openLogin">登录发表评论
+        <el-button v-if="showLogin()" type="primary" size="medium" @click="openLogin">登录发表留言
         </el-button>
-        <el-button v-else type="primary" size="medium" @click="onSubmit" :loading="mesing">评论
+        <el-button v-else type="primary" size="medium" @click="onSubmit" :loading="mesing">发布
         </el-button>
       </el-form-item>
     </el-form>
@@ -36,7 +36,7 @@
         },
         validRule: {
           content: [
-            {required: true, message: '请输入评论内容', trigger: 'blur'}
+            {required: true, message: '请输入留言内容', trigger: 'blur'}
           ]
         }
       }
