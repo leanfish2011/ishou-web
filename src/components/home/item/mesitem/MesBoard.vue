@@ -7,9 +7,10 @@
         <el-input type="textarea" v-model="mesModel.content"></el-input>
       </el-form-item>
       <el-form-item>
-        <el-button v-if="showLogin()" type="primary" @click="openLogin">登录发表评论</el-button>
-        <el-button v-else type="primary" @click="onSubmit" :loading="mesing">评论</el-button>
+        <el-button v-if="showLogin()" type="primary" size="medium" @click="openLogin">登录发表评论</el-button>
+        <el-button v-else type="primary" size="medium" @click="onSubmit" :loading="mesing">评论</el-button>
       </el-form-item>
+      <mes-board-list></mes-board-list>
     </el-form>
   </div>
 </template>
@@ -17,15 +18,20 @@
 <script>
   import Service from '../../../../config/service'
   import AuthUtil from '../../../../utils/authUtil'
+  import MesBoardList from './MesBoardList'
 
   export default {
     name: "Mesbox",
+    components: {
+      "mesBoardList": MesBoardList
+    },
     data() {
       return {
         userName: '',
         mesing: false,
         mesModel: {
-          content: ''
+          content: '',
+          parentId: null
         },
         validRule: {
           content: [
@@ -40,8 +46,12 @@
         this.$refs.mesForm.validate((valid) => {
           if (valid) {
             this.mesing = true;
-            //TODO 发布评论
-            this.$axios.post(Service.url.mes, this.mesModel).then(
+            this.$axios.post(Service.url.message, this.mesModel,
+              {
+                headers: {
+                  'Authorization': localStorage.getItem('token')
+                }
+              }).then(
               (res) => {
                 if (res.status === 200) {
                   let responseData = res.data;
@@ -100,7 +110,6 @@
     },
     mounted() {
       this.authCheck();
-      //TODO 读取评论
     }
   }
 </script>

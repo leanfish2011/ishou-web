@@ -41,7 +41,6 @@
   }
 
   .aboutContent {
-    text-align: center;
     min-height: calc(100vh - 176px);
     width: 50%;
     margin: 5px auto 5px auto;

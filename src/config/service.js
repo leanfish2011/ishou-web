@@ -32,6 +32,8 @@ const url = {
   loginByGitHub: ROOT_PATH + ':9091/api/v1/auth/access/login/github',
   sub: ROOT_PATH + ':9093/api/v1/system/site/sub',
   subExist: ROOT_PATH + ':9093/api/v1/system/site/sub/exist',
+  message: ROOT_PATH + ':9093/api/v1/system/message',
+  messageList: ROOT_PATH + ':9093/api/v1/system/message/list'
 };
 
 export default {
