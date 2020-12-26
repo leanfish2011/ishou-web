@@ -4,13 +4,15 @@
              status-icon
              class="mes-page">
       <el-form-item label="评论" prop="content">
-        <el-input type="textarea" v-model="mesModel.content"></el-input>
+        <el-input type="textarea" :rows="3" v-model="mesModel.content"></el-input>
       </el-form-item>
       <el-form-item>
-        <el-button v-if="showLogin()" type="primary" size="medium" @click="openLogin">登录发表评论</el-button>
-        <el-button v-else type="primary" size="medium" @click="onSubmit" :loading="mesing">评论</el-button>
+        <el-button v-if="showLogin()" type="primary" size="medium" @click="openLogin">登录发表评论
+        </el-button>
+        <el-button v-else type="primary" size="medium" @click="onSubmit" :loading="mesing">评论
+        </el-button>
       </el-form-item>
-      <mes-board-list></mes-board-list>
+      <mes-board-list ref="mesBoardList"></mes-board-list>
     </el-form>
   </div>
 </template>
@@ -63,6 +65,7 @@
                     });
 
                     this.$refs.mesForm.resetFields();
+                    this.$refs.mesBoardList.getMesList();
                   } else {
                     this.mesing = false;
                     this.$message.error(responseData.msg);

@@ -1,8 +1,7 @@
 <template>
   <div id="meslist-container">
-    <div class="comment-list-title">最新评论 (<span>{{mesTotal}}</span>)
-    </div>
-    <label v-for="mes in mesList" :key="mes.id">
+    <div class="comment-list-title">最新评论 (<span>{{mesList.total}}</span>)</div>
+    <label v-for="mes in mesList.list" :key="mes.id">
       <div class="comment-list">
         <div class="comment-item">
           <div class="comment-item__avatar">
@@ -26,6 +25,9 @@
                   <span>赞</span>
                 </div>
                 <div class="item">
+                  <span>回复</span>
+                </div>
+                <div class="item">
                   <span>举报</span>
                 </div>
               </div>
@@ -45,16 +47,18 @@
     name: "MesBoardList",
     data() {
       return {
-        mesList: null,
-        mesTotal: 0
+        mesList: {
+          list: null,
+          total: 0
+        }
       }
     },
     methods: {
       getMesList() {
         this.$axios.get(Service.url.messageList).then((res) => {
           if (res.status === 200) {
-            this.mesList = res.data.data.list;
-            this.mesTotal = res.data.data.total;
+            this.mesList.list = res.data.data.list;
+            this.mesList.total = res.data.data.total;
           } else {
             this.$message.error("系统内部错误");
           }
