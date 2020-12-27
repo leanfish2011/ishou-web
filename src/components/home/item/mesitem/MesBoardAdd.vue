@@ -19,13 +19,9 @@
 <script>
   import Service from '../../../../config/service'
   import AuthUtil from '../../../../utils/authUtil'
-  import MesBoardList from './MesBoardList'
 
   export default {
     name: "MesBoardAdd",
-    components: {
-      "mesBoardList": MesBoardList
-    },
     data() {
       return {
         userName: '',
