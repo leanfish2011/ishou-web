@@ -1,7 +1,7 @@
 <template>
   <div id="meslist-container">
     <div class="comment-list-title">最新评论 (<span>{{mesList.total}}</span>)</div>
-    <label v-for="mes in mesList.list" :key="mes.id">
+    <label v-for="(mes,index) in mesList.list" :key="index">
       <div class="comment-list">
         <div class="comment-item">
           <div class="comment-item__avatar">
@@ -25,7 +25,8 @@
                   <span>赞</span>
                 </div>
                 <div class="item">
-                  <span>回复</span>
+                  <span>
+                  <el-link :underline="false" @click="showResMesAdd(index)">回复</el-link></span>
                 </div>
                 <div class="item">
                   <span>举报</span>
@@ -35,6 +36,8 @@
           </div>
         </div>
       </div>
+      <res-mes-add v-show="index === showIndex" :parent-id="mes.id"
+                   @refresh="getMesList()"></res-mes-add>
     </label>
   </div>
 </template>
@@ -42,15 +45,20 @@
 <script>
   import Service from '../../../../config/service'
   import DateUtil from '../../../../utils/dateUtil'
+  import ResMesAdd from './MesBoardAdd'
 
   export default {
     name: "MesBoardList",
+    components: {
+      "resMesAdd": ResMesAdd,
+    },
     data() {
       return {
         mesList: {
           list: null,
           total: 0
-        }
+        },
+        showIndex: -1
       }
     },
     methods: {
@@ -70,6 +78,9 @@
       dateFormat(timeStamp) {
         return DateUtil.dateFormat(timeStamp);
       },
+      showResMesAdd(index) {
+        this.showIndex = index
+      }
     },
     mounted() {
       //读取评论

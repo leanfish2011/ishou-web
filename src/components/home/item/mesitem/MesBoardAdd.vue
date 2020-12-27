@@ -28,7 +28,7 @@
         mesing: false,
         mesModel: {
           content: '',
-          parentId: null
+          parentId: this.parentId
         },
         validRule: {
           content: [
@@ -37,6 +37,7 @@
         }
       }
     },
+    props:['parentId'],
     methods: {
       onSubmit(event) {
         event.preventDefault();
