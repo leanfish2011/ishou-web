@@ -11,7 +11,10 @@
           </div>
           <div class="comment-item__main">
             <div class="comment-item__header">
-              {{mes.userName}}
+              {{index+1}}楼-{{mes.userName}}
+            </div>
+            <div v-if="mes.parentId!==null">
+              @{{mes.parentUserName}}
             </div>
             <div class="comment-item__content">
               {{mes.content}}
@@ -21,16 +24,16 @@
                 <div class="item">{{dateFormat(mes.createTime)}}</div>
               </div>
               <div class="item-list">
-                <div class="item">
-                  <span>赞</span>
-                </div>
+                <!--<div class="item">-->
+                  <!--<span>赞</span>-->
+                <!--</div>-->
                 <div class="item">
                   <span>
                   <el-link :underline="false" @click="showResMesAdd(index)">回复</el-link></span>
                 </div>
-                <div class="item">
-                  <span>举报</span>
-                </div>
+                <!--<div class="item">-->
+                  <!--<span>举报</span>-->
+                <!--</div>-->
               </div>
             </div>
           </div>
