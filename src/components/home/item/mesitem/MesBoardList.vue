@@ -5,7 +5,7 @@
       <div class="comment-list">
         <div class="comment-item">
           <div class="comment-item__avatar">
-            <el-image style="width: 50px; height: 50px" src="/static/ishou.ico" :fit="fit"
+            <el-image style="width: 50px; height: 50px" src="/static/ishou.ico" fit="fill"
                       :alt="mes.userName" :title="mes.userName"
             ></el-image>
           </div>
