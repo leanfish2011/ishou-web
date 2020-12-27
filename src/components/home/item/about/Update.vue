@@ -26,11 +26,17 @@
       return {
         activities: [
           {
+            timestamp: '2020-12-27',
+            title: '增加留言板功能',
+            content: '增加留言板功能，用户用网站账号登录后可以留言和回复留言。原有的github登录方式留言功能保留',
+            type: 'primary',
+            icon: 'el-icon-more'
+          },
+          {
             timestamp: '2020-07-26',
             title: '增加订阅功能',
             content: '增加订阅功能，用户可以订阅首页网站，以邮件的形式获取每周最新的网站收藏',
-            type: 'primary',
-            icon: 'el-icon-more'
+            color: '#b9bd3e'
           },
           {
             timestamp: '2020-05-23',
