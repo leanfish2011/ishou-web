@@ -11,7 +11,7 @@
           </div>
           <div class="comment-item__main">
             <div class="comment-item__header">
-              {{index+1}}楼-{{mes.userName}}
+              #{{mesList.total-index}}楼-{{mes.userName}}
             </div>
             <div v-if="mes.parentId!==null">
               @{{mes.parentUserName}}
