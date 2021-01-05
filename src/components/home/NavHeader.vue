@@ -76,11 +76,16 @@
           },
           {
             "id": "3",
+            "name": "工具",
+            "route": "/tool"
+          },
+          {
+            "id": "4",
             "name": "留言",
             "route": "/message"
           },
           {
-            "id": "4",
+            "id": "5",
             "name": "关于",
             "route": "/about"
           }

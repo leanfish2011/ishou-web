@@ -1,17 +1,17 @@
 // 引入各个组件
-import Home from '../components/home/item/Home.vue'
-import My from '../components/home/item/My.vue'
+import Home from '../components/home/item/Home'
+import My from '../components/home/item/My'
 import Search from '../components/home/item/Search'
 import Message from '../components/home/item/Message'
-import About from '../components/home/item/About.vue'
-import Login from '../components/home/login/Login.vue'
-import GitHubLogin from '../components/home/login/GithubLogin.vue'
-import Register from '../components/home/login/Register.vue'
-import Manage from '../components/manage/Manage.vue'
-import Site from '../components/manage/site/Site.vue'
-import HomeSite from '../components/manage/site/HomeSite.vue'
-import User from '../components/manage/user/User.vue'
-import Role from '../components/manage/user/Role.vue'
+import About from '../components/home/item/About'
+import Login from '../components/home/login/Login'
+import GitHubLogin from '../components/home/login/GithubLogin'
+import Register from '../components/home/login/Register'
+import Manage from '../components/manage/Manage'
+import Site from '../components/manage/site/Site'
+import HomeSite from '../components/manage/site/HomeSite'
+import User from '../components/manage/user/User'
+import Role from '../components/manage/user/Role'
 import Table from '../components/test/elmentui/Table'
 import Slider from '../components/test/elmentui/Slider'
 import Tree from '../components/test/elmentui/Tree'
@@ -21,6 +21,7 @@ import BackTop from '../components/test/elmentui/BackTop'
 import Container from '../components/test/elmentui/Container'
 import Subscribe from '../components/sub/Subscribe'
 import UnSubscribe from '../components/sub/UnSubscribe'
+import Tool from '../components/home/item/Tool'
 
 // 设置路由路径
 export default [
@@ -41,6 +42,7 @@ export default [
   {path: "/con", component: Container},
   {path: "/sub", component: Subscribe},
   {path: "/unsub", component: UnSubscribe},
+  {path: "/tool", component: Tool},
   {
     path: "/manage",
     component: Manage,
