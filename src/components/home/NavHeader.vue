@@ -225,9 +225,9 @@
 
   #divMenu {
     line-height: 30px;
-    height: 30px;
+    height: 40px;
     top: 0px;
-    background: #1BA1E2;
+    background: #3a8ee6;
     margin-left: 5px;
     margin-right: 5px;
     z-index: 100;
@@ -235,7 +235,7 @@
 
   #divMenu ul {
     list-style: none;
-    line-height: 30px;
+    line-height: 40px;
     margin: 0 auto 0 auto;
   }
 
@@ -253,12 +253,12 @@
   }
 
   #divMenu ul li:hover {
-    background: #52BFF5;
+    background: #3787ee;
   }
 
   /*路由激活样式，router自带属性*/
   .router-link-active {
-    background-color: #e70;
+    background-color: #2283ee;
     color: #fff;
   }
 </style>

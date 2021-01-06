@@ -18,7 +18,7 @@
 <style scoped>
   .footer {
     height: 50px;
-    background-color: #1BA1E2;
+    background-color: #e5e8eb;
     text-align: center;
   }
 
@@ -27,6 +27,6 @@
     width: 100%;
     position: relative;
     top: 30%;
-    color: #fff;
+    color: #41403d;
   }
 </style>
