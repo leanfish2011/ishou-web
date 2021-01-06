@@ -84,10 +84,14 @@
 
   .logoTitle {
     font-size: 25px;
-    color: #E33E06;
+    color: #e37d57;
   }
 
   .headerUser {
     float: right;
+  }
+
+  .el-dropdown-link{
+    color: #e3e0db;
   }
 </style>

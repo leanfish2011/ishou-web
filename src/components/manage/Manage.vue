@@ -77,7 +77,7 @@
   }
 
   .manageHeader {
-    background-color: #13d1aa;
+    background-color: #2d3a4e;
     color: #8b8626;
     line-height: 60px;
     font-size: 12px;
