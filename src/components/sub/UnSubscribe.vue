@@ -1,26 +1,54 @@
 <template>
   <div class="unsub-container">
-    <el-link href="/" type="primary" icon="el-icon-back">回到首页</el-link>
-    <el-form ref="unsubForm" :model="unSubModel" label-width="80px"
-             status-icon
-             class="unsub-page">
-      <p>您确定要取消「爱收藏-每周经典网站」吗？</p>
-      <h3 class="title">取消订阅</h3>
-      <!--<el-checkbox-group v-model="checkList">-->
-      <!--<el-checkbox label="复选框 A"></el-checkbox>-->
-      <!--<el-checkbox label="复选框 B"></el-checkbox>-->
-      <!--<el-checkbox label="复选框 C"></el-checkbox>-->
-      <!--<el-checkbox label="禁用"></el-checkbox>-->
-      <!--<el-checkbox label="选中且禁用"></el-checkbox>-->
-      <!--</el-checkbox-group>-->
-      <el-form-item label="其他原因">
-        <el-input v-model="unSubModel.remark"></el-input>
-      </el-form-item>
-      <el-form-item>
-        <el-button type="primary" @click="onSubmit" :loading="unsubing">确定</el-button>
-        <el-button @click="onCancel">取消</el-button>
-      </el-form-item>
-    </el-form>
+    <el-container>
+      <el-header>
+        <el-row>
+          <el-col :span="6">
+            <p></p>
+          </el-col>
+          <el-col :span="1">
+            <img src="/static/ishou.ico" style="width: 50px;height: 50px;">
+          </el-col>
+          <el-col :span="1">
+            <span style="font-size: 20px;color: white">爱收藏</span>
+          </el-col>
+          <el-col :span="8">
+            <p></p>
+          </el-col>
+          <el-col :span="1">
+            <el-link style="color: white" href="/" type="primary">首页</el-link>
+          </el-col>
+          <el-col :span="1">
+            <el-link style="color: white" href="/login" type="primary">登录</el-link>
+          </el-col>
+          <el-col :span="6">
+            <p></p>
+          </el-col>
+        </el-row>
+      </el-header>
+      <el-main>
+        <el-form ref="unsubForm" :model="unSubModel" label-width="80px"
+                 status-icon
+                 class="unsub-page">
+          <p>您确定要取消「爱收藏-每周经典网站」吗？</p>
+          <h3 class="title">取消订阅原因：</h3>
+          <!--<el-checkbox-group v-model="checkList">-->
+          <!--<el-checkbox label="复选框 A"></el-checkbox>-->
+          <!--<el-checkbox label="复选框 B"></el-checkbox>-->
+          <!--<el-checkbox label="复选框 C"></el-checkbox>-->
+          <!--<el-checkbox label="禁用"></el-checkbox>-->
+          <!--<el-checkbox label="选中且禁用"></el-checkbox>-->
+          <!--</el-checkbox-group>-->
+          <el-form-item label="其他原因">
+            <el-input v-model="unSubModel.remark"></el-input>
+          </el-form-item>
+          <el-form-item>
+            <el-button type="primary" @click="onSubmit" :loading="unsubing">确定</el-button>
+            <el-button @click="onCancel">取消</el-button>
+          </el-form-item>
+        </el-form>
+      </el-main>
+    </el-container>
   </div>
 </template>
 
@@ -93,5 +121,11 @@
   .unsub-page {
     width: 600px;
     margin: 10px auto;
+  }
+
+  .el-header {
+    background-color: #41403d;
+    text-align: center;
+    line-height: 60px;
   }
 </style>

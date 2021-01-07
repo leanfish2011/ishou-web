@@ -1,18 +1,46 @@
 <template>
   <div class="sub-container">
-    <el-link href="/" type="primary" icon="el-icon-back">回到首页</el-link>
-    <el-form ref="subForm" :model="subModel" label-width="80px" :rules="validRule"
-             status-icon
-             class="sub-page">
-      <p>「爱收藏-每周经典网站」，是爱收藏网站推出的免费订阅服务，旨在为不愿错过好网站的你，推荐每周最新的网站收藏。</p>
-      <h3 class="title">订阅</h3>
-      <el-form-item label="邮箱" prop="email">
-        <el-input v-model="subModel.email" placeholder="请输入邮箱地址"></el-input>
-      </el-form-item>
-      <el-form-item>
-        <el-button type="primary" @click="onSubmit" :loading="subing">立即订阅</el-button>
-      </el-form-item>
-    </el-form>
+    <el-container>
+      <el-header>
+        <el-row>
+          <el-col :span="6">
+            <p></p>
+          </el-col>
+          <el-col :span="1">
+            <img src="/static/ishou.ico" style="width: 50px;height: 50px;">
+          </el-col>
+          <el-col :span="1">
+            <span style="font-size: 20px;color: white">爱收藏</span>
+          </el-col>
+          <el-col :span="8">
+            <p></p>
+          </el-col>
+          <el-col :span="1">
+            <el-link style="color: white" href="/" type="primary">首页</el-link>
+          </el-col>
+          <el-col :span="1">
+            <el-link style="color: white" href="/login" type="primary">登录</el-link>
+          </el-col>
+          <el-col :span="6">
+            <p></p>
+          </el-col>
+        </el-row>
+      </el-header>
+      <el-main>
+        <el-form ref="subForm" :model="subModel" label-width="80px" :rules="validRule"
+                 status-icon
+                 class="sub-page">
+          <p>「爱收藏-每周经典网站」，是爱收藏网站推出的免费订阅服务，旨在为不愿错过好网站的你，推荐每周最新的网站收藏。</p>
+          <h3 class="title">订阅</h3>
+          <el-form-item label="邮箱" prop="email">
+            <el-input v-model="subModel.email" placeholder="请输入邮箱地址"></el-input>
+          </el-form-item>
+          <el-form-item>
+            <el-button type="primary" @click="onSubmit" :loading="subing">立即订阅</el-button>
+          </el-form-item>
+        </el-form>
+      </el-main>
+    </el-container>
   </div>
 </template>
 
@@ -105,5 +133,11 @@
   .sub-page {
     width: 600px;
     margin: 10px auto;
+  }
+
+  .el-header {
+    background-color: #41403d;
+    text-align: center;
+    line-height: 60px;
   }
 </style>
