@@ -6,7 +6,7 @@
              ref="loginForm"
              label-position="left"
              class="login-page">
-      <h3 class="title">系统登录</h3>
+      <h2 class="title">爱收藏-登录</h2>
       <el-form-item prop="userCode">
         <el-input v-model="loginModel.userCode"
                   placeholder="请输入用户名">
@@ -39,6 +39,7 @@
                    :loading="logining">登录
         </el-button>
       </el-form-item>
+      <el-link href="/register" type="primary">立即注册</el-link>
     </el-form>
   </div>
 </template>
@@ -126,5 +127,9 @@
   label.el-checkbox.rememberme {
     margin: 0px 0px 15px;
     text-align: left;
+  }
+
+  .title {
+    text-align: center;
   }
 </style>
