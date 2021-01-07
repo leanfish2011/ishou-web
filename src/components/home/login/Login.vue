@@ -1,6 +1,5 @@
 <template>
   <div class="login-container">
-    <el-link href="/" type="primary" icon="el-icon-back">回到首页</el-link>
     <el-form :model="loginModel" :rules="validRule"
              status-icon
              ref="loginForm"
@@ -40,6 +39,8 @@
         </el-button>
       </el-form-item>
       <el-link href="/register" type="primary">立即注册</el-link>
+      &nbsp;
+      <el-link href="/" type="primary">回到首页</el-link>
     </el-form>
   </div>
 </template>
