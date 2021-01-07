@@ -49,14 +49,19 @@
         </el-form>
       </el-main>
     </el-container>
+    <bottom-footer></bottom-footer>
   </div>
 </template>
 
 <script>
   import Service from '../../config/service'
+  import Footer from '../home/Footer'
 
   export default {
     name: "UnSubscribe",
+    components: {
+      "bottomFooter": Footer
+    },
     data() {
       return {
         unsubing: false,
@@ -121,6 +126,10 @@
   .unsub-page {
     width: 600px;
     margin: 10px auto;
+  }
+
+  .el-container{
+    min-height: calc(100vh - 67px);
   }
 
   .el-header {
