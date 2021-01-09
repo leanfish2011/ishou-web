@@ -45,7 +45,6 @@
           </el-form-item>
           <el-form-item>
             <el-button type="primary" @click="onSubmit" :loading="registering">注册</el-button>
-            <el-button @click="onCancel">取消</el-button>
           </el-form-item>
         </el-form>
       </el-main>
@@ -107,9 +106,6 @@
               })
           }
         })
-      },
-      onCancel() {
-        this.$refs.registerForm.resetFields();
       }
     }
   }
