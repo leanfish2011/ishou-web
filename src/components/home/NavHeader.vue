@@ -17,7 +17,7 @@
         </div>
         <div id="userInfo">
           <el-row>
-            <el-button v-if="userName==''||userName==null" size="mini" type="primary"
+            <el-button v-if="userName==''||userName==null" size="mini" type="primary" plain
                        @click="openLogin()">登录
             </el-button>
             <el-dropdown v-else size="mini" split-button>
@@ -29,8 +29,10 @@
                 </el-dropdown-item>
               </el-dropdown-menu>
             </el-dropdown>
-            <el-button size="mini" type="primary" @click="openRegister()">注册</el-button>
-            <el-button size="mini" type="primary" @click="openSub()">订阅</el-button>
+            <el-button v-if="userName==''||userName==null" size="mini" type="primary" plain
+                       @click="openRegister()">注册
+            </el-button>
+            <el-button size="mini" type="primary" plain @click="openSub()">订阅</el-button>
           </el-row>
         </div>
       </div>

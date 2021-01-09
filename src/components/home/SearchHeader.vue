@@ -31,7 +31,9 @@
                 </el-dropdown-item>
               </el-dropdown-menu>
             </el-dropdown>
-            <el-button size="mini" type="primary" @click="openRegister()">注册</el-button>
+            <el-button v-if="userName==''||userName==null" size="mini" type="primary" plain
+                       @click="openRegister()">注册
+            </el-button>
           </el-row>
         </div>
       </div>
