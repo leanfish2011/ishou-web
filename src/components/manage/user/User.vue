@@ -6,7 +6,7 @@
     </el-breadcrumb>
     <el-divider></el-divider>
     <el-form ref="form" :inline="true" :model="searchForm" label-width="80px" size="mini">
-      <el-form-item label="姓名">
+      <el-form-item label="昵称">
         <el-input v-model="searchForm.name" placeholder="姓名"></el-input>
       </el-form-item>
       <el-form-item label="用户名">
@@ -43,8 +43,16 @@
       stripe
       style="width: 100%">
       <el-table-column
+        label="头像"
+        width="100">
+        <template slot-scope="scope">
+          <el-avatar :size="50"
+                     :src=scope.row.photourl></el-avatar>
+        </template>
+      </el-table-column>
+      <el-table-column
         prop="name"
-        label="姓名"
+        label="昵称"
         width="180">
       </el-table-column>
       <el-table-column
