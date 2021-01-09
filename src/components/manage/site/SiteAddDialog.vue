@@ -2,7 +2,7 @@
   <div>
     <el-dialog
       title="新增网页收藏" :visible.sync="dialogFormVisible">
-      <el-form ref="addForm" :model="addModel" label-width="80px" :rules="validRule"
+      <el-form ref="addForm" :model="addModel" label-width="100px" :rules="validRule"
                status-icon
                class="register-page">
         <el-form-item label="标题" prop="name">
@@ -17,8 +17,8 @@
         <el-form-item label="备注" prop="remark">
           <el-input v-model="addModel.remark" placeholder="请输入备注"></el-input>
         </el-form-item>
-        <el-form-item>
-          <el-checkbox v-model="addModel.isPost">发布到首页</el-checkbox>
+        <el-form-item label="发布到首页" prop="isPost">
+          <el-switch v-model="addModel.isPost"></el-switch>
         </el-form-item>
         <el-form-item>
           <el-button type="primary" @click="onSubmit" :loading="submiting">确定</el-button>

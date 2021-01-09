@@ -7,8 +7,8 @@
       <el-form-item label="链接" :label-width="formLabelWidth" prop="url">
         <el-input v-model="addModel.url" autocomplete="off" placeholder="请输入链接"></el-input>
       </el-form-item>
-      <el-form-item>
-        <el-checkbox v-model="addModel.isPost">发布到首页</el-checkbox>
+      <el-form-item label="发布到首页" prop="isPost">
+        <el-switch v-model="addModel.isPost"></el-switch>
       </el-form-item>
     </el-form>
     <div slot="footer" class="dialog-footer">
