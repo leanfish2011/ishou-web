@@ -88,7 +88,7 @@
                   localStorage.setItem('token', userData.token);
                   localStorage.setItem('userId', userData.userId);
 
-                  this.$router.push({path: "/"});
+                  this.$router.push({path: "/site"});
                 } else {
                   this.logining = false;
                   this.$message.error(responseData.msg);
