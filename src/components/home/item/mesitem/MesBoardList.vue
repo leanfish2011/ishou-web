@@ -5,9 +5,9 @@
       <div class="comment-list">
         <div class="comment-item">
           <div class="comment-item__avatar">
-            <el-image style="width: 50px; height: 50px" src="/static/ishou.ico" fit="fill"
+            <el-avatar style="width: 50px; height: 50px" :src="mes.userPhoto" fit="fill"
                       :alt="mes.userName" :title="mes.userName"
-            ></el-image>
+            ></el-avatar>
           </div>
           <div class="comment-item__main">
             <div class="comment-item__header">
@@ -25,14 +25,14 @@
               </div>
               <div class="item-list">
                 <!--<div class="item">-->
-                  <!--<span>赞</span>-->
+                <!--<span>赞</span>-->
                 <!--</div>-->
                 <div class="item">
                   <span>
                   <el-link :underline="false" @click="showResMesAdd(index)">回复</el-link></span>
                 </div>
                 <!--<div class="item">-->
-                  <!--<span>举报</span>-->
+                <!--<span>举报</span>-->
                 <!--</div>-->
               </div>
             </div>

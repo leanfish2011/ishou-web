@@ -37,8 +37,8 @@
           <el-form-item label="密码" prop="password">
             <el-input v-model="registerModel.password" placeholder="请输入密码"></el-input>
           </el-form-item>
-          <el-form-item label="姓名" prop="name">
-            <el-input v-model="registerModel.name" placeholder="请输入姓名"></el-input>
+          <el-form-item label="昵称" prop="name">
+            <el-input v-model="registerModel.name" placeholder="请输入昵称"></el-input>
           </el-form-item>
           <el-form-item label="邮箱" prop="email">
             <el-input v-model="registerModel.email" placeholder="请输入邮箱地址"></el-input>
@@ -80,7 +80,8 @@
         randomUrl: '/static/img/face/1.jpg',
         validRule: {
           userCode: [{required: true, message: '请输入用户名', trigger: 'blur'}],
-          password: [{required: true, message: '请输入密码', trigger: 'blur'}]
+          password: [{required: true, message: '请输入密码', trigger: 'blur'}],
+          name: [{required: true, message: '请输入昵称', trigger: 'blur'}],
         }
       }
     },

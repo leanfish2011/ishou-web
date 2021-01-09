@@ -17,6 +17,8 @@
         </div>
         <div id="userInfo">
           <el-row>
+            <el-avatar :size="40" ref="photourlAvatar"
+                       :src=userPhotoUrl></el-avatar>
             <el-button v-if="userName==''||userName==null" size="mini" type="primary" plain
                        @click="openLogin()">登录
             </el-button>
@@ -65,6 +67,7 @@
     data() {
       return {
         userName: '',
+        userPhotoUrl: '',
         menuData: [
           {
             "id": "1",
@@ -119,6 +122,7 @@
           }).then((res) => {
             AuthUtil.clearSession();
             this.userName = '';
+            this.userPhotoUrl = '';
             this.$router.push('/');
           }).catch(function (error) {
             console.error(error);
@@ -160,8 +164,8 @@
             if (code === -1 || code === -2) {
               AuthUtil.clearSession();
             } else {
-              let userName = localStorage.getItem('userName');
-              this.userName = userName;
+              this.userName = localStorage.getItem('userName');
+              this.userPhotoUrl = localStorage.getItem('photourl');
             }
           } else {
             this.$message.error("系统内部错误");
