@@ -43,6 +43,10 @@
           <el-form-item label="邮箱" prop="email">
             <el-input v-model="registerModel.email" placeholder="请输入邮箱地址"></el-input>
           </el-form-item>
+          <el-form-item label="头像" prop="photourl">
+            <el-avatar :size="50" ref="photourlAvatar"
+                       :src=randomUrl></el-avatar>
+          </el-form-item>
           <el-form-item>
             <el-button type="primary" @click="onSubmit" :loading="registering">注册</el-button>
           </el-form-item>
@@ -56,6 +60,7 @@
 <script>
   import Service from '../../../config/service'
   import Footer from '../Footer'
+  import RandomUtil from '../../../utils/randomUtil'
 
   export default {
     name: "register",
@@ -69,8 +74,10 @@
           userCode: '',
           password: '123456',
           name: '',
-          email: ''
+          email: '',
+          photourl: ''
         },
+        randomUrl: '/static/img/face/1.jpg',
         validRule: {
           userCode: [{required: true, message: '请输入用户名', trigger: 'blur'}],
           password: [{required: true, message: '请输入密码', trigger: 'blur'}]
@@ -83,6 +90,7 @@
         this.$refs.registerForm.validate((valid) => {
           if (valid) {
             this.registering = true;
+            this.registerModel.photourl = this.$refs.photourlAvatar.src;
             this.$axios.post(Service.url.register, this.registerModel).then(
               (res) => {
                 if (res.status === 200) {
@@ -106,7 +114,14 @@
               })
           }
         })
+      },
+      randomFace() {
+        let faceNum = RandomUtil.getRandomInt(1, 9);
+        this.randomUrl = '/static/img/face/' + faceNum + '.jpg';
       }
+    },
+    mounted() {
+      this.randomFace();
     }
   }
 </script>
@@ -122,7 +137,7 @@
     margin: 10px auto;
   }
 
-  .el-container{
+  .el-container {
     min-height: calc(100vh - 67px);
   }
 
