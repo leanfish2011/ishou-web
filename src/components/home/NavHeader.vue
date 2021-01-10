@@ -17,27 +17,34 @@
         </div>
         <div id="userInfo">
           <el-row>
-            <el-avatar v-if="userPhotoUrl!=''" :size="40" ref="photourlAvatar"
-                       :src=userPhotoUrl></el-avatar>
-            <el-button v-if="userName==''||userName==null" size="mini" type="primary" plain
-                       @click="openLogin()">登录
-            </el-button>
-            <el-dropdown v-else size="mini" split-button>
-              <label @click="openMange()">{{ userName }}</label>
-              <el-dropdown-menu slot="dropdown">
-                <el-dropdown-item icon="el-icon-circle-plus-outline" @click.native="addSite()">增加收藏
-                </el-dropdown-item>
-                <el-dropdown-item icon="el-icon-switch-button" @click.native="logout()">退出登录
-                </el-dropdown-item>
-              </el-dropdown-menu>
-            </el-dropdown>
-            <el-button v-if="userName==''||userName==null" size="mini" type="primary" plain
-                       @click="openRegister()">注册
-            </el-button>
-            <el-tooltip effect="dark" content="订阅" placement="top-start">
-              <el-button size="mini" type="info" circle @click="openSub()"
-                         icon="el-icon-copy-document"></el-button>
-            </el-tooltip>
+            <el-col :span="22" v-if="userName==''||userName==null">
+              <el-button size="mini" type="primary" plain
+                         @click="openLogin()">登录
+              </el-button>
+              <el-button size="mini" type="primary" plain
+                         @click="openRegister()">注册
+              </el-button>
+            </el-col>
+            <el-col :span="22" v-else>
+              <el-avatar :size="40" ref="photourlAvatar"
+                         :src=userPhotoUrl></el-avatar>
+              <el-dropdown size="mini" split-button>
+                <label @click="openMange()">{{ userName }}</label>
+                <el-dropdown-menu slot="dropdown">
+                  <el-dropdown-item icon="el-icon-circle-plus-outline" @click.native="addSite()">
+                    增加收藏
+                  </el-dropdown-item>
+                  <el-dropdown-item icon="el-icon-switch-button" @click.native="logout()">退出登录
+                  </el-dropdown-item>
+                </el-dropdown-menu>
+              </el-dropdown>
+            </el-col>
+            <el-col :span="2">
+              <el-tooltip effect="dark" content="订阅" placement="top-start">
+                <el-button size="mini" type="info" circle @click="openSub()"
+                           icon="el-icon-copy-document"></el-button>
+              </el-tooltip>
+            </el-col>
           </el-row>
         </div>
       </div>
