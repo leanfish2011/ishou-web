@@ -26,11 +26,15 @@
               </el-button>
             </el-col>
             <el-col :span="22" v-else>
-              <el-avatar :size="40" ref="photourlAvatar"
-                         :src=userPhotoUrl></el-avatar>
-              <el-dropdown size="mini" split-button>
-                <label @click="openMange()">{{ userName }}</label>
+              <el-dropdown size="medium">
+                <el-tooltip effect="dark" :content=userName placement="left-start">
+                  <el-avatar :size="40" ref="photourlAvatar"
+                             :src=userPhotoUrl></el-avatar>
+                </el-tooltip>
                 <el-dropdown-menu slot="dropdown">
+                  <el-dropdown-item icon="el-icon-setting" @click.native="openMange()">
+                    管理
+                  </el-dropdown-item>
                   <el-dropdown-item icon="el-icon-circle-plus-outline" @click.native="addSite()">
                     增加收藏
                   </el-dropdown-item>
