@@ -34,7 +34,10 @@
             <el-button v-if="userName==''||userName==null" size="mini" type="primary" plain
                        @click="openRegister()">注册
             </el-button>
-            <el-button size="mini" type="primary" plain @click="openSub()">订阅</el-button>
+            <el-tooltip effect="dark" content="订阅" placement="top-start">
+              <el-button size="mini" type="info" circle @click="openSub()"
+                         icon="el-icon-copy-document"></el-button>
+            </el-tooltip>
           </el-row>
         </div>
       </div>
