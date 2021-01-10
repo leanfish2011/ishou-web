@@ -17,7 +17,7 @@
         </div>
         <div id="userInfo">
           <el-row>
-            <el-avatar :size="40" ref="photourlAvatar"
+            <el-avatar v-if="userPhotoUrl!=''" :size="40" ref="photourlAvatar"
                        :src=userPhotoUrl></el-avatar>
             <el-button v-if="userName==''||userName==null" size="mini" type="primary" plain
                        @click="openLogin()">登录
