@@ -28,6 +28,7 @@
             localStorage.setItem('userName', userData.name);
             localStorage.setItem('token', userData.token);
             localStorage.setItem('userId', userData.userId);
+            localStorage.setItem('photourl', userData.photourl);
 
             this.$router.push({path: "/"});
           } else {
