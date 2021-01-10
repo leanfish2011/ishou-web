@@ -45,8 +45,7 @@
         },
         validRule: {
           name: [{required: true, message: '请输入标题', trigger: 'blur'}],
-          url: [{required: true, message: '请输入链接', trigger: 'blur'}],
-          tag: [{required: true, message: '请输入标签', trigger: 'blur'}]
+          url: [{required: true, message: '请输入链接', trigger: 'blur'}]
         }
       };
     },
