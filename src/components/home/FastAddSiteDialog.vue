@@ -1,5 +1,5 @@
 <template>
-  <el-dialog title="增加收藏" :visible.sync="dialogFormVisible" width="30%">
+  <el-dialog title="增加收藏" :visible.sync="dialogFormVisible" width="30%" @close='onCloseDialog'>
     <el-form :model="addModel" ref="addForm" :rules="validRule">
       <el-form-item label="链接" :label-width="formLabelWidth" prop="url">
         <el-input v-model="addModel.url" autocomplete="off" @blur="checkContent"
@@ -99,7 +99,6 @@
         });
       },
       checkContent() {
-        console.log(this.addModel.url);
         let url = this.addModel.url;
         if (url != null && url != "") {
           this.checkContentModel.url = url;
@@ -108,7 +107,6 @@
           if (res.status === 200) {
             let responseData = res.data;
             if (responseData.code === 0) {
-              console.log(responseData);
               this.checkContentResp = responseData.data;
               if (this.checkContentResp.isPass) {
                 this.addModel.name = this.checkContentResp.webContentVO.title;

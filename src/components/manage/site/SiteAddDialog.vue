@@ -1,12 +1,12 @@
 <template>
   <div>
     <el-dialog
-      title="新增网页收藏" :visible.sync="dialogFormVisible">
+      title="新增网页收藏" :visible.sync="dialogFormVisible" @close='onCloseDialog'>
       <el-form ref="addForm" :model="addModel" label-width="100px" :rules="validRule"
                status-icon
                class="register-page">
         <el-form-item label="链接" prop="url">
-          <el-input v-model="addModel.url" placeholder="请输入链接"></el-input>
+          <el-input v-model="addModel.url" placeholder="请输入链接" @blur="checkContent"></el-input>
         </el-form-item>
         <el-form-item label="标题" prop="name">
           <el-input v-model="addModel.name" placeholder="请输入标题"></el-input>
@@ -47,6 +47,17 @@
           url: "",
           isPost: false
         },
+        checkContentModel: {
+          url: ""
+        },
+        checkContentResp: {
+          isPass: false,
+          webContentVO: {
+            description: "",
+            keyWords: "",
+            title: ""
+          }
+        },
         validRule: {
           name: [{required: true, message: '请输入标题', trigger: 'blur'}],
           url: [{required: true, message: '请输入链接', trigger: 'blur'}]
@@ -56,7 +67,6 @@
     methods: {
       onSubmit() {
         if (this.addModel.id === "" || this.addModel.id === undefined) {
-          console.log("新增");
           this.$axios.post(Service.url.sitePersonal, this.addModel,
             {
               headers: {
@@ -81,7 +91,6 @@
             }
           })
         } else {
-          console.log(this.addModel);
           this.$axios.put(Service.url.sitePersonal, this.addModel, {
             headers: {
               'Authorization': localStorage.getItem('token')
@@ -114,6 +123,31 @@
       },
       onClose() {
         this.onCloseDialog();
+      },
+      checkContent() {
+        let url = this.addModel.url;
+        if (url != null && url != "") {
+          this.checkContentModel.url = url;
+        }
+        this.$axios.post(Service.url.siteCheck, this.checkContentModel).then((res) => {
+          if (res.status === 200) {
+            let responseData = res.data;
+            if (responseData.code === 0) {
+              this.checkContentResp = responseData.data;
+              if (this.checkContentResp.isPass) {
+                this.addModel.name = this.checkContentResp.webContentVO.title;
+                this.addModel.tag = this.checkContentResp.webContentVO.keyWords;
+                this.addModel.remark = this.checkContentResp.webContentVO.description;
+              } else {
+                this.$message.error("该网站存在不合规内容！");
+              }
+            } else {
+              this.$message.error(responseData.msg);
+            }
+          } else {
+            this.$message.error("系统内部错误");
+          }
+        });
       }
     }
   }
