@@ -2,7 +2,8 @@
   <el-dialog title="增加收藏" :visible.sync="dialogFormVisible" width="30%">
     <el-form :model="addModel" ref="addForm" :rules="validRule">
       <el-form-item label="链接" :label-width="formLabelWidth" prop="url">
-        <el-input v-model="addModel.url" autocomplete="off" placeholder="请输入链接"></el-input>
+        <el-input v-model="addModel.url" autocomplete="off" @blur="checkContent"
+                  placeholder="请输入链接"></el-input>
       </el-form-item>
       <el-form-item label="标题" :label-width="formLabelWidth" prop="name">
         <el-input v-model="addModel.name" autocomplete="off" placeholder="请输入标题"></el-input>
@@ -40,6 +41,17 @@
           remark: "",
           isPost: false
         },
+        checkContentModel: {
+          url: ""
+        },
+        checkContentResp: {
+          isPass: false,
+          webContentVO: {
+            description: "",
+            keyWords: "",
+            title: ""
+          }
+        },
         formLabelWidth: '60px',
         validRule: {
           name: [{required: true, message: '请输入标题', trigger: 'blur'}],
@@ -52,6 +64,8 @@
         this.$refs.addForm.resetFields();
         this.dialogFormVisible = false;
         this.addModel = Object.assign({}, "");
+        this.checkContentModel= Object.assign({}, "");
+        this.checkContentResp= Object.assign({}, "");
       },
       submit() {
         this.$refs.addForm.validate((valid) => {
@@ -81,6 +95,33 @@
           } else {
             console.log('请检查参数！');
             return false;
+          }
+        });
+      },
+      checkContent() {
+        console.log(this.addModel.url);
+        let url = this.addModel.url;
+        if (url != null && url != "") {
+          this.checkContentModel.url = url;
+        }
+        this.$axios.post(Service.url.siteCheck, this.checkContentModel).then((res) => {
+          if (res.status === 200) {
+            let responseData = res.data;
+            if (responseData.code === 0) {
+              console.log(responseData);
+              this.checkContentResp = responseData.data;
+              if (this.checkContentResp.isPass) {
+                this.addModel.name = this.checkContentResp.webContentVO.title;
+                this.addModel.tag = this.checkContentResp.webContentVO.keyWords;
+                this.addModel.remark = this.checkContentResp.webContentVO.description;
+              } else {
+                this.$message.error("该网站存在不合规内容！");
+              }
+            } else {
+              this.$message.error(responseData.msg);
+            }
+          } else {
+            this.$message.error("系统内部错误");
           }
         });
       }
