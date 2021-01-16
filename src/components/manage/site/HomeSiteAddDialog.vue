@@ -5,11 +5,11 @@
       <el-form ref="addForm" :model="addModel" label-width="80px" :rules="validRule"
                status-icon
                class="register-page">
-        <el-form-item label="标题" prop="name">
-          <el-input v-model="addModel.name" placeholder="请输入标题"></el-input>
-        </el-form-item>
         <el-form-item label="链接" prop="url">
           <el-input v-model="addModel.url" placeholder="请输入链接"></el-input>
+        </el-form-item>
+        <el-form-item label="标题" prop="name">
+          <el-input v-model="addModel.name" placeholder="请输入标题"></el-input>
         </el-form-item>
         <el-form-item label="标签" prop="tag">
           <el-input v-model="addModel.tag" placeholder="请输入标签"></el-input>

@@ -45,7 +45,8 @@ const url = {
   subExist: serviceGate.systemService + '/site/sub/exist',
   message: serviceGate.systemService + '/message',
   messageList: serviceGate.systemService + '/message/list',
-  githubAuth: thirdLoginGate.githubAuth
+  githubAuth: thirdLoginGate.githubAuth,
+  siteCheck: serviceGate.siteService + '/check'
 };
 
 export default {

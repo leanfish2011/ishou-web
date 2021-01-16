@@ -1,11 +1,17 @@
 <template>
   <el-dialog title="增加收藏" :visible.sync="dialogFormVisible" width="30%">
     <el-form :model="addModel" ref="addForm" :rules="validRule">
+      <el-form-item label="链接" :label-width="formLabelWidth" prop="url">
+        <el-input v-model="addModel.url" autocomplete="off" placeholder="请输入链接"></el-input>
+      </el-form-item>
       <el-form-item label="标题" :label-width="formLabelWidth" prop="name">
         <el-input v-model="addModel.name" autocomplete="off" placeholder="请输入标题"></el-input>
       </el-form-item>
-      <el-form-item label="链接" :label-width="formLabelWidth" prop="url">
-        <el-input v-model="addModel.url" autocomplete="off" placeholder="请输入链接"></el-input>
+      <el-form-item label="标签" :label-width="formLabelWidth" prop="tag">
+        <el-input v-model="addModel.tag" placeholder="请输入标签"></el-input>
+      </el-form-item>
+      <el-form-item label="备注" :label-width="formLabelWidth" prop="remark">
+        <el-input v-model="addModel.remark" placeholder="请输入备注"></el-input>
       </el-form-item>
       <el-form-item label="发布到首页" prop="isPost">
         <el-switch v-model="addModel.isPost"></el-switch>
@@ -28,8 +34,10 @@
       return {
         dialogFormVisible: false,
         addModel: {
-          name: '',
-          url: '',
+          url: "",
+          name: "",
+          tag: "",
+          remark: "",
           isPost: false
         },
         formLabelWidth: '60px',
