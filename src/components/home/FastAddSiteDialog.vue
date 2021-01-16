@@ -100,9 +100,10 @@
       },
       checkContent() {
         let url = this.addModel.url;
-        if (url != null && url != "") {
-          this.checkContentModel.url = url;
+        if (url == null || url == "") {
+          return;
         }
+        this.checkContentModel.url = url;
         this.$axios.post(Service.url.siteCheck, this.checkContentModel).then((res) => {
           if (res.status === 200) {
             let responseData = res.data;
