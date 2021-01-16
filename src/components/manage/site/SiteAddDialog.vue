@@ -119,7 +119,9 @@
       onCloseDialog() {
         this.$refs.addForm.resetFields();
         this.dialogFormVisible = false;
-        this.addModel = Object.assign({}, "");//将数据传入dialog页面
+        this.addModel = Object.assign({}, "");
+        this.checkContentModel = Object.assign({}, "");
+        this.checkContentResp = Object.assign({}, "");
       },
       onClose() {
         this.onCloseDialog();
@@ -141,6 +143,10 @@
                 this.addModel.remark = this.checkContentResp.webContentVO.description;
               } else {
                 this.$message.error("该网站存在不合规内容！");
+                this.$refs.addForm.resetFields();
+                this.addModel = Object.assign({}, "");
+                this.checkContentModel = Object.assign({}, "");
+                this.checkContentResp = Object.assign({}, "");
               }
             } else {
               this.$message.error(responseData.msg);
