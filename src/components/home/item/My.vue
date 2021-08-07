@@ -14,14 +14,13 @@
             <el-row>
               <el-col :span="6">
                 <a :href=item.url target="_blank">
-                  <img class="siteIcon" :src="queryIcon(item.url)"
-                       onerror="this.src='../../../../static/ishou.ico'"/>
+                  <img class="siteIcon" :src="queryIcon(item.iconUrl)"/>
                 </a>
               </el-col>
               <el-col :span="18">
-                <el-link :href="item.url" target="_blank">{{item.name}}</el-link>
-                <p>{{item.remark}}</p>
-                <p>{{item.tag}}</p>
+                <el-link :href="item.url" target="_blank" style="font-size: 16px;">{{item.name}}
+                </el-link>
+                <div class="remark">{{item.remark}}</div>
               </el-col>
             </el-row>
           </el-card>
@@ -60,7 +59,7 @@
           if (res.status === 200) {
             let responseData = res.data;
             if (responseData.code === 0) {
-              this.myDataList = responseData.data;
+              this.myDataList = responseData.data.list;
             } else {
               this.$message.error(responseData.msg);
               if (responseData.code === -2) {
@@ -80,8 +79,11 @@
         return DateUtil.dateFormat(createTimeStamp);
       },
       queryIcon(url) {
-        let reg = /((https?|http|ftp|file):\/\/)?[-A-Za-z0-9+&@#\/%?=~_|!:,.;]+\.[-A-Za-z+]+\/+/g;
-        return url.match(reg) + "favicon.ico";
+        if (url == null || url == "") {
+          return "../../../../static/ishou.ico";
+        }
+
+        return url;
       }
     },
     created() {
@@ -107,5 +109,9 @@
   .siteIcon {
     width: 50%;
     height: 50%;
+  }
+
+  .remark {
+    font-size: 14px;
   }
 </style>

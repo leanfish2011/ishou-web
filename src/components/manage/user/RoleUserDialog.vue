@@ -2,9 +2,7 @@
   <div>
     <el-dialog
       title="分配用户"
-      :visible.sync="visible"
-      @close="onClose"
-      :show="show">
+      :visible.sync="dialogFormVisible">
       <span>角色名称：{{roleModel.name}} 角色备注：{{roleModel.remark}}</span>
       <el-container>
         <el-aside width="50%">
@@ -24,6 +22,8 @@
           <div class="alluser">
             <span class="tag-group__title">选择用户：</span>
             <el-table
+              size="medium"
+              height="250"
               ref="multipleUserTable"
               :data="tableUserData"
               tooltip-effect="dark"
@@ -48,8 +48,8 @@
         </el-main>
       </el-container>
       <span slot="footer" class="dialog-footer">
-        <el-button type="primary" @click="onSubmit" :loading="submiting">确定</el-button>
-        <el-button @click="onCancel">取消</el-button>
+        <el-button type="primary" @click="onSubmit" :loading="submiting" size="mini">确定</el-button>
+        <el-button @click="onCancel" size="mini">取消</el-button>
       </span>
     </el-dialog>
   </div>
@@ -63,7 +63,7 @@
     name: "roleUserDialog",
     data() {
       return {
-        visible: this.show,
+        dialogFormVisible: false,
         submiting: false,
         addUserModel: {
           userIdList: null,
@@ -83,16 +83,9 @@
         multipleSelection: []
       };
     },
-    props: {
-      show: {
-        type: Boolean,
-        default: false
-      }
-    },
     watch: {
-      show() {
-        this.visible = this.show;
-        if (this.visible) {
+      dialogFormVisible() {
+        if (this.dialogFormVisible) {
           this.loadRoleUser();
         }
       }
@@ -116,7 +109,7 @@
             let responseData = res.data;
             if (responseData.code === 0) {
               this.$message.success(responseData.msg);
-              this.visible = false;
+              this.onCancel();
             } else {
               this.$message.error(responseData.msg);
               if (responseData.code === -2) {
@@ -130,8 +123,9 @@
         })
       },
       onCancel() {
-        this.$emit('update:show', false);
+        this.dialogFormVisible = false;
         this.addUserModel = Object.assign({}, "");//清空model
+        this.$refs.multipleUserTable.clearSelection();//清空已经选择的用户
       },
       onClose() {
         this.onCancel();
@@ -145,7 +139,7 @@
           if (res.status === 200) {
             let responseData = res.data;
             if (responseData.code === 0) {
-              this.tableUserData = responseData.data;
+              this.tableUserData = responseData.data.list;
             } else {
               this.$message.error(responseData.msg);
               if (responseData.code === -2) {

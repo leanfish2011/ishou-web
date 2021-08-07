@@ -2,12 +2,12 @@
   <div>
     <el-breadcrumb separator-class="el-icon-arrow-right">
       <el-breadcrumb-item>后台管理</el-breadcrumb-item>
-      <el-breadcrumb-item>网页管理</el-breadcrumb-item>
+      <el-breadcrumb-item>个人网址管理</el-breadcrumb-item>
     </el-breadcrumb>
     <el-divider></el-divider>
     <el-form ref="form" :inline="true" :model="searchForm" label-width="80px" size="mini">
       <el-form-item label="标题">
-        <el-input v-model="searchForm.name" placeholder="标题"></el-input>
+        <el-input v-model="searchForm.name" placeholder="标题" clearable></el-input>
       </el-form-item>
       <el-form-item label="创建时间">
         <el-date-picker
@@ -30,8 +30,8 @@
         <el-button type="primary" @click="onAddShow">创建</el-button>
       </el-form-item>
     </el-form>
-    <site-add-dialog ref="addDialog" :show.sync="isShowAdd" @refresh="load()"></site-add-dialog>
     <el-table
+      size="medium"
       :data="siteData"
       stripe
       style="width: 100%">
@@ -43,7 +43,7 @@
       <el-table-column
         prop="url"
         label="链接"
-        width="180">
+        width="500">
         <template slot-scope="scope">
           <a :href="scope.row.url"
              target="_blank"
@@ -76,6 +76,18 @@
         </template>
       </el-table-column>
     </el-table>
+    <el-pagination
+      ref="sitepage"
+      @current-change="handleCurrentChange"
+      @size-change="handleSizeChange"
+      background
+      :page-sizes="[10, 20, 50]"
+      :page-size="perSize"
+      :current-page="currentPage"
+      layout="prev, pager, next, total, sizes"
+      :total="totalCount">
+    </el-pagination>
+    <site-add-dialog ref="addDialog" @refresh="load()"></site-add-dialog>
   </div>
 </template>
 
@@ -92,13 +104,17 @@
     },
     data() {
       return {
+        perSize: 10,
+        totalCount: 1,
+        currentPage: 1,
         searchForm: {
-          name: '',
-          createTimeStart: '',
-          createTimeEnd: ''
+          name: null,
+          createTimeStart: null,
+          createTimeEnd: null,
+          pageNo: 1,
+          pageSize: 10
         },
         value2: '',
-        isShowAdd: false,
         siteData: null,
         pickerOptions: {
           shortcuts: [{
@@ -126,9 +142,17 @@
           this.searchForm.createTimeStart = this.value2[0];
           this.searchForm.createTimeEnd = this.value2[1];
         } else {
-          this.searchForm.createTimeStart = "";
-          this.searchForm.createTimeEnd = "";
+          this.searchForm.createTimeStart = null;
+          this.searchForm.createTimeEnd = null;
         }
+
+        if (this.searchForm.name == '') {
+          this.searchForm.name = null;
+        }
+
+        this.searchForm.pageNo = this.currentPage;
+        this.searchForm.pageSize = this.perSize;
+
         this.$axios.get(Service.url.sitePersonal, {
           params: this.searchForm,
           headers: {
@@ -138,7 +162,8 @@
           if (res.status === 200) {
             let responseData = res.data;
             if (responseData.code === 0) {
-              this.siteData = res.data.data;
+              this.totalCount = responseData.data.allTotal;
+              this.siteData = responseData.data.list;
             } else {
               this.$message.error(responseData.msg);
               if (responseData.code === -2) {
@@ -153,11 +178,19 @@
           console.error(error);
         });
       },
+      handleCurrentChange(val) {
+        this.currentPage = val;
+        this.onSearch();
+      },
+      handleSizeChange(val) {
+        this.perSize = val;
+        this.onSearch();
+      },
       onAddShow() {
-        this.isShowAdd = true;
+        this.$refs.addDialog.dialogFormVisible = true;
       },
       handleEdit(index, row) {
-        this.isShowAdd = true;//dialog对话窗口打开
+        this.$refs.addDialog.dialogFormVisible = true;
         this.$refs.addDialog.addModel = Object.assign({}, row);//将数据传入dialog页面
       },
       handleDelete(index, row) {
@@ -201,6 +234,7 @@
       },
       load() {
         this.$axios.get(Service.url.sitePersonal, {
+          params: this.searchForm,
           headers: {
             'Authorization': localStorage.getItem('token')
           }
@@ -208,7 +242,8 @@
           if (res.status === 200) {
             let responseData = res.data;
             if (responseData.code === 0) {
-              this.siteData = responseData.data;
+              this.totalCount = responseData.data.allTotal;
+              this.siteData = responseData.data.list;
             } else {
               this.$message.error(responseData.msg);
               if (responseData.code === -2) {
@@ -232,5 +267,12 @@
 </script>
 
 <style scoped>
+  a:link, a:visited {
+    color: #2f65ca
+  }
 
+  /* 已访问的链接 */
+  a:hover {
+    color: #5c31ff
+  }
 </style>

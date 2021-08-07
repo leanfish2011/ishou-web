@@ -1,12 +1,11 @@
 <template>
   <div class="login-container">
-    <el-link href="/" type="primary" icon="el-icon-back">回到首页</el-link>
     <el-form :model="loginModel" :rules="validRule"
              status-icon
              ref="loginForm"
              label-position="left"
              class="login-page">
-      <h3 class="title">系统登录</h3>
+      <h2 class="title">爱收藏-登录</h2>
       <el-form-item prop="userCode">
         <el-input v-model="loginModel.userCode"
                   placeholder="请输入用户名">
@@ -27,7 +26,7 @@
           <el-tooltip class="item" effect="dark" content="试试github登录" placement="top-start">
             <a href="#">
               <img @click="githubLogin" height="30" width="30"
-                   src="https://github.com/fluidicon.png"/>
+                   src="../../../../static/img/github.png"/>
             </a>
           </el-tooltip>
         </el-col>
@@ -39,6 +38,9 @@
                    :loading="logining">登录
         </el-button>
       </el-form-item>
+      <el-link href="/register" type="primary">立即注册</el-link>
+      &nbsp;
+      <el-link href="/" type="primary">回到首页</el-link>
     </el-form>
   </div>
 </template>
@@ -85,8 +87,9 @@
                   localStorage.setItem('userName', userData.name);
                   localStorage.setItem('token', userData.token);
                   localStorage.setItem('userId', userData.userId);
+                  localStorage.setItem('photourl', userData.photourl);
 
-                  this.$router.push({path: "/"});
+                  this.$router.push({path: "/site"});
                 } else {
                   this.logining = false;
                   this.$message.error(responseData.msg);
@@ -108,8 +111,6 @@
 
 <style scoped>
   .login-container {
-    width: 100%;
-    height: 100%;
   }
 
   .login-page {
@@ -126,5 +127,9 @@
   label.el-checkbox.rememberme {
     margin: 0px 0px 15px;
     text-align: left;
+  }
+
+  .title {
+    text-align: center;
   }
 </style>

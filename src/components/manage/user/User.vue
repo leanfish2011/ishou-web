@@ -6,7 +6,7 @@
     </el-breadcrumb>
     <el-divider></el-divider>
     <el-form ref="form" :inline="true" :model="searchForm" label-width="80px" size="mini">
-      <el-form-item label="姓名">
+      <el-form-item label="昵称">
         <el-input v-model="searchForm.name" placeholder="姓名"></el-input>
       </el-form-item>
       <el-form-item label="用户名">
@@ -36,14 +36,23 @@
         <el-button type="primary" @click="onAddShow">创建</el-button>
       </el-form-item>
     </el-form>
-    <user-add-dialog ref="addDialog" :show.sync="isShowAdd" @refresh="load()"></user-add-dialog>
+    <user-add-dialog ref="addDialog" @refresh="load()"></user-add-dialog>
     <el-table
+      size="medium"
       :data="userData"
       stripe
       style="width: 100%">
       <el-table-column
+        label="头像"
+        width="100">
+        <template slot-scope="scope">
+          <el-avatar :size="50"
+                     :src=scope.row.photourl></el-avatar>
+        </template>
+      </el-table-column>
+      <el-table-column
         prop="name"
-        label="姓名"
+        label="昵称"
         width="180">
       </el-table-column>
       <el-table-column
@@ -73,6 +82,17 @@
         </template>
       </el-table-column>
     </el-table>
+    <el-pagination
+      ref="userpage"
+      @current-change="handleCurrentChange"
+      @size-change="handleSizeChange"
+      background
+      :page-sizes="[10, 20, 50]"
+      :page-size="perSize"
+      :current-page="currentPage"
+      layout="prev, pager, next, total, sizes"
+      :total="totalCount">
+    </el-pagination>
   </div>
 </template>
 
@@ -89,15 +109,19 @@
     },
     data() {
       return {
+        perSize: 10,
+        totalCount: 1,
+        currentPage: 1,
         searchForm: {
-          name: '',
-          userCode: '',
-          beginTime: '',
-          endTime: '',
-          email: ''
+          name: null,
+          userCode: null,
+          beginTime: null,
+          endTime: null,
+          email: null,
+          pageNo: 1,
+          pageSize: 10
         },
         value2: '',
-        isShowAdd: false,
         userData: null,
         pickerOptions: {
           shortcuts: [{
@@ -125,9 +149,25 @@
           this.searchForm.beginTime = this.value2[0];
           this.searchForm.endTime = this.value2[1];
         } else {
-          this.searchForm.beginTime = "";
-          this.searchForm.endTime = "";
+          this.searchForm.beginTime = null;
+          this.searchForm.endTime = null;
         }
+
+        if (this.searchForm.name == '') {
+          this.searchForm.name = null;
+        }
+
+        if (this.searchForm.userCode == '') {
+          this.searchForm.userCode = null;
+        }
+
+        if (this.searchForm.email == '') {
+          this.searchForm.email = null;
+        }
+
+        this.searchForm.pageNo = this.currentPage;
+        this.searchForm.pageSize = this.perSize;
+
         this.$axios.get(Service.url.user, {
           headers: {
             'Authorization': localStorage.getItem('token')
@@ -137,7 +177,8 @@
           if (res.status === 200) {
             let responseData = res.data;
             if (responseData.code === 0) {
-              this.userData = responseData.data;
+              this.totalCount = responseData.data.allTotal;
+              this.userData = responseData.data.list;
             } else {
               this.$message.error(responseData.msg);
               if (responseData.code === -2) {
@@ -152,11 +193,19 @@
           console.error(error);
         });
       },
+      handleCurrentChange(val) {
+        this.currentPage = val;
+        this.onSearch();
+      },
+      handleSizeChange(val) {
+        this.perSize = val;
+        this.onSearch();
+      },
       onAddShow() {
-        this.isShowAdd = true;
+        this.$refs.addDialog.dialogFormVisible = true;
       },
       handleEdit(index, row) {
-        this.isShowAdd = true;//dialog对话窗口打开
+        this.$refs.addDialog.dialogFormVisible = true;
         this.$refs.addDialog.addModel = Object.assign({}, row);//将数据传入dialog页面
       },
       handleDelete(index, row) {
@@ -195,19 +244,21 @@
         });
       },
       //时间格式化
-      dateFormat: function (row) {
+      dateFormat(row) {
         return DateUtil.dateFormat(row.createTime);
       },
       load() {
         this.$axios.get(Service.url.user, {
           headers: {
             'Authorization': localStorage.getItem('token')
-          }
+          },
+          params: this.searchForm,
         }).then((res) => {
           if (res.status === 200) {
             let responseData = res.data;
             if (responseData.code === 0) {
-              this.userData = responseData.data;
+              this.totalCount = responseData.data.allTotal;
+              this.userData = responseData.data.list;
             } else {
               this.$message.error(responseData.msg);
               if (responseData.code === -2) {

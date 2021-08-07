@@ -13,6 +13,8 @@
       </div>
       <div class="headerUser">
         <el-link href="/" type="primary" icon="el-icon-back">回到首页</el-link>
+        <el-avatar :size="40" ref="photourlAvatar"
+                   :src=userPhotoUrl></el-avatar>
         <el-dropdown trigger="hover"
                      :hide-on-click="false">
               <span class="el-dropdown-link">
@@ -45,6 +47,7 @@
     data() {
       return {
         userName: '',
+        userPhotoUrl: '',
       }
     },
     methods: {
@@ -59,6 +62,7 @@
           }).then((res) => {
             AuthUtil.clearSession();
             this.userName = '';
+            this.userPhotoUrl = '';
             this.$router.push('/login');
           }).catch(function (error) {
             console.error(error);
@@ -70,8 +74,8 @@
       }
     },
     mounted() {
-      let userName = localStorage.getItem('userName');
-      this.userName = userName;
+      this.userName = localStorage.getItem('userName');
+      this.userPhotoUrl = localStorage.getItem('photourl');
     }
   }
 </script>
@@ -84,10 +88,14 @@
 
   .logoTitle {
     font-size: 25px;
-    color: #E33E06;
+    color: #e37d57;
   }
 
   .headerUser {
     float: right;
+  }
+
+  .el-dropdown-link {
+    color: #e3e0db;
   }
 </style>

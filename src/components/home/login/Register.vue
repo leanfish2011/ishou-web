@@ -1,35 +1,72 @@
 <template>
   <div class="register-container">
-    <el-link href="/" type="primary" icon="el-icon-back">回到首页</el-link>
-    <el-form ref="registerForm" :model="registerModel" label-width="80px" :rules="validRule"
-             status-icon
-             class="register-page">
-      <h3 class="title">注册</h3>
-      <el-form-item label="用户名" prop="userCode">
-        <el-input v-model="registerModel.userCode" placeholder="请输入用户名"></el-input>
-      </el-form-item>
-      <el-form-item label="密码" prop="password">
-        <el-input v-model="registerModel.password" placeholder="请输入密码"></el-input>
-      </el-form-item>
-      <el-form-item label="姓名" prop="name">
-        <el-input v-model="registerModel.name" placeholder="请输入姓名"></el-input>
-      </el-form-item>
-      <el-form-item label="邮箱" prop="email">
-        <el-input v-model="registerModel.email" placeholder="请输入邮箱地址"></el-input>
-      </el-form-item>
-      <el-form-item>
-        <el-button type="primary" @click="onSubmit" :loading="registering">注册</el-button>
-        <el-button @click="onCancel">取消</el-button>
-      </el-form-item>
-    </el-form>
+    <el-container>
+      <el-header>
+        <el-row>
+          <el-col :span="6">
+            <p></p>
+          </el-col>
+          <el-col :span="1">
+            <img src="/static/ishou.ico" style="width: 50px;height: 50px;">
+          </el-col>
+          <el-col :span="1">
+            <span style="font-size: 20px;color: white">爱收藏</span>
+          </el-col>
+          <el-col :span="8">
+            <p></p>
+          </el-col>
+          <el-col :span="1">
+            <el-link style="color: white" href="/" type="primary">首页</el-link>
+          </el-col>
+          <el-col :span="1">
+            <el-link style="color: white" href="/login" type="primary">登录</el-link>
+          </el-col>
+          <el-col :span="6">
+            <p></p>
+          </el-col>
+        </el-row>
+      </el-header>
+      <el-main>
+        <el-form ref="registerForm" :model="registerModel" label-width="80px" :rules="validRule"
+                 status-icon
+                 class="register-page">
+          <h3 class="title">注册</h3>
+          <el-form-item label="用户名" prop="userCode">
+            <el-input v-model="registerModel.userCode" placeholder="请输入用户名"></el-input>
+          </el-form-item>
+          <el-form-item label="密码" prop="password">
+            <el-input v-model="registerModel.password" placeholder="请输入密码"></el-input>
+          </el-form-item>
+          <el-form-item label="昵称" prop="name">
+            <el-input v-model="registerModel.name" placeholder="请输入昵称"></el-input>
+          </el-form-item>
+          <el-form-item label="邮箱" prop="email">
+            <el-input v-model="registerModel.email" placeholder="请输入邮箱地址"></el-input>
+          </el-form-item>
+          <el-form-item label="头像" prop="photourl">
+            <el-avatar :size="50" ref="photourlAvatar"
+                       :src=randomUrl></el-avatar>
+          </el-form-item>
+          <el-form-item>
+            <el-button type="primary" @click="onSubmit" :loading="registering">注册</el-button>
+          </el-form-item>
+        </el-form>
+      </el-main>
+    </el-container>
+    <bottom-footer></bottom-footer>
   </div>
 </template>
 
 <script>
   import Service from '../../../config/service'
+  import Footer from '../Footer'
+  import RandomUtil from '../../../utils/randomUtil'
 
   export default {
     name: "register",
+    components: {
+      "bottomFooter": Footer
+    },
     data() {
       return {
         registering: false,
@@ -37,16 +74,14 @@
           userCode: '',
           password: '123456',
           name: '',
-          email: ''
+          email: '',
+          photourl: ''
         },
+        randomUrl: '/static/img/face/1.jpg',
         validRule: {
           userCode: [{required: true, message: '请输入用户名', trigger: 'blur'}],
           password: [{required: true, message: '请输入密码', trigger: 'blur'}],
-          name: [{required: true, message: '请输入姓名', trigger: 'blur'}],
-          email: [
-            {required: true, message: '请输入邮箱地址', trigger: 'blur'},
-            {type: 'email', message: '请输入正确的邮箱地址', trigger: ['blur', 'change']}
-          ]
+          name: [{required: true, message: '请输入昵称', trigger: 'blur'}],
         }
       }
     },
@@ -56,6 +91,7 @@
         this.$refs.registerForm.validate((valid) => {
           if (valid) {
             this.registering = true;
+            this.registerModel.photourl = this.$refs.photourlAvatar.src;
             this.$axios.post(Service.url.register, this.registerModel).then(
               (res) => {
                 if (res.status === 200) {
@@ -80,9 +116,13 @@
           }
         })
       },
-      onCancel() {
-        this.$refs.registerForm.resetFields();
+      randomFace() {
+        let faceNum = RandomUtil.getRandomInt(1, 9);
+        this.randomUrl = '/static/img/face/' + faceNum + '.jpg';
       }
+    },
+    mounted() {
+      this.randomFace();
     }
   }
 </script>
@@ -96,5 +136,15 @@
   .register-page {
     width: 600px;
     margin: 10px auto;
+  }
+
+  .el-container {
+    min-height: calc(100vh - 67px);
+  }
+
+  .el-header {
+    background-color: #41403d;
+    text-align: center;
+    line-height: 60px;
   }
 </style>

@@ -2,42 +2,60 @@
   <div>
     <div id="topMenu">
       <div id="top">
-        <div id="log">
+        <div id="log" @click="goHome()">
           <img src="../../../static/img/log.jpg">
         </div>
-        <div id="logTitle">
+        <div id="logTitle" @click="goHome()">
           爱收藏
         </div>
         <div id="midSearch">
-          <form ref="baiduSearch" action="http://www.baidu.com/s" method="GET" target="_blank">
-            <input type="text" name="wd" id="txtKeyword"/>
-            <el-button type="primary" plain size="medium" @click="searchKeyword()">百度一下</el-button>
-            <input type="hidden" name="ie" value="utf-8"/>
-            <input type="hidden" name="tn" value="ace"/>
-          </form>
+          <el-form :model="searchForm">
+            <el-input v-model="searchForm.keyword" size="medium" class="searchInput"
+                      placeholder="请输入关键词"></el-input>
+            <el-button type="primary" plain size="medium" @click="search()">搜索一下</el-button>
+          </el-form>
         </div>
         <div id="userInfo">
           <el-row>
-            <el-button v-if="userName==''||userName==null" size="mini" type="primary"
-                       @click="openLogin()">登录
-            </el-button>
-            <el-dropdown v-else size="mini" split-button>
-              <label @click="openMange()">{{ userName }}</label>
-              <el-dropdown-menu slot="dropdown">
-                <el-dropdown-item icon="el-icon-circle-plus-outline" @click.native="addSite()">增加收藏
-                </el-dropdown-item>
-                <el-dropdown-item icon="el-icon-switch-button" @click.native="logout()">退出登录
-                </el-dropdown-item>
-              </el-dropdown-menu>
-            </el-dropdown>
-            <el-button size="mini" type="primary" @click="openRegister()">注册</el-button>
+            <el-col :span="22" v-if="userName==''||userName==null">
+              <el-button size="mini" type="primary" plain
+                         @click="openLogin()">登录
+              </el-button>
+              <el-button size="mini" type="primary" plain
+                         @click="openRegister()">注册
+              </el-button>
+            </el-col>
+            <el-col :span="22" v-else>
+              <el-dropdown size="medium">
+                <el-tooltip effect="dark" :content=userName placement="left-start">
+                  <el-avatar :size="40" ref="photourlAvatar"
+                             :src=userPhotoUrl></el-avatar>
+                </el-tooltip>
+                <el-dropdown-menu slot="dropdown">
+                  <el-dropdown-item icon="el-icon-setting" @click.native="openMange()">
+                    管理
+                  </el-dropdown-item>
+                  <el-dropdown-item icon="el-icon-circle-plus-outline" @click.native="addSite()">
+                    增加收藏
+                  </el-dropdown-item>
+                  <el-dropdown-item icon="el-icon-switch-button" @click.native="logout()">退出登录
+                  </el-dropdown-item>
+                </el-dropdown-menu>
+              </el-dropdown>
+            </el-col>
+            <el-col :span="2">
+              <el-tooltip effect="dark" content="订阅" placement="top-start">
+                <el-button size="mini" type="info" circle @click="openSub()"
+                           icon="el-icon-copy-document"></el-button>
+              </el-tooltip>
+            </el-col>
           </el-row>
         </div>
       </div>
       <div id="divMenu">
         <ul>
           <label v-for="item in menuData">
-            <label v-if="showMenu(item.needLogin)">
+            <label v-if="showMenu(item.id)">
               <li>
                 <router-link :to=item.route exact>{{item.name}}</router-link>
               </li>
@@ -63,38 +81,49 @@
     data() {
       return {
         userName: '',
-        activeId: "1",
+        userPhotoUrl: '',
         menuData: [
           {
             "id": "1",
             "name": "主页",
-            "route": "/",
-            "needLogin": false
+            "route": "/"
           },
           {
             "id": "2",
             "name": "我的",
-            "route": "/my",
-            "needLogin": true
+            "route": "/my"
           },
           {
             "id": "3",
-            "name": "留言",
-            "route": "/message",
-            "needLogin": false
+            "name": "工具",
+            "route": "/tool"
           },
           {
             "id": "4",
+            "name": "留言",
+            "route": "/message"
+          },
+          {
+            "id": "5",
             "name": "关于",
-            "route": "/about",
-            "needLogin": false
+            "route": "/about"
           }
-        ]
+        ],
+        searchForm: {
+          keyword: ''
+        }
       }
     },
     methods: {
-      searchKeyword() {
-        this.$refs.baiduSearch.submit();
+      search() {
+        let keyword = this.searchForm.keyword.trim();
+        if (keyword == "") {
+          this.$message.warning("请输入关键词！");
+          return;
+        }
+
+        //url中传递参数
+        this.$router.push({path: "/search", query: {keyword: keyword}});
       },
       logout() {
         this.$confirm('确认退出?', '提示', {})
@@ -107,6 +136,7 @@
           }).then((res) => {
             AuthUtil.clearSession();
             this.userName = '';
+            this.userPhotoUrl = '';
             this.$router.push('/');
           }).catch(function (error) {
             console.error(error);
@@ -116,12 +146,9 @@
       addSite() {
         this.$refs.fastAddSite.dialogFormVisible = true;
       },
-      showMenu(needLogin) {
-        if (needLogin == false) {
-          return true;
-        }
-
-        if (this.userName == null || this.userName == '') {
+      showMenu(id) {
+        // "我的"菜单需要登录后才显示
+        if (id == "2" && (this.userName == null || this.userName == '')) {
           return false;
         }
 
@@ -133,13 +160,40 @@
       openRegister() {
         this.$router.push('/register');
       },
+      openSub() {
+        this.$router.push('/sub');
+      },
       openMange() {
         this.$router.push('/site');
+      },
+      authCheck() {
+        this.$axios.get(Service.url.authCheck, {
+          headers: {
+            'Authorization': localStorage.getItem('token')
+          }
+        }).then((res) => {
+          if (res.status === 200) {
+            let responseData = res.data;
+            let code = responseData.code;
+            if (code === -1 || code === -2) {
+              AuthUtil.clearSession();
+            } else {
+              this.userName = localStorage.getItem('userName');
+              this.userPhotoUrl = localStorage.getItem('photourl');
+            }
+          } else {
+            this.$message.error("系统内部错误");
+          }
+        }).catch(function (error) {
+          console.error(error);
+        });
+      },
+      goHome() {
+        this.$router.push('/');
       }
     },
     mounted() {
-      let userName = localStorage.getItem('userName');
-      this.userName = userName;
+      this.authCheck();
     }
   }
 </script>
@@ -177,11 +231,10 @@
     margin-left: 50px;
   }
 
-  #midSearch input {
+  .searchInput {
     width: 400px;
     height: 30px;
     font-size: 15px;
-    border: 1px solid #4791FF;
   }
 
   #userInfo {
@@ -192,9 +245,9 @@
 
   #divMenu {
     line-height: 30px;
-    height: 30px;
+    height: 40px;
     top: 0px;
-    background: #1BA1E2;
+    background: #3a8ee6;
     margin-left: 5px;
     margin-right: 5px;
     z-index: 100;
@@ -202,7 +255,7 @@
 
   #divMenu ul {
     list-style: none;
-    line-height: 30px;
+    line-height: 40px;
     margin: 0 auto 0 auto;
   }
 
@@ -220,12 +273,12 @@
   }
 
   #divMenu ul li:hover {
-    background: #52BFF5;
+    background: #3787ee;
   }
 
   /*路由激活样式，router自带属性*/
   .router-link-active {
-    background-color: #e70;
+    background-color: #2283ee;
     color: #fff;
   }
 </style>

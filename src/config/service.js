@@ -3,32 +3,50 @@
 //当前网页IP
 const ROOT_PATH = `${window.location.origin.replace(/:\d+/, '')}`;
 
+// github登录信息
 const githubLoginData = {
   authorize_uri: "https://github.com/login/oauth/authorize",
   client_id: "f2a52e951e10ea966cf9",
-  redirect_uri: ROOT_PATH + ":80/github/auth"
+  redirect_uri: ROOT_PATH + "/github/auth"
+};
+
+const thirdLoginGate = {
+  githubAuth: githubLoginData.authorize_uri + '?client_id='
+    + githubLoginData.client_id
+    + '&redirect_uri=' + githubLoginData.redirect_uri
+};
+
+// 后端微服务入口
+const serviceGate = {
+  authService: ROOT_PATH + '/api/v1/auth',
+  siteService: ROOT_PATH + '/api/v1/site',
+  systemService: ROOT_PATH + '/api/v1/system'
 };
 
 //各个接口地址
 const url = {
-  home: ROOT_PATH + ':9092/api/v1/site/index',
-  login: ROOT_PATH + ':9091/api/v1/auth/access/login',
-  register: ROOT_PATH + ':9091/api/v1/auth/access/register',
-  sitePersonal: ROOT_PATH + ':9092/api/v1/site/personal',
-  siteHome: ROOT_PATH + ':9092/api/v1/site/home',
-  logout: ROOT_PATH + ':9091/api/v1/auth/access/logout',
-  user: ROOT_PATH + ':9091/api/v1/auth/user',
-  role: ROOT_PATH + ':9091/api/v1/auth/role',
-  authCheck: ROOT_PATH + ':9091/api/v1/auth/access/check',
-  menuAll: ROOT_PATH + ':9091/api/v1/auth/menu',
-  menuRole: ROOT_PATH + ':9091/api/v1/auth/role/menu',
-  roleUser: ROOT_PATH + ':9091/api/v1/auth/role/user',
-  menuUser: ROOT_PATH + ':9091/api/v1/auth/menu/user',
-  changePwd: ROOT_PATH + ':9091/api/v1/auth/access/password',
-  githubAuth: githubLoginData.authorize_uri + '?client_id='
-    + githubLoginData.client_id
-    + '&redirect_uri=' + githubLoginData.redirect_uri,
-  loginByGitHub: ROOT_PATH + ':9091/api/v1/auth/access/login/github',
+  login: serviceGate.authService + '/access/login',
+  register: serviceGate.authService + '/access/register',
+  logout: serviceGate.authService + '/access/logout',
+  user: serviceGate.authService + '/user',
+  role: serviceGate.authService + '/role',
+  authCheck: serviceGate.authService + '/access/check',
+  menuAll: serviceGate.authService + '/menu',
+  menuRole: serviceGate.authService + '/role/menu',
+  roleUser: serviceGate.authService + '/role/user',
+  menuUser: serviceGate.authService + '/menu/user',
+  changePwd: serviceGate.authService + '/access/password',
+  loginByGitHub: serviceGate.authService + '/access/login/github',
+  home: serviceGate.siteService + '/index',
+  search: serviceGate.siteService + '/index/search',
+  sitePersonal: serviceGate.siteService + '/personal',
+  siteHome: serviceGate.siteService + '/home',
+  sub: serviceGate.systemService + '/site/sub',
+  subExist: serviceGate.systemService + '/site/sub/exist',
+  message: serviceGate.systemService + '/message',
+  messageList: serviceGate.systemService + '/message/list',
+  githubAuth: thirdLoginGate.githubAuth,
+  siteCheck: serviceGate.siteService + '/check'
 };
 
 export default {

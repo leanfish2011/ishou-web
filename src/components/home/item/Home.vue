@@ -9,12 +9,12 @@
               <el-row>
                 <el-col :span="6">
                   <a :href=item.url target="_blank">
-                    <img class="siteIcon" :src="queryIcon(item.url)"
-                         onerror="this.src='../../../../static/ishou.ico'"/>
+                    <img class="siteIcon" :src="queryIcon(item.iconUrl)"/>
                   </a>
                 </el-col>
                 <el-col :span="18">
-                  <el-link :href="item.url" target="_blank">{{item.name}}</el-link>
+                  <el-link :href="item.url" target="_blank" style="font-size: 16px;">{{item.name}}
+                  </el-link>
                   <div class="remark">{{item.remark}}</div>
                 </el-col>
               </el-row>
@@ -45,15 +45,22 @@
     },
     created() {
       this.$axios.get(Service.url.home).then((res) => {
-        this.myDataList = res.data.data;
+        if (res.status === 200) {
+          this.myDataList = res.data.data.list;
+        } else {
+          this.$message.error("系统内部错误");
+        }
       }).catch(function (error) {
         console.error(error);
       });
     },
     methods: {
       queryIcon(url) {
-        let reg = /((https?|http|ftp|file):\/\/)?[-A-Za-z0-9+&@#\/%?=~_|!:,.;]+\.[-A-Za-z+]+\/+/g;
-        return url.match(reg) + "favicon.ico";
+        if (url == null || url == "") {
+          return "../../../../static/ishou.ico";
+        }
+
+        return url;
       }
     }
   }

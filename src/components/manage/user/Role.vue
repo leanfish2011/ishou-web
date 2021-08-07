@@ -45,9 +45,9 @@
         </template>
       </el-table-column>
     </el-table>
-    <role-add-dialog ref="addDialog" :show.sync="isShowAdd" @refresh="load()"></role-add-dialog>
-    <role-menu-dialog ref="menuDialog" :show.sync="isShowMenu"></role-menu-dialog>
-    <role-user-dialog ref="userDialog" :show.sync="isShowUser"></role-user-dialog>
+    <role-add-dialog ref="addDialog" @refresh="load()"></role-add-dialog>
+    <role-menu-dialog ref="menuDialog"></role-menu-dialog>
+    <role-user-dialog ref="userDialog"></role-user-dialog>
   </div>
 </template>
 
@@ -68,26 +68,23 @@
     },
     data() {
       return {
-        roleData: null,
-        isShowAdd: false,
-        isShowMenu: false,
-        isShowUser: false,
+        roleData: null
       }
     },
     methods: {
       onAddShow() {
-        this.isShowAdd = true;
+        this.$refs.addDialog.dialogFormVisible = true;
       },
       handleMenu(index, row) {
-        this.isShowMenu = true;
+        this.$refs.menuDialog.dialogFormVisible = true;
         this.$refs.menuDialog.roleModel = Object.assign({}, row);
       },
       handleUser(index, row) {
-        this.isShowUser = true;
+        this.$refs.userDialog.dialogFormVisible = true;
         this.$refs.userDialog.roleModel = Object.assign({}, row);
       },
       handleEdit(index, row) {
-        this.isShowAdd = true;//dialog对话窗口打开
+        this.$refs.addDialog.dialogFormVisible = true;
         this.$refs.addDialog.addModel = Object.assign({}, row);//将数据传入dialog页面
       },
       handleDelete(index, row) {
