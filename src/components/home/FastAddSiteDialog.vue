@@ -70,7 +70,7 @@
       submit() {
         this.$refs.addForm.validate((valid) => {
           if (valid) {
-            this.$axios.post(Service.url.sitePersonal, this.addModel,
+            this.$axios.post(Service.siteUrl.sitePersonal, this.addModel,
               {
                 headers: {
                   'Authorization': localStorage.getItem('token')
@@ -104,7 +104,7 @@
           return;
         }
         this.checkContentModel.url = url;
-        this.$axios.post(Service.url.siteCheck, this.checkContentModel).then((res) => {
+        this.$axios.post(Service.siteUrl.siteCheck, this.checkContentModel).then((res) => {
           if (res.status === 200) {
             let responseData = res.data;
             if (responseData.code === 0) {

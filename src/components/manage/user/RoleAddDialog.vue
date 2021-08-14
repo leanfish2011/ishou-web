@@ -44,7 +44,7 @@
     methods: {
       onSubmit() {
         if (this.addModel.id === "" || this.addModel.id === undefined) {
-          this.$axios.post(Service.url.role, this.addModel, {
+          this.$axios.post(Service.authUrl.role, this.addModel, {
             headers: {
               'Authorization': localStorage.getItem('token')
             }
@@ -67,7 +67,7 @@
             }
           })
         } else {
-          this.$axios.put(Service.url.role, this.addModel, {
+          this.$axios.put(Service.authUrl.role, this.addModel, {
             headers: {
               'Authorization': localStorage.getItem('token')
             }

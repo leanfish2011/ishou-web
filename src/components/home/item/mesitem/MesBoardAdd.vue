@@ -44,7 +44,7 @@
         this.$refs.mesForm.validate((valid) => {
           if (valid) {
             this.mesing = true;
-            this.$axios.post(Service.url.message, this.mesModel,
+            this.$axios.post(Service.systemUrl.message, this.mesModel,
               {
                 headers: {
                   'Authorization': localStorage.getItem('token')
@@ -75,7 +75,7 @@
         })
       },
       authCheck() {
-        this.$axios.get(Service.url.authCheck, {
+        this.$axios.get(Service.authUrl.authCheck, {
           headers: {
             'Authorization': localStorage.getItem('token')
           }

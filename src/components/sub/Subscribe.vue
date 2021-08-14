@@ -75,7 +75,7 @@
           if (valid) {
             this.subing = true;
             //校验是否已经订阅过
-            this.$axios.post(Service.url.subExist, this.subModel).then(
+            this.$axios.post(Service.systemUrl.subExist, this.subModel).then(
               (res) => {
                 if (res.status === 200) {
                   let responseData = res.data;
@@ -103,7 +103,7 @@
         })
       },
       onSub() {
-        this.$axios.post(Service.url.sub, this.subModel).then(
+        this.$axios.post(Service.systemUrl.sub, this.subModel).then(
           (res) => {
             if (res.status === 200) {
               let responseData = res.data;
@@ -140,7 +140,7 @@
     margin: 10px auto;
   }
 
-  .el-container{
+  .el-container {
     min-height: calc(100vh - 67px);
   }
 

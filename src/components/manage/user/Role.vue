@@ -93,7 +93,7 @@
           cancelButtonText: '取消',
           type: 'warning'
         }).then(() => {
-          this.$axios.delete(Service.url.role + '/' + row.id, {
+          this.$axios.delete(Service.authUrl.role + '/' + row.id, {
             headers: {
               'Authorization': localStorage.getItem('token')
             }
@@ -126,7 +126,7 @@
         return DateUtil.dateFormat(row.createTime);
       },
       load() {
-        this.$axios.get(Service.url.role, {
+        this.$axios.get(Service.authUrl.role, {
           headers: {
             'Authorization': localStorage.getItem('token')
           }

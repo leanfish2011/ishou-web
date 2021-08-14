@@ -77,7 +77,7 @@
         this.$refs.loginForm.validate((valid) => {
           if (valid) {
             this.logining = true;
-            this.$axios.post(Service.url.login, this.loginModel).then((res) => {
+            this.$axios.post(Service.authUrl.login, this.loginModel).then((res) => {
               if (res.status === 200) {
                 let responseData = res.data;
                 if (responseData.code === 0) {
@@ -103,7 +103,7 @@
         })
       },
       githubLogin() {
-        window.location.href = Service.url.githubAuth;
+        window.location.href = Service.otherUrl.githubAuth;
       }
     }
   };

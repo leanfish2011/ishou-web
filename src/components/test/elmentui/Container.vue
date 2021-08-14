@@ -42,7 +42,7 @@
     },
     methods: {
       authCheck() {
-        this.$axios.get(Service.url.authCheck, {
+        this.$axios.get(Service.authUrl.authCheck, {
           headers: {
             'Authorization': localStorage.getItem('token')
           }

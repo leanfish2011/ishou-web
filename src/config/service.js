@@ -10,6 +10,7 @@ const githubLoginData = {
   redirect_uri: ROOT_PATH + "/github/auth"
 };
 
+//第三方服务
 const thirdLoginGate = {
   githubAuth: githubLoginData.authorize_uri + '?client_id='
     + githubLoginData.client_id
@@ -23,8 +24,8 @@ const serviceGate = {
   systemService: ROOT_PATH + '/api/ishou/v2/system'
 };
 
-//各个接口地址
-const url = {
+// auth模块接口
+const authUrl = {
   login: serviceGate.authService + '/access/login',
   register: serviceGate.authService + '/access/register',
   logout: serviceGate.authService + '/access/logout',
@@ -37,18 +38,34 @@ const url = {
   menuUser: serviceGate.authService + '/menu/user',
   changePwd: serviceGate.authService + '/access/password',
   loginByGitHub: serviceGate.authService + '/access/login/github',
+};
+
+// site模块接口
+const siteUrl = {
   home: serviceGate.siteService + '/index',
   search: serviceGate.siteService + '/index/search',
   sitePersonal: serviceGate.siteService + '/personal',
   siteHome: serviceGate.siteService + '/home',
-  sub: serviceGate.systemService + '/site/sub',
-  subExist: serviceGate.systemService + '/site/sub/exist',
-  message: serviceGate.systemService + '/message',
-  messageList: serviceGate.systemService + '/message/list',
-  githubAuth: thirdLoginGate.githubAuth,
   siteCheck: serviceGate.siteService + '/check'
 };
 
+// 系统模块接口
+const systemUrl = {
+  sub: serviceGate.systemService + '/site/sub',
+  subExist: serviceGate.systemService + '/site/sub/exist',
+  message: serviceGate.systemService + '/message',
+  messageList: serviceGate.systemService + '/message/list'
+};
+
+// 其他类的接口
+const otherUrl = {
+  githubAuth: thirdLoginGate.githubAuth
+};
+
+// 对外暴露接口
 export default {
-  url
+  authUrl,
+  siteUrl,
+  systemUrl,
+  otherUrl
 };

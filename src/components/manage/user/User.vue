@@ -168,7 +168,7 @@
         this.searchForm.pageNo = this.currentPage;
         this.searchForm.pageSize = this.perSize;
 
-        this.$axios.get(Service.url.user, {
+        this.$axios.get(Service.authUrl.user, {
           headers: {
             'Authorization': localStorage.getItem('token')
           },
@@ -214,7 +214,7 @@
           cancelButtonText: '取消',
           type: 'warning'
         }).then(() => {
-          this.$axios.delete(Service.url.user + '/' + row.id, {
+          this.$axios.delete(Service.authUrl.user + '/' + row.id, {
             headers: {
               'Authorization': localStorage.getItem('token')
             }
@@ -248,7 +248,7 @@
         return DateUtil.dateFormat(row.createTime);
       },
       load() {
-        this.$axios.get(Service.url.user, {
+        this.$axios.get(Service.authUrl.user, {
           headers: {
             'Authorization': localStorage.getItem('token')
           },

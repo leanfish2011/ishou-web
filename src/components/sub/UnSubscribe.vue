@@ -85,7 +85,7 @@
           return;
         }
         this.unsubing = true;
-        this.$axios.delete(Service.url.sub + "/" + this.subid).then(
+        this.$axios.delete(Service.systemUrl.sub + "/" + this.subid).then(
           (res) => {
             if (res.status === 200) {
               let responseData = res.data;
@@ -128,7 +128,7 @@
     margin: 10px auto;
   }
 
-  .el-container{
+  .el-container {
     min-height: calc(100vh - 67px);
   }
 

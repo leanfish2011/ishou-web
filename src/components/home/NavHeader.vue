@@ -129,7 +129,7 @@
         this.$confirm('确认退出?', '提示', {})
         .then(() => {
           //调用接口
-          this.$axios.get(Service.url.logout, {
+          this.$axios.get(Service.authUrl.logout, {
             headers: {
               'Authorization': localStorage.getItem('token')
             }
@@ -167,7 +167,7 @@
         this.$router.push('/site');
       },
       authCheck() {
-        this.$axios.get(Service.url.authCheck, {
+        this.$axios.get(Service.authUrl.authCheck, {
           headers: {
             'Authorization': localStorage.getItem('token')
           }

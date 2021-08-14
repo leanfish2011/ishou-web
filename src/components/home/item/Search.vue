@@ -63,7 +63,7 @@
       },
       onSearch(keyword) {
         this.searchForm.keyword = keyword;
-        this.$axios.get(Service.url.search, {
+        this.$axios.get(Service.siteUrl.search, {
           params: this.searchForm
         }).then((res) => {
           if (res.status === 200) {

@@ -92,7 +92,7 @@
           if (valid) {
             this.registering = true;
             this.registerModel.photourl = this.$refs.photourlAvatar.src;
-            this.$axios.post(Service.url.register, this.registerModel).then(
+            this.$axios.post(Service.authUrl.register, this.registerModel).then(
               (res) => {
                 if (res.status === 200) {
                   let responseData = res.data;

@@ -51,7 +51,7 @@
     },
     methods: {
       load() {
-        this.$axios.get(Service.url.sitePersonal, {
+        this.$axios.get(Service.siteUrl.sitePersonal, {
           headers: {
             'Authorization': localStorage.getItem('token')
           }

@@ -67,7 +67,7 @@
     methods: {
       onSubmit() {
         if (this.addModel.id === "" || this.addModel.id === undefined) {
-          this.$axios.post(Service.url.sitePersonal, this.addModel,
+          this.$axios.post(Service.siteUrl.sitePersonal, this.addModel,
             {
               headers: {
                 'Authorization': localStorage.getItem('token')
@@ -91,7 +91,7 @@
             }
           })
         } else {
-          this.$axios.put(Service.url.sitePersonal, this.addModel, {
+          this.$axios.put(Service.siteUrl.sitePersonal, this.addModel, {
             headers: {
               'Authorization': localStorage.getItem('token')
             }
@@ -132,7 +132,7 @@
           return;
         }
         this.checkContentModel.url = url;
-        this.$axios.post(Service.url.siteCheck, this.checkContentModel).then((res) => {
+        this.$axios.post(Service.siteUrl.siteCheck, this.checkContentModel).then((res) => {
           if (res.status === 200) {
             let responseData = res.data;
             if (responseData.code === 0) {

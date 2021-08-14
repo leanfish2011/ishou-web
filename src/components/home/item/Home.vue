@@ -44,7 +44,7 @@
       }
     },
     created() {
-      this.$axios.get(Service.url.home).then((res) => {
+      this.$axios.get(Service.siteUrl.home).then((res) => {
         if (res.status === 200) {
           this.myDataList = res.data.data.list;
         } else {

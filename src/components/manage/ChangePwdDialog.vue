@@ -48,7 +48,7 @@
         this.$refs.addForm.validate((valid) => {
           if (valid) {
             this.updateModel.id = localStorage.getItem("userId");
-            this.$axios.put(Service.url.changePwd, this.updateModel,
+            this.$axios.put(Service.authUrl.changePwd, this.updateModel,
               {
                 headers: {
                   'Authorization': localStorage.getItem('token')

@@ -63,7 +63,7 @@
         this.addModel.menuIdList = this.$refs.menuTree.getCheckedKeys().concat(
           this.$refs.menuTree.getHalfCheckedKeys());
         console.log(this.addModel);
-        this.$axios.post(Service.url.menuRole, this.addModel, {
+        this.$axios.post(Service.authUrl.menuRole, this.addModel, {
           headers: {
             'Authorization': localStorage.getItem('token')
           }
@@ -94,7 +94,7 @@
         this.onCancel();
       },
       loadAllMenu() {
-        this.$axios.get(Service.url.menuAll, {
+        this.$axios.get(Service.authUrl.menuAll, {
           headers: {
             'Authorization': localStorage.getItem('token')
           }
@@ -118,7 +118,7 @@
         });
       },
       loadRoleMenu() {
-        this.$axios.get(Service.url.menuRole + "/" + this.roleModel.id, {
+        this.$axios.get(Service.authUrl.menuRole + "/" + this.roleModel.id, {
           headers: {
             'Authorization': localStorage.getItem('token')
           }
