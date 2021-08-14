@@ -18,9 +18,9 @@ const thirdLoginGate = {
 
 // 后端微服务入口
 const serviceGate = {
-  authService: ROOT_PATH + '/api/v1/auth',
-  siteService: ROOT_PATH + '/api/v1/site',
-  systemService: ROOT_PATH + '/api/v1/system'
+  authService: ROOT_PATH + '/api/galaxy/v2/auth',
+  siteService: ROOT_PATH + '/api/ishou/v2/site',
+  systemService: ROOT_PATH + '/api/ishou/v2/system'
 };
 
 //各个接口地址

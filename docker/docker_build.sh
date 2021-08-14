@@ -4,15 +4,17 @@
 
 #!/bin/bash
 
-# 整个项目父路径
-project_path_prefix="/home/tim/git/ishou"
-version="v1.0"
+version="v2.0"
 
 function build_image()
 {
-    project_path=$project_path_prefix"/"$1
-    echo $project_path
-    cd $project_path
+    work_path=$(pwd)
+    echo "当前目录："$work_path
+
+    cd ../
+    project_path=$(pwd)
+    echo "当前项目目录："$project_path
+
     latest_commit_id=$(git rev-parse --short HEAD)
     branch=$(git symbolic-ref --short -q HEAD)
 
@@ -24,6 +26,7 @@ function build_image()
     time=$(date "+%Y%m%d_%H%M%S")
     tag=$version"_"$branch"_"$time"_"$latest_commit_id
     docker_name=$1":"$tag
+
     sudo docker build -t $docker_name .
 }
 

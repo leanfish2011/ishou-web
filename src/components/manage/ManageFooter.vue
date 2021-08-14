@@ -1,7 +1,7 @@
 <template>
   <footer>
     <div class="footer_content">
-      Copyright © Tim 2016-2022
+      Copyright © Tim 2016-2021
     </div>
   </footer>
 </template>
