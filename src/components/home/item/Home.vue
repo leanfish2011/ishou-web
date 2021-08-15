@@ -2,22 +2,22 @@
   <div id="home">
     <nav-header></nav-header>
     <div class="homeContent">
-        <label v-for="item in myDataList" :key="item.id">
-            <el-card shadow="hover" class="siteCard">
-              <el-row>
-                <el-col :span="6">
-                  <a :href=item.url target="_blank">
-                    <img class="siteIcon" :src="queryIcon(item.iconUrl)"/>
-                  </a>
-                </el-col>
-                <el-col :span="18">
-                  <el-link :href="item.url" target="_blank" style="font-size: 16px;">{{item.name}}
-                  </el-link>
-                  <div class="remark">{{item.remark}}</div>
-                </el-col>
-              </el-row>
-            </el-card>
-        </label>
+      <label v-for="item in myDataList" :key="item.id">
+        <el-card shadow="hover" class="siteCard">
+          <el-row>
+            <el-col :span="2">
+              <a :href=item.url target="_blank">
+                <img class="siteIcon" :src="queryIcon(item.iconUrl)"/>
+              </a>
+            </el-col>
+            <el-col :span="22">
+              <el-link :href="item.url" target="_blank" style="font-size: 16px;">{{item.name}}
+              </el-link>
+              <div class="remark">{{item.remark}}</div>
+            </el-col>
+          </el-row>
+        </el-card>
+      </label>
     </div>
     <bottom-footer></bottom-footer>
   </div>
@@ -79,8 +79,8 @@
   }
 
   .siteIcon {
-    width: 20%;
-    height: 20%;
+    width: 50%;
+    height: 50%;
   }
 
   .remark {
