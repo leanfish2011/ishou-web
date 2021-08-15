@@ -30,7 +30,7 @@
             localStorage.setItem('userId', userData.userId);
             localStorage.setItem('photourl', userData.photourl);
 
-            this.$router.push({path: "/"});
+            this.$router.push({path: "/my"});
           } else {
             this.loading = false;
             this.$message.error(responseData.msg);
