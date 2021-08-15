@@ -2,7 +2,7 @@
   <div id="my">
     <nav-header></nav-header>
     <div class="myContent">
-      <el-timeline reverse style="width: 20%">
+      <el-timeline reverse style="width: 40%">
         <el-timeline-item
           v-for="(item, index) in myDataList"
           :timestamp="dateFormat(item.createTime)"
@@ -95,11 +95,13 @@
 <style scoped>
   #my {
     width: 100%;
-    margin-top: 110px;
+    margin-top: 120px;
   }
 
   .myContent {
+    width: 50%;
     min-height: calc(100vh - 176px);
+    margin: 5px auto 5px auto;
   }
 
   .siteCard {

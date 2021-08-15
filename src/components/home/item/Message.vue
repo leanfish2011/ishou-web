@@ -37,7 +37,7 @@
 <style scoped>
   #message {
     width: 100%;
-    margin-top: 110px;
+    margin-top: 120px;
   }
 
   .aboutContent {

@@ -2,9 +2,7 @@
   <div id="home">
     <nav-header></nav-header>
     <div class="homeContent">
-      <el-row :gutter="8">
         <label v-for="item in myDataList" :key="item.id">
-          <el-col :span="4">
             <el-card shadow="hover" class="siteCard">
               <el-row>
                 <el-col :span="6">
@@ -19,9 +17,7 @@
                 </el-col>
               </el-row>
             </el-card>
-          </el-col>
         </label>
-      </el-row>
     </div>
     <bottom-footer></bottom-footer>
   </div>
@@ -69,13 +65,13 @@
 <style scoped>
   #home {
     width: 100%;
-    margin-top: 110px;
+    margin-top: 120px;
   }
 
   .homeContent {
-    width: 99%;
+    width: 50%;
     min-height: calc(100vh - 176px);
-    margin-left: 10px;
+    margin: 5px auto 5px auto;
   }
 
   .siteCard {
@@ -83,8 +79,8 @@
   }
 
   .siteIcon {
-    width: 50%;
-    height: 50%;
+    width: 20%;
+    height: 20%;
   }
 
   .remark {

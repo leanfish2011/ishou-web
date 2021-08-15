@@ -244,7 +244,7 @@
   }
 
   #divMenu {
-    line-height: 30px;
+    line-height: 40px;
     height: 40px;
     top: 0px;
     background: #3a8ee6;
@@ -257,6 +257,7 @@
     list-style: none;
     line-height: 40px;
     margin: 0 auto 0 auto;
+    width: 50%;
   }
 
   #divMenu ul li {
@@ -268,8 +269,8 @@
     text-decoration: none;
     color: #fff;
     display: block;
-    padding-left: 20px;
-    padding-right: 20px;
+    padding-left: 30px;
+    padding-right: 30px;
   }
 
   #divMenu ul li:hover {

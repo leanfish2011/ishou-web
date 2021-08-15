@@ -53,12 +53,12 @@
 <style scoped>
   #tool {
     width: 100%;
-    margin-top: 110px;
+    margin-top: 120px;
   }
 
   .toolContent {
     min-height: calc(100vh - 176px);
-    width: 80%;
+    width: 50%;
     margin: 5px auto 5px auto;
   }
 </style>

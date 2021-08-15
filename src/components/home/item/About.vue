@@ -40,10 +40,12 @@
 <style scoped>
   #about {
     width: 100%;
-    margin-top: 110px;
+    margin-top: 120px;
   }
 
   .aboutContent {
+    width: 50%;
     min-height: calc(100vh - 176px);
+    margin: 5px auto 5px auto;
   }
 </style>
