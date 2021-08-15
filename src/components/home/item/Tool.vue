@@ -12,6 +12,7 @@
               {{item.remark}}
             </div>
           </div>
+          <el-divider></el-divider>
         </div>
       </label>
     </div>
@@ -60,5 +61,15 @@
     min-height: calc(100vh - 176px);
     width: 50%;
     margin: 5px auto 5px auto;
+  }
+
+  a:link, a:visited {
+    text-decoration: none;
+    color: #2f65ca
+  }
+
+  /* 已访问的链接 */
+  a:hover {
+    color: #5c31ff
   }
 </style>

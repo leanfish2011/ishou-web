@@ -11,7 +11,7 @@
               </a>
             </el-col>
             <el-col :span="22">
-              <el-link :href="item.url" target="_blank" style="font-size: 16px;">{{item.name}}
+              <el-link :href="item.url" target="_blank" class="el-link">{{item.name}}
               </el-link>
               <div class="remark">{{item.remark}}</div>
             </el-col>
@@ -85,5 +85,19 @@
 
   .remark {
     font-size: 14px;
+  }
+
+  .el-link{
+    font-size: 16px;
+  }
+
+  a:link, a:visited {
+    text-decoration: none;
+    color: #2f65ca
+  }
+
+  /* 已访问的链接 */
+  a:hover {
+    color: #5c31ff
   }
 </style>
