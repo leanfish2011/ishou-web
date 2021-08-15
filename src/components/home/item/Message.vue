@@ -2,7 +2,7 @@
   <div id="message">
     <nav-header></nav-header>
     <div class="aboutContent">
-      <h4>留下点什么呢？</h4>
+      <h4>你的建议，是我们前进最大的动力</h4>
       <el-tabs>
         <el-tab-pane label="网站账号留言">
           <mes-board></mes-board>
