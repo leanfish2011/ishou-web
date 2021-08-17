@@ -70,7 +70,7 @@
 
   .homeContent {
     width: 50%;
-    min-height: calc(100vh - 176px);
+    min-height: calc(100vh - 186px);
     margin: 5px auto 5px auto;
   }
 
