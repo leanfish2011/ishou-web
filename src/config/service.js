@@ -24,7 +24,7 @@ const serviceGate = {
   systemService: ROOT_PATH + '/api/ishou/v2/system'
 };
 
-// auth模块接口
+// 1、auth模块接口
 const authUrl = {
   login: serviceGate.authService + '/access/login',
   register: serviceGate.authService + '/access/register',
@@ -40,7 +40,7 @@ const authUrl = {
   loginByGitHub: serviceGate.authService + '/access/login/github',
 };
 
-// site模块接口
+// 2、site模块接口
 const siteUrl = {
   home: serviceGate.siteService + '/index',
   search: serviceGate.siteService + '/index/search',
@@ -49,7 +49,7 @@ const siteUrl = {
   siteCheck: serviceGate.siteService + '/check'
 };
 
-// 系统模块接口
+// 3、系统模块接口
 const systemUrl = {
   sub: serviceGate.systemService + '/site/sub',
   subExist: serviceGate.systemService + '/site/sub/exist',
@@ -57,9 +57,10 @@ const systemUrl = {
   messageList: serviceGate.systemService + '/message/list'
 };
 
-// 其他类的接口
+//4、其他类的接口
 const otherUrl = {
-  githubAuth: thirdLoginGate.githubAuth
+  githubAuth: thirdLoginGate.githubAuth,
+  webPhotoshop: ROOT_PATH + "/webphotoshop/index.html"
 };
 
 // 对外暴露接口

@@ -23,6 +23,7 @@
 <script>
   import NavHeader from '../NavHeader'
   import Footer from '../Footer'
+  import Service from '../../../config/service'
 
   export default {
     name: "tool",
@@ -33,6 +34,12 @@
     data() {
       return {
         toolList: [
+          {
+            "id": "0",
+            "name": "WebPhotoshop",
+            "url": Service.otherUrl.webPhotoshop,
+            "remark": "在线绘图工具。由作者本人研发"
+          },
           {
             "id": "3d3eb99f-f2a5-4fec-98d7-12143bd7eec7",
             "name": "在线工具",
