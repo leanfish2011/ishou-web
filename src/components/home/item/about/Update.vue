@@ -26,11 +26,17 @@
       return {
         activities: [
           {
+            timestamp: '2021-08-19',
+            title: '增加在线绘图板功能',
+            content: '在线绘图板，又名WebPhotoshop，是本网站作者自主研发的在线绘图和图像处理系统，实现了桌面版绘图和图像处理软件的大部分功能，且功能还在持续完善中。',
+            type: 'primary',
+            icon: 'el-icon-more'
+          },
+          {
             timestamp: '2020-12-27',
             title: '增加留言板功能',
             content: '增加留言板功能，用户用网站账号登录后可以留言和回复留言。原有的github登录方式留言功能保留',
-            type: 'primary',
-            icon: 'el-icon-more'
+            color: '#8d75bd'
           },
           {
             timestamp: '2020-07-26',
