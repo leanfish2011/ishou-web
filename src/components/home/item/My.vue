@@ -2,7 +2,7 @@
   <div id="my">
     <nav-header></nav-header>
     <div class="myContent">
-      <el-timeline reverse style="width: 40%">
+      <el-timeline style="width: 40%">
         <el-timeline-item
           v-for="(item, index) in myDataList"
           :timestamp="dateFormat(item.createTime)"
