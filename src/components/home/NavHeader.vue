@@ -166,34 +166,13 @@
       openMange() {
         this.$router.push('/site');
       },
-      authCheck() {
-        this.$axios.get(Service.authUrl.authCheck, {
-          headers: {
-            'Authorization': localStorage.getItem('token')
-          }
-        }).then((res) => {
-          if (res.status === 200) {
-            let responseData = res.data;
-            let code = responseData.code;
-            if (code === -1 || code === -2) {
-              AuthUtil.clearSession();
-            } else {
-              this.userName = localStorage.getItem('userName');
-              this.userPhotoUrl = localStorage.getItem('photourl');
-            }
-          } else {
-            this.$message.error("系统内部错误");
-          }
-        }).catch(function (error) {
-          console.error(error);
-        });
-      },
       goHome() {
         this.$router.push('/');
       }
     },
-    mounted() {
-      this.authCheck();
+    created() {
+      this.userName = localStorage.getItem('userName');
+      this.userPhotoUrl = localStorage.getItem('photourl');
     }
   }
 </script>
