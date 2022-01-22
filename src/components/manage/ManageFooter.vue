@@ -1,14 +1,27 @@
 <template>
   <footer>
     <div class="footer_content">
-      Copyright © Tim 2016-2021
+      Copyright © Tim 2016-{{year}}
     </div>
   </footer>
 </template>
 
 <script>
   export default {
-    name: "ManageFooter"
+    name: "ManageFooter",
+    data() {
+      return {
+        year: ''
+      }
+    },
+    methods: {
+      getYear() {
+        this.year = new Date().getFullYear()
+      }
+    },
+    created() {
+      this.getYear()
+    }
   }
 </script>
 
