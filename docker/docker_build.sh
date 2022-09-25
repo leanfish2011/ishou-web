@@ -20,6 +20,7 @@ function build_image()
 
     rm -rf dist/*
     npm run build
+    mkdir docker/web
     rm -rf docker/web/*
     cp -r dist/* docker/web/
     cd docker
