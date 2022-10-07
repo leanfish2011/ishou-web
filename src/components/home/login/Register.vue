@@ -99,6 +99,13 @@ export default {
         email: "",
         photourl: "",
       },
+      registerModelSubmit: {
+        userCode: "",
+        password: "",
+        name: "",
+        email: "",
+        photourl: "",
+      },
       randomUrl: "/static/img/face/1.jpg",
       validRule: {
         userCode: [
@@ -146,9 +153,15 @@ export default {
           if (this.registerModel.name == "") {
             this.registerModel.name = this.registerModel.userCode;
           }
-          this.registerModel.password = md5(this.registerModel.password);
+
+          // 给待提交数据赋值
+          this.registerModelSubmit.userCode = this.registerModel.userCode;
+          this.registerModelSubmit.password = md5(this.registerModel.password);
+          this.registerModelSubmit.name = this.registerModel.name;
+          this.registerModelSubmit.email = this.registerModel.email;
+          this.registerModelSubmit.photourl = this.registerModel.photourl;
           this.$axios
-            .post(Service.authUrl.register, this.registerModel)
+            .post(Service.authUrl.register, this.registerModelSubmit)
             .then((res) => {
               if (res.status === 200) {
                 let responseData = res.data;

@@ -45,6 +45,10 @@ export default {
         userCode: "",
         password: "",
       },
+      loginModelSubmit: {
+        userCode: "",
+        password: "",
+      },
       validRule: {
         userCode: [
           { required: true, message: "请输入用户名", trigger: "blur" },
@@ -68,9 +72,10 @@ export default {
       this.$refs.loginForm.validate((valid) => {
         if (valid) {
           this.logining = true;
-          this.loginModel.password = md5(this.loginModel.password);
+          this.loginModelSubmit.userCode = this.loginModel.userCode;
+          this.loginModelSubmit.password = md5(this.loginModel.password);
           this.$axios
-            .post(Service.authUrl.login, this.loginModel)
+            .post(Service.authUrl.login, this.loginModelSubmit)
             .then((res) => {
               if (res.status === 200) {
                 let responseData = res.data;
