@@ -21,7 +21,7 @@
         v-model="checked"
         class="rememberme">记住密码
       </el-checkbox>
-      <el-row>
+      <!-- <el-row>
         <el-col :span="24">
           <el-tooltip class="item" effect="dark" content="试试github登录" placement="top-start">
             <a href="#">
@@ -30,7 +30,7 @@
             </a>
           </el-tooltip>
         </el-col>
-      </el-row>
+      </el-row> -->
       <el-form-item style="width:100%;margin-top: 10px;">
         <el-button type="primary"
                    style="width:100%;"

@@ -3,14 +3,15 @@
     <nav-header></nav-header>
     <div class="aboutContent">
       <h4>你的建议，是我们前进最大的动力</h4>
-      <el-tabs>
+      <mes-board></mes-board>
+      <!-- <el-tabs>
         <el-tab-pane label="网站账号留言">
           <mes-board></mes-board>
         </el-tab-pane>
         <el-tab-pane label="github账号留言">
           <utterances-mes :id="1"></utterances-mes>
         </el-tab-pane>
-      </el-tabs>
+      </el-tabs> -->
     </div>
     <bottom-footer></bottom-footer>
   </div>
