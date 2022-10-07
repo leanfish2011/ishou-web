@@ -1,13 +1,11 @@
 <template>
   <el-dialog title="修改密码" :visible.sync="dialogFormVisible" width="20%">
-    <el-form :model="updateModel" ref="addForm" :rules="validRule">
+    <el-form :model="updateModel" ref="changeForm" :rules="validRule">
       <el-form-item label="旧密码" :label-width="formLabelWidth" prop="oldPassword">
-        <el-input v-model="updateModel.oldPassword" autocomplete="off"
-                  placeholder="请输入旧密码"></el-input>
+        <el-input type="password" v-model="updateModel.oldPassword" autocomplete="off" placeholder="请输入旧密码"></el-input>
       </el-form-item>
       <el-form-item label="新密码" :label-width="formLabelWidth" prop="newPassword">
-        <el-input v-model="updateModel.newPassword" autocomplete="off"
-                  placeholder="请输入新密码"></el-input>
+        <el-input type="password" v-model="updateModel.newPassword" autocomplete="off" placeholder="请输入新密码"></el-input>
       </el-form-item>
     </el-form>
     <div slot="footer" class="dialog-footer">
@@ -18,42 +16,93 @@
 </template>
 
 <script>
-  import Service from '../../config/service'
-  import AuthUtil from '../../utils/authUtil'
+import Service from "../../config/service";
+import AuthUtil from "../../utils/authUtil";
+import md5 from "js-md5";
 
-  export default {
-    name: "ChangePwdDialog",
-    data() {
-      return {
-        dialogFormVisible: false,
-        updateModel: {
-          id: '',
-          oldPassword: '',
-          newPassword: '',
-        },
-        formLabelWidth: '70px',
-        validRule: {
-          oldPassword: [{required: true, message: '请输入旧密码', trigger: 'blur'}],
-          newPassword: [{required: true, message: '请输入新密码', trigger: 'blur'}]
+export default {
+  name: "ChangePwdDialog",
+  data() {
+    var validateOldPwd = (rule, value, callback) => {
+      if (value === "") {
+        callback(new Error("请输入旧密码"));
+      } else {
+        if (this.updateModel.oldPassword !== "") {
+          this.$refs.changeForm.validateField("newPassword");
         }
-      };
-    },
-    methods: {
-      onCloseDialog() {
-        this.$refs.addForm.resetFields();
-        this.dialogFormVisible = false;
-        this.updateModel = Object.assign({}, "");
+        callback();
+      }
+    };
+
+    var validateNewPwd = (rule, value, callback) => {
+      if (value === "") {
+        callback(new Error("请输入新密码"));
+      } else if (value === this.updateModel.oldPassword) {
+        callback(new Error("新密码与旧密码相同!"));
+      } else {
+        callback();
+      }
+    };
+    return {
+      dialogFormVisible: false,
+      updateModel: {
+        oldPassword: "",
+        newPassword: "",
       },
-      submit() {
-        this.$refs.addForm.validate((valid) => {
-          if (valid) {
-            this.updateModel.id = localStorage.getItem("userId");
-            this.$axios.put(Service.authUrl.changePwd, this.updateModel,
-              {
-                headers: {
-                  'Authorization': localStorage.getItem('token')
-                }
-              }).then((res) => {
+      updateModelSubmit: {
+        id: "",
+        oldPassword: "",
+        newPassword: "",
+      },
+      formLabelWidth: "70px",
+      validRule: {
+        oldPassword: [
+          { required: true, message: "请输入旧密码", trigger: "blur" },
+          {
+            min: 5,
+            max: 10,
+            message: "长度在 5 到 10 个字符",
+            trigger: "blur",
+          },
+          { validator: validateOldPwd, trigger: "blur" },
+        ],
+        newPassword: [
+          { required: true, message: "请输入新密码", trigger: "blur" },
+          {
+            min: 5,
+            max: 10,
+            message: "长度在 5 到 10 个字符",
+            trigger: "blur",
+          },
+          { validator: validateNewPwd, trigger: "blur" },
+        ],
+      },
+    };
+  },
+  methods: {
+    onCloseDialog() {
+      this.$refs.changeForm.resetFields();
+      this.dialogFormVisible = false;
+      this.updateModel = Object.assign({}, "");
+      this.updateModelSubmit = Object.assign({}, "");
+    },
+    submit() {
+      this.$refs.changeForm.validate((valid) => {
+        if (valid) {
+          this.updateModelSubmit.id = localStorage.getItem("userId");
+          this.updateModelSubmit.oldPassword = md5(
+            this.updateModel.oldPassword
+          );
+          this.updateModelSubmit.newPassword = md5(
+            this.updateModel.newPassword
+          );
+          this.$axios
+            .put(Service.authUrl.changePwd, this.updateModelSubmit, {
+              headers: {
+                Authorization: localStorage.getItem("token"),
+              },
+            })
+            .then((res) => {
               if (res.status === 200) {
                 let responseData = res.data;
                 if (responseData.code === 0) {
@@ -63,23 +112,22 @@
                   this.$message.error(responseData.msg);
                   if (responseData.code === -2) {
                     AuthUtil.clearSession();
-                    this.$router.push('/login');
+                    this.$router.push("/login");
                   }
                 }
               } else {
                 this.$message.error("系统内部错误");
               }
             });
-          } else {
-            console.log('请检查参数！');
-            return false;
-          }
-        });
-      }
-    }
-  }
+        } else {
+          console.log("请检查参数！");
+          return false;
+        }
+      });
+    },
+  },
+};
 </script>
 
 <style scoped>
-
 </style>
