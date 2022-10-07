@@ -47,6 +47,7 @@
 
 <script>
   import Service from '../../../config/service'
+  import md5 from "js-md5";
 
   export default {
     data() {
@@ -77,6 +78,7 @@
         this.$refs.loginForm.validate((valid) => {
           if (valid) {
             this.logining = true;
+            this.registerModel.password = md5(this.registerModel.password);
             this.$axios.post(Service.authUrl.login, this.loginModel).then((res) => {
               if (res.status === 200) {
                 let responseData = res.data;

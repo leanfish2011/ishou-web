@@ -61,6 +61,7 @@
 import Service from "../../../config/service";
 import Footer from "../Footer";
 import RandomUtil from "../../../utils/randomUtil";
+import md5 from "js-md5";
 
 export default {
   name: "register",
@@ -145,6 +146,7 @@ export default {
           if (this.registerModel.name == "") {
             this.registerModel.name = this.registerModel.userCode;
           }
+          this.registerModel.password = md5(this.registerModel.password);
           this.$axios
             .post(Service.authUrl.register, this.registerModel)
             .then((res) => {
