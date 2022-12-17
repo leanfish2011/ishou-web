@@ -12,22 +12,24 @@
         </el-row>
       </div>
       <div class="headerUser">
-        <el-link href="/" type="primary" icon="el-icon-back">回到首页</el-link>
-        <el-avatar :size="40" ref="photourlAvatar"
-                   :src=userPhotoUrl></el-avatar>
-        <el-dropdown trigger="hover"
-                     :hide-on-click="false">
-              <span class="el-dropdown-link">
-                {{ userName }}
-                <i class="el-icon-arrow-down el-icon--right"></i>
-              </span>
-          <el-dropdown-menu slot="dropdown">
-            <el-dropdown-item @click.native="changePwd">修改密码</el-dropdown-item>
-            <el-dropdown-item divided
-                              @click.native="logout">退出登录
-            </el-dropdown-item>
-          </el-dropdown-menu>
-        </el-dropdown>
+        <el-row type="flex" justify="space-around" align="middle">
+          <el-col :span="6">
+              <el-link href="/" type="primary">回到首页</el-link>
+              <el-divider direction="vertical"></el-divider>
+          </el-col>
+          <el-col :span="6">
+              <el-link @click="changePwd" type="primary">修改密码</el-link>
+              <el-divider direction="vertical"></el-divider>
+          </el-col>
+          <el-col :span="5">
+              <el-link @click="logout" type="primary">退出登录</el-link>
+          </el-col>
+          <el-col :span="7">
+            <el-tooltip effect="dark" :content=userName placement="left-start">
+              <el-avatar :size="30" ref="photourlAvatar" :src=userPhotoUrl></el-avatar>
+            </el-tooltip>
+          </el-col>
+        </el-row>
       </div>
     </div>
     <change-pwd-dialog ref="changePwd"></change-pwd-dialog>
@@ -93,6 +95,13 @@
 
   .headerUser {
     float: right;
+    width: 16%;
+  }
+
+  .headerUser .el-col {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
   }
 
   .el-dropdown-link {
