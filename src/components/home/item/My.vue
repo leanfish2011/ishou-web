@@ -105,7 +105,8 @@
   }
 
   .siteCard {
-    height: 80px;
+    width: 120%;
+    height: 100px;
   }
 
   .siteIcon {
@@ -114,7 +115,7 @@
   }
 
   .el-link{
-    font-size: 18px;
+    font-size: 16px;
   }
 
   .remark {

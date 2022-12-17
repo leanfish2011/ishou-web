@@ -13,7 +13,11 @@
             <el-col :span="22">
               <el-link :href="item.url" target="_blank" class="el-link">{{item.name}}
               </el-link>
-              <div class="remark">{{item.remark}}</div>
+              <el-tooltip effect="dark" placement="bottom-end" v-if="isMore(item.remark)">
+                <div slot="content" v-html="showRemarkTip(item.remark)"></div>
+                <div class="remark">{{cutRemark(item.remark)}}</div>
+              </el-tooltip>
+              <div class="remark" v-else>{{item.remark}}</div>
             </el-col>
           </el-row>
         </el-card>
@@ -28,6 +32,7 @@
   import Service from '../../../config/service'
   import Footer from '../Footer'
 
+  let remarkLength = 60;
   export default {
     name: 'home',
     components: {
@@ -57,6 +62,19 @@
         }
 
         return url;
+      },
+      isMore(remark) {
+        if (remark != null && remark.length > remarkLength) {
+          return true;
+        }
+
+        return false;
+      },
+      cutRemark(remark) {
+        return remark.slice(0, remarkLength);
+      },
+      showRemarkTip(remark) {
+        return remark.replace(/(.{30})/g, "$1<br/>");
       }
     }
   }
@@ -88,8 +106,8 @@
     font-size: 14px;
   }
 
-  .el-link{
-    font-size: 18px;
+  .el-link {
+    font-size: 16px;
   }
 
   a:link, a:visited {
