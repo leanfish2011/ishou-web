@@ -14,9 +14,6 @@
           <el-main>
             <router-view/>
           </el-main>
-          <el-footer>
-            <manage-footer></manage-footer>
-          </el-footer>
         </el-container>
       </el-container>
     </el-container>
@@ -28,12 +25,10 @@
   import AuthUtil from '../../utils/authUtil'
   import ManageHeader from './Header'
   import ManageAside from './Aside'
-  import ManageFooter from './ManageFooter'
 
   export default {
     name: 'Manage',
     components: {
-      "manageFooter": ManageFooter,
       "manageHeader": ManageHeader,
       "manageAside": ManageAside,
     },

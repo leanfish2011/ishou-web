@@ -13,7 +13,6 @@
             </div>
 
           </div>
-          <v-footer></v-footer>
         </div>
 
       </div>
@@ -26,7 +25,6 @@
   import AuthUtil from '../../../utils/authUtil'
   import ManageHeader from '../../manage/Header'
   import ManageAside from '../../manage/Aside'
-  import ManageFooter from '../../manage/ManageFooter'
 
   export default {
     name: 'Container',
@@ -36,7 +34,6 @@
       }
     },
     components: {
-      "manageFooter": ManageFooter,
       "manageHeader": ManageHeader,
       "manageAside": ManageAside,
     },
