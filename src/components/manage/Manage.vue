@@ -10,11 +10,9 @@
           <manage-aside></manage-aside>
         </el-aside>
 
-        <el-container>
-          <el-main>
-            <router-view/>
-          </el-main>
-        </el-container>
+        <el-main class="viewContent">
+          <router-view/>
+        </el-main>
       </el-container>
     </el-container>
   </div>
@@ -76,10 +74,19 @@
     color: #8b8626;
     line-height: 60px;
     font-size: 12px;
+    height: 60px !important;
   }
 
   .manageContent {
     height: 100vh;
+  }
+
+  .el-aside {
+    height: calc(100vh - 60px);
+  }
+
+  .viewContent {
+    height: calc(100vh - 60px);
   }
 
 </style>
