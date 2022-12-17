@@ -6,6 +6,7 @@
     </el-breadcrumb>
     <el-divider></el-divider>
     <el-button type="primary" @click="onAddShow" size="mini">创建</el-button>
+    <el-divider></el-divider>
     <el-table
       :data="roleData"
       stripe
@@ -157,5 +158,7 @@
 </script>
 
 <style scoped>
-
+  .el-divider {
+    margin: 10px 0;
+  }
 </style>

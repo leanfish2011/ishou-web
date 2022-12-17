@@ -36,6 +36,7 @@
         <el-button type="primary" @click="onAddShow">创建</el-button>
       </el-form-item>
     </el-form>
+    <el-divider></el-divider>
     <user-add-dialog ref="addDialog" @refresh="load()"></user-add-dialog>
     <el-table
       size="medium"
@@ -282,5 +283,7 @@
 </script>
 
 <style scoped>
-
+  .el-divider {
+    margin: 10px 0;
+  }
 </style>

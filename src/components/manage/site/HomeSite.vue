@@ -30,6 +30,7 @@
         <el-button type="primary" @click="onAddShow">创建</el-button>
       </el-form-item>
     </el-form>
+    <el-divider></el-divider>
     <el-table
       size="medium"
       :data="siteData"
@@ -267,6 +268,10 @@
 </script>
 
 <style scoped>
+  .el-divider {
+    margin: 10px 0;
+  }
+
   a:link, a:visited {
     color: #2f65ca
   }
