@@ -37,7 +37,7 @@
             <el-input v-model="findModel.userCode" placeholder="请输入注册时的用户名"></el-input>
           </el-form-item>
           <el-form-item label="邮箱" prop="email">
-            <el-input v-model="findModel.email" placeholder="请输入注册时的邮箱"></el-input>
+            <el-input v-model="findModel.email" placeholder="请输入注册时的邮箱，新密码将发送到这个邮箱"></el-input>
           </el-form-item>
           <el-form-item>
             <el-button type="primary" @click="onSubmit" :loading="finding">找回</el-button>
@@ -83,7 +83,7 @@
           email: [
             {
               required: true,
-              message: "请输入注册时的邮箱",
+              message: "请输入注册时的邮箱，新密码将发送到这个邮箱",
               trigger: "blur",
             },
             {
@@ -115,7 +115,7 @@
                 if (responseData.code === 0) {
                   this.finding = false;
                   this.$message({
-                    message: responseData.msg,
+                    message: responseData.msg + "，请前往邮箱查看密码！",
                     type: "success",
                   });
 
