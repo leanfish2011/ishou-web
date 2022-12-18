@@ -42,7 +42,7 @@
             <el-input v-model="registerModel.name" placeholder="请输入昵称"></el-input>
           </el-form-item>
           <el-form-item label="邮箱" prop="email">
-            <el-input v-model="registerModel.email" placeholder="请输入邮箱地址"></el-input>
+            <el-input v-model="registerModel.email" placeholder="请输入邮箱地址，可用于找回密码"></el-input>
           </el-form-item>
           <el-form-item label="头像" prop="photourl">
             <el-avatar :size="50" ref="photourlAvatar" :src="randomUrl"></el-avatar>

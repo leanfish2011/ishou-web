@@ -1,8 +1,11 @@
-// 整个项目的调用API
+/**
+ * 整个项目的调用的后端API。在用到的component中引用
+ */
 
-//当前网页IP
+//1、获取当前网页IP，或者指定IP
 const ROOT_PATH = `${window.location.origin.replace(/:\d+/, '')}`;
 
+//2、定义各个模块总的入口
 // github登录信息
 const githubLoginData = {
   authorize_uri: "https://github.com/login/oauth/authorize",
@@ -24,10 +27,12 @@ const serviceGate = {
   systemService: ROOT_PATH + '/api/ishou/v2/system'
 };
 
+//3、各个模块具体接口
 // 1、auth模块接口
 const authUrl = {
   login: serviceGate.authService + '/access/login',
   register: serviceGate.authService + '/access/register',
+  find: serviceGate.authService + '/access/find',
   logout: serviceGate.authService + '/access/logout',
   user: serviceGate.authService + '/user',
   role: serviceGate.authService + '/role',

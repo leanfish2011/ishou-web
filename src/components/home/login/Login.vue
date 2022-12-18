@@ -29,6 +29,8 @@
       <el-link href="/register" type="primary">立即注册</el-link>
       &nbsp;
       <el-link href="/" type="primary">回到首页</el-link>
+      &nbsp;
+      <el-link href="/find" type="primary">忘记密码？</el-link>
     </el-form>
   </div>
 </template>
