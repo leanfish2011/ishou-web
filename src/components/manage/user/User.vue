@@ -32,12 +32,9 @@
       <el-form-item>
         <el-button type="primary" @click="onSearch">查询</el-button>
       </el-form-item>
-      <el-form-item>
-        <el-button type="primary" @click="onAddShow">创建</el-button>
-      </el-form-item>
     </el-form>
     <el-divider></el-divider>
-    <user-add-dialog ref="addDialog" @refresh="load()"></user-add-dialog>
+    <user-update-dialog ref="updateDialog" @refresh="load()"></user-update-dialog>
     <el-table
       size="medium"
       :data="userData"
@@ -98,7 +95,7 @@
 </template>
 
 <script>
-  import UserAddDialog from './UserAddDialog'
+  import UserUpdateDialog from './UserUpdateDialog'
   import Service from '../../../config/service'
   import DateUtil from '../../../utils/dateUtil'
   import AuthUtil from '../../../utils/authUtil'
@@ -106,7 +103,7 @@
   export default {
     name: "user",
     components: {
-      "userAddDialog": UserAddDialog
+      "userUpdateDialog": UserUpdateDialog
     },
     data() {
       return {
@@ -202,12 +199,9 @@
         this.perSize = val;
         this.onSearch();
       },
-      onAddShow() {
-        this.$refs.addDialog.dialogFormVisible = true;
-      },
       handleEdit(index, row) {
-        this.$refs.addDialog.dialogFormVisible = true;
-        this.$refs.addDialog.addModel = Object.assign({}, row);//将数据传入dialog页面
+        this.$refs.updateDialog.dialogFormVisible = true;
+        this.$refs.updateDialog.updateModel = Object.assign({}, row);//将数据传入dialog页面
       },
       handleDelete(index, row) {
         this.$confirm('确定删除?', '提示', {
