@@ -1,6 +1,7 @@
 <template>
   <div class="login-container">
-    <el-form :model="loginModel" :rules="validRule" status-icon ref="loginForm" label-position="left" class="login-page">
+    <el-form :model="loginModel" :rules="validRule" status-icon ref="loginForm"
+             label-position="left" class="login-page">
       <h2 class="title">爱收藏 - 登录</h2>
       <el-form-item prop="userCode">
         <el-input v-model="loginModel.userCode" placeholder="请输入用户名">
@@ -36,47 +37,48 @@
 </template>
 
 <script>
-import Service from "../../../config/service";
-import md5 from "js-md5";
+  import Service from "../../../config/service";
+  import Md5Util from "../../../utils/md5Util";
 
-export default {
-  data() {
-    return {
-      logining: false,
-      loginModel: {
-        userCode: "",
-        password: "",
-      },
-      loginModelSubmit: {
-        userCode: "",
-        password: "",
-      },
-      validRule: {
-        userCode: [
-          { required: true, message: "请输入用户名", trigger: "blur" },
-        ],
-        password: [{ required: true, message: "请输入密码", trigger: "blur" }],
-      },
-      checked: false,
-    };
-  },
-  created() {
-    document.onkeydown = (e) => {
-      let key = window.event.keyCode;
-      if (key === 13) {
-        this.onSubmit(event);
-      }
-    };
-  },
-  methods: {
-    onSubmit(event) {
-      event.preventDefault();
-      this.$refs.loginForm.validate((valid) => {
-        if (valid) {
-          this.logining = true;
-          this.loginModelSubmit.userCode = this.loginModel.userCode;
-          this.loginModelSubmit.password = md5(this.loginModel.password);
-          this.$axios
+  export default {
+    data() {
+      return {
+        logining: false,
+        loginModel: {
+          userCode: "",
+          password: "",
+        },
+        loginModelSubmit: {
+          userCode: "",
+          password: "",
+        },
+        validRule: {
+          userCode: [
+            {required: true, message: "请输入用户名", trigger: "blur"},
+          ],
+          password: [{required: true, message: "请输入密码", trigger: "blur"}],
+        },
+        checked: false,
+      };
+    },
+    created() {
+      document.onkeydown = (e) => {
+        let key = window.event.keyCode;
+        if (key === 13) {
+          this.onSubmit(event);
+        }
+      };
+    },
+    methods: {
+      onSubmit(event) {
+        event.preventDefault();
+        this.$refs.loginForm.validate((valid) => {
+          if (valid) {
+            this.logining = true;
+            this.loginModelSubmit.userCode = this.loginModel.userCode;
+            this.loginModelSubmit.password = Md5Util.encrypt(this.loginModel.password,
+              this.loginModel.userCode);
+            this.$axios
             .post(Service.authUrl.login, this.loginModelSubmit)
             .then((res) => {
               if (res.status === 200) {
@@ -90,7 +92,7 @@ export default {
                   localStorage.setItem("userId", userData.userId);
                   localStorage.setItem("photourl", userData.photourl);
 
-                  this.$router.push({ path: "/my" });
+                  this.$router.push({path: "/my"});
                 } else {
                   this.logining = false;
                   this.$message.error(responseData.msg);
@@ -100,37 +102,37 @@ export default {
                 this.$message.error("系统内部错误");
               }
             });
-        }
-      });
+          }
+        });
+      },
+      githubLogin() {
+        window.location.href = Service.otherUrl.githubAuth;
+      },
     },
-    githubLogin() {
-      window.location.href = Service.otherUrl.githubAuth;
-    },
-  },
-};
+  };
 </script>
 
 <style scoped>
-.login-container {
-}
+  .login-container {
+  }
 
-.login-page {
-  -webkit-border-radius: 5px;
-  border-radius: 5px;
-  margin: 10% auto;
-  width: 350px;
-  padding: 35px 35px 15px;
-  background: #fff;
-  border: 1px solid #eaeaea;
-  box-shadow: 0 0 25px #cac6c6;
-}
+  .login-page {
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    margin: 10% auto;
+    width: 350px;
+    padding: 35px 35px 15px;
+    background: #fff;
+    border: 1px solid #eaeaea;
+    box-shadow: 0 0 25px #cac6c6;
+  }
 
-label.el-checkbox.rememberme {
-  margin: 0px 0px 15px;
-  text-align: left;
-}
+  label.el-checkbox.rememberme {
+    margin: 0px 0px 15px;
+    text-align: left;
+  }
 
-.title {
-  text-align: center;
-}
+  .title {
+    text-align: center;
+  }
 </style>
