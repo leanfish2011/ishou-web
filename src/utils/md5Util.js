@@ -7,7 +7,6 @@ import md5 from "js-md5";
 
 const md5Util = {
   encrypt: function (origin, salt) {
-    console.log(origin.concat(salt));
     return md5(origin.concat(salt));
   }
 };
