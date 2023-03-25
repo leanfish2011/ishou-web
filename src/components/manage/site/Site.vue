@@ -30,6 +30,7 @@
         <el-button type="primary" @click="onAddShow">创建</el-button>
       </el-form-item>
     </el-form>
+    <el-divider></el-divider>
     <el-table
       size="medium"
       :data="siteData"
@@ -153,7 +154,7 @@
         this.searchForm.pageNo = this.currentPage;
         this.searchForm.pageSize = this.perSize;
 
-        this.$axios.get(Service.url.sitePersonal, {
+        this.$axios.get(Service.siteUrl.sitePersonal, {
           params: this.searchForm,
           headers: {
             'Authorization': localStorage.getItem('token')
@@ -199,7 +200,7 @@
           cancelButtonText: '取消',
           type: 'warning'
         }).then(() => {
-          this.$axios.delete(Service.url.sitePersonal + '/' + row.id,
+          this.$axios.delete(Service.siteUrl.sitePersonal + '/' + row.id,
             {
               headers: {
                 'Authorization': localStorage.getItem('token')
@@ -233,7 +234,7 @@
         return DateUtil.dateFormat(row.createTime);
       },
       load() {
-        this.$axios.get(Service.url.sitePersonal, {
+        this.$axios.get(Service.siteUrl.sitePersonal, {
           params: this.searchForm,
           headers: {
             'Authorization': localStorage.getItem('token')
@@ -267,6 +268,10 @@
 </script>
 
 <style scoped>
+  .el-divider {
+    margin: 10px 0;
+  }
+
   a:link, a:visited {
     color: #2f65ca
   }

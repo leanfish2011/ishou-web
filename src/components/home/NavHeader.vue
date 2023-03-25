@@ -10,44 +10,34 @@
         </div>
         <div id="midSearch">
           <el-form :model="searchForm">
-            <el-input v-model="searchForm.keyword" size="medium" class="searchInput"
-                      placeholder="请输入关键词"></el-input>
+            <el-input v-model="searchForm.keyword" size="medium" class="searchInput" placeholder="请输入关键词"></el-input>
             <el-button type="primary" plain size="medium" @click="search()">搜索一下</el-button>
           </el-form>
         </div>
         <div id="userInfo">
-          <el-row>
-            <el-col :span="22" v-if="userName==''||userName==null">
-              <el-button size="mini" type="primary" plain
-                         @click="openLogin()">登录
-              </el-button>
-              <el-button size="mini" type="primary" plain
-                         @click="openRegister()">注册
-              </el-button>
+          <el-row type="flex" justify="center" align="middle">
+            <el-col :span="18">
+               <el-link type="primary" icon="el-icon-message" @click="openSub()">订阅</el-link>
             </el-col>
-            <el-col :span="22" v-else>
+            <el-col :span="4" v-if="userName==''||userName==null">
+              <el-link type="primary" @click="openLogin()">登录</el-link>
+              <el-divider direction="vertical"></el-divider>
+              <el-link type="primary" @click="openRegister()">注册</el-link>
+            </el-col>
+            <el-col :span="4" v-else>
+              <el-link type="primary" @click="addSite()">收藏</el-link>
+              <el-divider direction="vertical"></el-divider>
               <el-dropdown size="medium">
                 <el-tooltip effect="dark" :content=userName placement="left-start">
-                  <el-avatar :size="40" ref="photourlAvatar"
-                             :src=userPhotoUrl></el-avatar>
+                  <el-avatar :size="30" ref="photourlAvatar" :src=userPhotoUrl></el-avatar>
                 </el-tooltip>
                 <el-dropdown-menu slot="dropdown">
-                  <el-dropdown-item icon="el-icon-setting" @click.native="openMange()">
-                    管理
-                  </el-dropdown-item>
-                  <el-dropdown-item icon="el-icon-circle-plus-outline" @click.native="addSite()">
-                    增加收藏
+                  <el-dropdown-item icon="el-icon-setting" @click.native="openMange()">系统管理
                   </el-dropdown-item>
                   <el-dropdown-item icon="el-icon-switch-button" @click.native="logout()">退出登录
                   </el-dropdown-item>
                 </el-dropdown-menu>
               </el-dropdown>
-            </el-col>
-            <el-col :span="2">
-              <el-tooltip effect="dark" content="订阅" placement="top-start">
-                <el-button size="mini" type="info" circle @click="openSub()"
-                           icon="el-icon-copy-document"></el-button>
-              </el-tooltip>
             </el-col>
           </el-row>
         </div>
@@ -69,216 +59,204 @@
 </template>
 
 <script>
-  import Service from '../../config/service'
-  import AuthUtil from '../../utils/authUtil'
-  import FastAddSiteDialog from './FastAddSiteDialog'
+import Service from "../../config/service";
+import AuthUtil from "../../utils/authUtil";
+import FastAddSiteDialog from "./FastAddSiteDialog";
 
-  export default {
-    name: "NavHeader",
-    components: {
-      "fastAddSiteDialog": FastAddSiteDialog
-    },
-    data() {
-      return {
-        userName: '',
-        userPhotoUrl: '',
-        menuData: [
-          {
-            "id": "1",
-            "name": "主页",
-            "route": "/"
-          },
-          {
-            "id": "2",
-            "name": "我的",
-            "route": "/my"
-          },
-          {
-            "id": "3",
-            "name": "工具",
-            "route": "/tool"
-          },
-          {
-            "id": "4",
-            "name": "留言",
-            "route": "/message"
-          },
-          {
-            "id": "5",
-            "name": "关于",
-            "route": "/about"
-          }
-        ],
-        searchForm: {
-          keyword: ''
-        }
-      }
-    },
-    methods: {
-      search() {
-        let keyword = this.searchForm.keyword.trim();
-        if (keyword == "") {
-          this.$message.warning("请输入关键词！");
-          return;
-        }
-
-        //url中传递参数
-        this.$router.push({path: "/search", query: {keyword: keyword}});
+export default {
+  name: "NavHeader",
+  components: {
+    fastAddSiteDialog: FastAddSiteDialog,
+  },
+  data() {
+    return {
+      userName: "",
+      userPhotoUrl: "",
+      menuData: [
+        {
+          id: "1",
+          name: "主页",
+          route: "/",
+        },
+        {
+          id: "2",
+          name: "我的",
+          route: "/my",
+        },
+        {
+          id: "3",
+          name: "工具",
+          route: "/tool",
+        },
+        {
+          id: "4",
+          name: "留言",
+          route: "/message",
+        },
+        {
+          id: "5",
+          name: "关于",
+          route: "/about",
+        },
+      ],
+      searchForm: {
+        keyword: "",
       },
-      logout() {
-        this.$confirm('确认退出?', '提示', {})
-        .then(() => {
-          //调用接口
-          this.$axios.get(Service.url.logout, {
+    };
+  },
+  methods: {
+    search() {
+      let keyword = this.searchForm.keyword.trim();
+      if (keyword == "") {
+        this.$message.warning("请输入关键词！");
+        return;
+      }
+
+      //url中传递参数
+      this.$router.push({ path: "/search", query: { keyword: keyword } });
+    },
+    logout() {
+      this.$confirm("确认退出?", "提示", {}).then(() => {
+        //调用接口
+        this.$axios
+          .get(Service.authUrl.logout, {
             headers: {
-              'Authorization': localStorage.getItem('token')
-            }
-          }).then((res) => {
+              Authorization: localStorage.getItem("token"),
+            },
+          })
+          .then((res) => {
             AuthUtil.clearSession();
-            this.userName = '';
-            this.userPhotoUrl = '';
-            this.$router.push('/');
-          }).catch(function (error) {
+            this.userName = "";
+            this.userPhotoUrl = "";
+            this.$router.push("/");
+          })
+          .catch(function (error) {
             console.error(error);
           });
-        })
-      },
-      addSite() {
-        this.$refs.fastAddSite.dialogFormVisible = true;
-      },
-      showMenu(id) {
-        // "我的"菜单需要登录后才显示
-        if (id == "2" && (this.userName == null || this.userName == '')) {
-          return false;
-        }
-
-        return true;
-      },
-      openLogin() {
-        this.$router.push('/login');
-      },
-      openRegister() {
-        this.$router.push('/register');
-      },
-      openSub() {
-        this.$router.push('/sub');
-      },
-      openMange() {
-        this.$router.push('/site');
-      },
-      authCheck() {
-        this.$axios.get(Service.url.authCheck, {
-          headers: {
-            'Authorization': localStorage.getItem('token')
-          }
-        }).then((res) => {
-          if (res.status === 200) {
-            let responseData = res.data;
-            let code = responseData.code;
-            if (code === -1 || code === -2) {
-              AuthUtil.clearSession();
-            } else {
-              this.userName = localStorage.getItem('userName');
-              this.userPhotoUrl = localStorage.getItem('photourl');
-            }
-          } else {
-            this.$message.error("系统内部错误");
-          }
-        }).catch(function (error) {
-          console.error(error);
-        });
-      },
-      goHome() {
-        this.$router.push('/');
-      }
+      });
     },
-    mounted() {
-      this.authCheck();
-    }
-  }
+    addSite() {
+      this.$refs.fastAddSite.dialogFormVisible = true;
+    },
+    showMenu(id) {
+      // "我的"菜单需要登录后才显示
+      if (id == "2" && (this.userName == null || this.userName == "")) {
+        return false;
+      }
+
+      return true;
+    },
+    openLogin() {
+      this.$router.push("/login");
+    },
+    openRegister() {
+      this.$router.push("/register");
+    },
+    openSub() {
+      this.$router.push("/sub");
+    },
+    openMange() {
+      this.$router.push("/site");
+    },
+    goHome() {
+      this.$router.push("/");
+    },
+  },
+  created() {
+    this.userName = localStorage.getItem("userName");
+    this.userPhotoUrl = localStorage.getItem("photourl");
+  },
+};
 </script>
 
 <style scoped>
-  #topMenu {
-    width: 100%;
-    top: 0;
-    background: white;
-    z-index: 100;
-    margin: 0 auto 0 auto;
-    position: fixed;
-  }
+#topMenu {
+  width: 100%;
+  top: 0;
+  background: white;
+  z-index: 100;
+  margin: 0 auto 0 auto;
+  position: fixed;
+}
 
-  #top {
-    border: 1px solid #D8DFEA;
-    margin: 5px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
+#top {
+  border: 1px solid #d8dfea;
+  margin: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 
-  #log {
-    width: 4%;
-  }
+#log {
+  width: 4%;
+}
 
-  #logTitle {
-    font-size: 25px;
-    color: #E33E06;
-    width: 6%;
-  }
+#logTitle {
+  font-size: 25px;
+  color: #e33e06;
+  width: 6%;
+}
 
-  #midSearch {
-    width: 60%;
-    margin-left: 50px;
-  }
+#midSearch {
+  width: 60%;
+  margin-left: 50px;
+}
 
-  .searchInput {
-    width: 400px;
-    height: 30px;
-    font-size: 15px;
-  }
+.searchInput {
+  width: 400px;
+  height: 30px;
+  font-size: 15px;
+}
 
-  #userInfo {
-    width: 30%;
-    text-align: right;
-    margin-right: 10px;
-  }
+#userInfo {
+  width: 30%;
+  text-align: right;
+  margin-left: 10px;
+}
 
-  #divMenu {
-    line-height: 30px;
-    height: 40px;
-    top: 0px;
-    background: #3a8ee6;
-    margin-left: 5px;
-    margin-right: 5px;
-    z-index: 100;
-  }
+#userInfo .el-col {
+  display: flex;
+  justify-content: end;
+  align-items: center;
+} 
 
-  #divMenu ul {
-    list-style: none;
-    line-height: 40px;
-    margin: 0 auto 0 auto;
-  }
+#divMenu {
+  line-height: 40px;
+  height: 40px;
+  top: 0px;
+  background: #3a8ee6;
+  margin-left: 5px;
+  margin-right: 5px;
+  z-index: 100;
+}
 
-  #divMenu ul li {
-    display: block;
-    float: left;
-  }
+#divMenu ul {
+  list-style: none;
+  line-height: 40px;
+  margin: 0 auto 0 auto;
+  width: 50%;
+}
 
-  #divMenu ul li a {
-    text-decoration: none;
-    color: #fff;
-    display: block;
-    padding-left: 20px;
-    padding-right: 20px;
-  }
+#divMenu ul li {
+  display: block;
+  float: left;
+}
 
-  #divMenu ul li:hover {
-    background: #3787ee;
-  }
+#divMenu ul li a {
+  text-decoration: none;
+  color: #fff;
+  display: block;
+  padding-left: 30px;
+  padding-right: 30px;
+}
 
-  /*路由激活样式，router自带属性*/
-  .router-link-active {
-    background-color: #2283ee;
-    color: #fff;
-  }
+#divMenu ul li:hover {
+  background: #3787ee;
+}
+
+/*路由激活样式，router自带属性*/
+.router-link-active {
+  background-color: #2283ee;
+  color: #fff;
+}
 </style>

@@ -10,51 +10,23 @@
         </div>
         <div id="midSearch">
           <el-form :model="searchForm">
-
             <el-input v-model="searchForm.keyword" size="medium" class="searchInput"
                       placeholder="请输入关键词"></el-input>
             <el-button type="primary" plain size="medium" @click="search()">搜索一下</el-button>
             <el-link href="/" type="primary" icon="el-icon-back">回到首页</el-link>
           </el-form>
         </div>
-        <div id="userInfo">
-          <el-row>
-            <el-button v-if="userName==''||userName==null" size="mini" type="primary"
-                       @click="openLogin()">登录
-            </el-button>
-            <el-dropdown v-else size="mini" split-button>
-              <label @click="openMange()">{{ userName }}</label>
-              <el-dropdown-menu slot="dropdown">
-                <el-dropdown-item icon="el-icon-circle-plus-outline" @click.native="addSite()">增加收藏
-                </el-dropdown-item>
-                <el-dropdown-item icon="el-icon-switch-button" @click.native="logout()">退出登录
-                </el-dropdown-item>
-              </el-dropdown-menu>
-            </el-dropdown>
-            <el-button v-if="userName==''||userName==null" size="mini" type="primary" plain
-                       @click="openRegister()">注册
-            </el-button>
-          </el-row>
-        </div>
+        <div id="userInfo"></div>
       </div>
     </div>
-    <fast-add-site-dialog ref="fastAddSite"></fast-add-site-dialog>
   </div>
 </template>
 
 <script>
-  import Service from '../../config/service'
-  import AuthUtil from '../../utils/authUtil'
-  import FastAddSiteDialog from './FastAddSiteDialog'
-
   export default {
     name: "SearchHeader",
-    components: {
-      "fastAddSiteDialog": FastAddSiteDialog
-    },
     data() {
       return {
-        userName: '',
         searchForm: {
           keyword: ''
         }
@@ -70,62 +42,9 @@
 
         //子组件调用父组件方法
         this.$emit('search', keyword);
-      },
-      logout() {
-        this.$confirm('确认退出?', '提示', {})
-        .then(() => {
-          //调用接口
-          this.$axios.get(Service.url.logout, {
-            headers: {
-              'Authorization': localStorage.getItem('token')
-            }
-          }).then((res) => {
-            AuthUtil.clearSession();
-            this.userName = '';
-            this.$router.push('/');
-          }).catch(function (error) {
-            console.error(error);
-          });
-        })
-      },
-      addSite() {
-        this.$refs.fastAddSite.dialogFormVisible = true;
-      },
-      openLogin() {
-        this.$router.push('/login');
-      },
-      openRegister() {
-        this.$router.push('/register');
-      },
-      openMange() {
-        this.$router.push('/site');
-      },
-      authCheck() {
-        this.$axios.get(Service.url.authCheck, {
-          headers: {
-            'Authorization': localStorage.getItem('token')
-          }
-        }).then((res) => {
-          if (res.status === 200) {
-            let responseData = res.data;
-            let code = responseData.code;
-            if (code === -1 || code === -2) {
-              AuthUtil.clearSession();
-            } else {
-              let userName = localStorage.getItem('userName');
-              this.userName = userName;
-            }
-          } else {
-            this.$message.error("系统内部错误");
-          }
-        }).catch(function (error) {
-          console.error(error);
-        });
       }
     },
     mounted() {
-      this.authCheck();
-
       //搜索框显示主页传递过来的关键词
       let keyword = this.$route.query.keyword;
       this.searchForm.keyword = keyword;
@@ -174,7 +93,5 @@
 
   #userInfo {
     width: 30%;
-    text-align: right;
-    margin-right: 10px;
   }
 </style>

@@ -66,7 +66,7 @@
     },
     methods: {
       getMesList() {
-        this.$axios.get(Service.url.messageList).then((res) => {
+        this.$axios.get(Service.systemUrl.messageList).then((res) => {
           if (res.status === 200) {
             this.mesList.list = res.data.data.list;
             this.mesList.total = res.data.data.total;

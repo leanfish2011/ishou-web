@@ -32,7 +32,7 @@
     },
     methods: {
       load() {
-        this.$axios.get(Service.url.menuAll, {
+        this.$axios.get(Service.authUrl.menuAll, {
           headers: {
             'Authorization': localStorage.getItem('token')
           }

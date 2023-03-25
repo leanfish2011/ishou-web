@@ -2,7 +2,7 @@
   <div id="my">
     <nav-header></nav-header>
     <div class="myContent">
-      <el-timeline reverse style="width: 20%">
+      <el-timeline style="width: 40%">
         <el-timeline-item
           v-for="(item, index) in myDataList"
           :timestamp="dateFormat(item.createTime)"
@@ -18,7 +18,7 @@
                 </a>
               </el-col>
               <el-col :span="18">
-                <el-link :href="item.url" target="_blank" style="font-size: 16px;">{{item.name}}
+                <el-link :href="item.url" target="_blank" class="el-link">{{item.name}}
                 </el-link>
                 <div class="remark">{{item.remark}}</div>
               </el-col>
@@ -51,7 +51,7 @@
     },
     methods: {
       load() {
-        this.$axios.get(Service.url.sitePersonal, {
+        this.$axios.get(Service.siteUrl.sitePersonal, {
           headers: {
             'Authorization': localStorage.getItem('token')
           }
@@ -95,15 +95,18 @@
 <style scoped>
   #my {
     width: 100%;
-    margin-top: 110px;
+    margin-top: 120px;
   }
 
   .myContent {
-    min-height: calc(100vh - 176px);
+    width: 50%;
+    min-height: calc(100vh - 186px);
+    margin: 5px auto 5px auto;
   }
 
   .siteCard {
-    height: 80px;
+    width: 120%;
+    height: 100px;
   }
 
   .siteIcon {
@@ -111,7 +114,21 @@
     height: 50%;
   }
 
+  .el-link{
+    font-size: 16px;
+  }
+
   .remark {
     font-size: 14px;
+  }
+
+  a:link, a:visited {
+    text-decoration: none;
+    color: #2f65ca
+  }
+
+  /* 已访问的链接 */
+  a:hover {
+    color: #5c31ff
   }
 </style>

@@ -32,11 +32,9 @@
       <el-form-item>
         <el-button type="primary" @click="onSearch">查询</el-button>
       </el-form-item>
-      <el-form-item>
-        <el-button type="primary" @click="onAddShow">创建</el-button>
-      </el-form-item>
     </el-form>
-    <user-add-dialog ref="addDialog" @refresh="load()"></user-add-dialog>
+    <el-divider></el-divider>
+    <user-update-dialog ref="updateDialog" @refresh="load()"></user-update-dialog>
     <el-table
       size="medium"
       :data="userData"
@@ -97,7 +95,7 @@
 </template>
 
 <script>
-  import UserAddDialog from './UserAddDialog'
+  import UserUpdateDialog from './UserUpdateDialog'
   import Service from '../../../config/service'
   import DateUtil from '../../../utils/dateUtil'
   import AuthUtil from '../../../utils/authUtil'
@@ -105,7 +103,7 @@
   export default {
     name: "user",
     components: {
-      "userAddDialog": UserAddDialog
+      "userUpdateDialog": UserUpdateDialog
     },
     data() {
       return {
@@ -168,7 +166,7 @@
         this.searchForm.pageNo = this.currentPage;
         this.searchForm.pageSize = this.perSize;
 
-        this.$axios.get(Service.url.user, {
+        this.$axios.get(Service.authUrl.user, {
           headers: {
             'Authorization': localStorage.getItem('token')
           },
@@ -201,12 +199,9 @@
         this.perSize = val;
         this.onSearch();
       },
-      onAddShow() {
-        this.$refs.addDialog.dialogFormVisible = true;
-      },
       handleEdit(index, row) {
-        this.$refs.addDialog.dialogFormVisible = true;
-        this.$refs.addDialog.addModel = Object.assign({}, row);//将数据传入dialog页面
+        this.$refs.updateDialog.dialogFormVisible = true;
+        this.$refs.updateDialog.updateModel = Object.assign({}, row);//将数据传入dialog页面
       },
       handleDelete(index, row) {
         this.$confirm('确定删除?', '提示', {
@@ -214,7 +209,7 @@
           cancelButtonText: '取消',
           type: 'warning'
         }).then(() => {
-          this.$axios.delete(Service.url.user + '/' + row.id, {
+          this.$axios.delete(Service.authUrl.user + '/' + row.id, {
             headers: {
               'Authorization': localStorage.getItem('token')
             }
@@ -248,7 +243,7 @@
         return DateUtil.dateFormat(row.createTime);
       },
       load() {
-        this.$axios.get(Service.url.user, {
+        this.$axios.get(Service.authUrl.user, {
           headers: {
             'Authorization': localStorage.getItem('token')
           },
@@ -282,5 +277,7 @@
 </script>
 
 <style scoped>
-
+  .el-divider {
+    margin: 10px 0;
+  }
 </style>

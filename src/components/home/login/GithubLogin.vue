@@ -18,7 +18,7 @@
     },
     mounted() {
       let code = this.$route.query.code;
-      this.$axios.get(Service.url.loginByGitHub + "?code=" + code).then((res) => {
+      this.$axios.get(Service.authUrl.loginByGitHub + "?code=" + code).then((res) => {
         if (res.status === 200) {
           let responseData = res.data;
           if (responseData.code === 0) {
@@ -30,7 +30,7 @@
             localStorage.setItem('userId', userData.userId);
             localStorage.setItem('photourl', userData.photourl);
 
-            this.$router.push({path: "/"});
+            this.$router.push({path: "/my"});
           } else {
             this.loading = false;
             this.$message.error(responseData.msg);

@@ -2,7 +2,7 @@
   <div>
     <div class="footer">
       <div class="rightInfo">
-        <p>Copyright © Tim 2016-2022</p>
+        <p>Copyright © Tim 2016-{{year}}</p>
       </div>
     </div>
     <el-backtop></el-backtop>
@@ -11,7 +11,20 @@
 
 <script>
   export default {
-    name: "Footer"
+    name: "Footer",
+    data() {
+      return {
+        year: ''
+      }
+    },
+    methods: {
+      getYear() {
+        this.year = new Date().getFullYear()
+      }
+    },
+    created() {
+      this.getYear()
+    }
   }
 </script>
 

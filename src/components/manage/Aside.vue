@@ -36,7 +36,7 @@
     },
     methods: {
       loadUserMenu() {
-        this.$axios.get(Service.url.menuUser + "/" + localStorage.getItem('userId'), {
+        this.$axios.get(Service.authUrl.menuUser+ "/" + localStorage.getItem('userId'), {
           headers: {
             'Authorization': localStorage.getItem('token')
           }

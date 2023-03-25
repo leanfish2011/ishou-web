@@ -100,7 +100,7 @@
         });
 
         this.addUserModel.userIdList = userSelectedId;
-        this.$axios.post(Service.url.roleUser, this.addUserModel, {
+        this.$axios.post(Service.authUrl.roleUser, this.addUserModel, {
           headers: {
             'Authorization': localStorage.getItem('token')
           }
@@ -131,7 +131,7 @@
         this.onCancel();
       },
       loadAllUser() {
-        this.$axios.get(Service.url.user, {
+        this.$axios.get(Service.authUrl.user, {
           headers: {
             'Authorization': localStorage.getItem('token')
           }
@@ -156,7 +156,7 @@
         });
       },
       loadRoleUser() {
-        this.$axios.get(Service.url.roleUser + "/" + this.roleModel.id, {
+        this.$axios.get(Service.authUrl.roleUser + "/" + this.roleModel.id, {
           headers: {
             'Authorization': localStorage.getItem('token')
           }
